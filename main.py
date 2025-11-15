@@ -1,9 +1,22 @@
-from fastapi import FastAPI, File, UploadFile
+import asyncio
+import uuid
+
+from funcs import csv_process
+
+from fastapi import FastAPI, UploadFile
 
 app = FastAPI()
 
 
 @app.post("/uploadfile")
-async def uploadfile(fileup: UploadFile):
-    with open(fileup.filename, 'wb') as file:
-        file.write(fileup.file.read())
+async def uploadfile(uploaded_file: UploadFile):
+    file_uuid = str(uuid.uuid4().int)
+    file_extension = uploaded_file.filename.split('.')[-1]
+    filename = file_uuid + file_extension
+
+    if file_extension == 'csv':
+        asyncio.create_task(csv_process(filename, uploaded_file))
+    elif file_extension == 'json':
+        asyncio.create_task(csv_process(filename, uploaded_file))
+
+    return {'uuid': file_uuid}
