@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from database import Base
 
+
 class FileModel(Base):
     __tablename__ = 'files'
 
@@ -10,3 +11,9 @@ class FileModel(Base):
     result_path: Mapped[str] = mapped_column(nullable=False)
     stats: Mapped[str] = mapped_column(nullable=False)
     error: Mapped[str] = mapped_column(nullable=True)
+
+    def __str__(self):
+        return f'File(uuid={self.uuid};filename={self.filename})'
+
+    def __repr__(self):
+        return str(self)
