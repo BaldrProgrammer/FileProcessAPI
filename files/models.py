@@ -17,3 +17,13 @@ class FileModel(Base):
 
     def __repr__(self):
         return str(self)
+
+    def to_dict(self):
+        return {
+            'uuid': self.uuid,
+            'filename': self.filename,
+            'original_path': self.original_path,
+            'result_path': self.result_path,
+            'status': self.stats,
+            'error': self.error
+        }
