@@ -1,0 +1,12 @@
+from sqlalchemy.orm import Mapped, mapped_column
+from database import Base
+
+class FileModel(Base):
+    __tablename__ = 'files'
+
+    uuid: Mapped[int] = mapped_column(primary_key=True)
+    filename: Mapped[str] = mapped_column(nullable=False)
+    original_path: Mapped[str] = mapped_column(nullable=False)
+    result_path: Mapped[str] = mapped_column(nullable=False)
+    stats: Mapped[str] = mapped_column(nullable=False)
+    error: Mapped[str] = mapped_column(nullable=True)
