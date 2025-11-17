@@ -20,3 +20,12 @@ class BaseDAO:
             query = select(cls.model).filter_by(**filters)
             result = await session.execute(query)
             return result.scalars().one_or_none()
+
+
+    @classmethod
+    async def find_by_id(cls, columnid: int):
+        async with async_session_maker() as session:
+            query = select(cls.model).filter_by(id=columnid)
+            result = await session.execute(query)
+            return result.scalars().all()
+
