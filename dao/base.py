@@ -29,3 +29,14 @@ class BaseDAO:
             result = await session.execute(query)
             return result.scalars().all()
 
+
+    async def add(cls, **values):
+        async with async_session_maker() as session:
+            new_instance = cls.model(**values)
+            session.add(new_instance)
+            try:
+                await session.commit()
+            except Exception as e:
+                await session.rollback()
+                raise e
+            return new_instance
