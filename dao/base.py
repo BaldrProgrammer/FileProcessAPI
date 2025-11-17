@@ -1,4 +1,5 @@
-from sqlalchemy import select
+from sqlalchemy import update as sqlalchemy_update
+from sqlalchemy.future import select
 from database import async_session_maker
 from files.models import FileModel
 import asyncio
@@ -30,6 +31,7 @@ class BaseDAO:
             return result.scalars().all()
 
 
+    @classmethod
     async def add(cls, **values):
         async with async_session_maker() as session:
             new_instance = cls.model(**values)
@@ -40,3 +42,21 @@ class BaseDAO:
                 await session.rollback()
                 raise e
             return new_instance
+
+
+    @classmethod
+    async def update(cls, filter_by: dict, values: dict):
+        async with async_session_maker() as session:
+            query = (
+                sqlalchemy_update(cls.model)
+                .filter_by(**filter_by)
+                .values(**values)
+                .execution_options(synchronize_session='fetch')
+            )
+            await session.execute(query)
+            try:
+                await session.commit()
+            except Exception as e:
+                await session.rollback()
+                raise e
+            return True
