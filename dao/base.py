@@ -1,5 +1,6 @@
 from sqlalchemy import update as sqlalchemy_update
 from sqlalchemy.future import select
+from sqlalchemy.exc import SQLAlchemyError
 from database import async_session_maker
 from files.models import FileModel
 import asyncio
@@ -38,7 +39,7 @@ class BaseDAO:
             session.add(new_instance)
             try:
                 await session.commit()
-            except Exception as e:
+            except SQLAlchemyError as e:
                 await session.rollback()
                 raise e
             return new_instance
@@ -56,7 +57,7 @@ class BaseDAO:
             await session.execute(query)
             try:
                 await session.commit()
-            except Exception as e:
+            except SQLAlchemyError as e:
                 await session.rollback()
                 raise e
             return True
