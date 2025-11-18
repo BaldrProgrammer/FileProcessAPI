@@ -5,12 +5,20 @@ import asyncio
 from fastapi import APIRouter, UploadFile
 
 from funcs import csv_process, json_process
+from files.dao import FileDAO
+from files.schemas import SFileGet
 
 router = APIRouter()
 
 
-@router.post("/uploadfile")
-async def uploadfile(uploaded_file: UploadFile):
+@router.get("/files/get_info/{fileid}")
+async def get_fileinfo(fileid: int) -> SFileGet:
+    file_obj = await FileDAO.find_by_id(fileid)
+    return file_obj
+
+
+@router.post("/files/upload")
+async def uploadfile(uploaded_file: UploadFile) -> dict:
     file_id = random.randint(0, 2147483647)
     file_extension = uploaded_file.filename.split('.')[-1]
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage", file_extension, str(file_id) + uploaded_file.filename)
