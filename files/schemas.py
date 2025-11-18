@@ -16,5 +16,3 @@ class SFileAdd(BaseModel):
     id: int
     filename: str = Field(..., description='имя файла')
     original_path: str = Field(..., description='путь к необ. файлу')
-    result_path: Optional[str] = Field(None, description='путь к об. файлу')
-    stats: str = Field(..., description='стата файла')
