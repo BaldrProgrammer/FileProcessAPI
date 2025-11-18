@@ -11,6 +11,7 @@ class FileModel(Base):
     filename: Mapped[str]
     original_path: Mapped[str]
     result_path: Mapped[Optional[str]]
+    status: Mapped[str] = mapped_column(default='pending')
     stats: Mapped[str] = mapped_column(default='{}')
     error: Mapped[Optional[str]]
 
