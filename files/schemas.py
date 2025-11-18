@@ -3,7 +3,7 @@ from typing import Optional
 
 
 class SFileGet(BaseModel):
-    uuid: int
+    id: int
     filename: str = Field(..., description='имя файла')
     original_path: str = Field(..., description='путь к необ. файлу')
     result_path: Optional[str] = Field(None, description='путь к об. файлу')
@@ -13,7 +13,7 @@ class SFileGet(BaseModel):
 
 
 class SFileAdd(BaseModel):
-    uuid: int
+    id: int
     filename: str = Field(..., description='имя файла')
     original_path: str = Field(..., description='путь к необ. файлу')
     result_path: Optional[str] = Field(None, description='путь к об. файлу')
