@@ -1,3 +1,4 @@
+import os.path
 import random
 import asyncio
 
@@ -12,7 +13,7 @@ router = APIRouter()
 async def uploadfile(uploaded_file: UploadFile):
     file_id = random.randint(0, 2147483647)
     file_extension = uploaded_file.filename.split('.')[-1]
-    filepath = str(file_id) + file_extension
+    filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage", file_extension, str(file_id) + uploaded_file.filename)
     filename = filepath
 
     file_byte = await uploaded_file.read()
