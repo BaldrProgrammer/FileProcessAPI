@@ -10,11 +10,11 @@ class FileDAO(BaseDAO):
     model = FileModel
 
     @classmethod
-    async def change_status_by_id(cls, uuid, new_status):
+    async def change_status_by_id(cls, fileid, new_status):
         async with async_session_maker() as session:
             query = (
                 update_sqlalchemy(cls.model)
-                .filter_by(uuid=uuid)
+                .filter_by(id=fileid)
                 .values(status=new_status)
                 .execution_options(synchronize_session='fetch')
             )

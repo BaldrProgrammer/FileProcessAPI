@@ -12,11 +12,14 @@ router = APIRouter()
 async def uploadfile(uploaded_file: UploadFile):
     file_id = random.randint(0, 2147483647)
     file_extension = uploaded_file.filename.split('.')[-1]
-    filename = str(file_id) + file_extension
+    filepath = str(file_id) + file_extension
+    filename = filepath
+
+    file_byte = await uploaded_file.read()
 
     if file_extension == 'csv':
-        asyncio.create_task(csv_process(file_id, filename, uploaded_file))
+        asyncio.create_task(csv_process(file_id, filename, filepath, file_byte))
     elif file_extension == 'json':
-        asyncio.create_task(json_process(file_id, filename, uploaded_file))
+        asyncio.create_task(json_process(file_id, filename, file_byte))
 
     return {'fileid': file_id}
