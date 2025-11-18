@@ -2,8 +2,6 @@ from sqlalchemy import update as sqlalchemy_update
 from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
 from database import async_session_maker
-from files.models import FileModel
-import asyncio
 
 class BaseDAO:
     model = None
