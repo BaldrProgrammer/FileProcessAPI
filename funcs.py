@@ -12,8 +12,8 @@ async def csv_process(fileid, filename, path, file_byte):
             file.write(file_byte)
         await FileDAO.change_status_by_id(fileid, 'done')
     except Exception as e:
-        raise e
         await FileDAO.change_status_by_id(fileid, 'error')
+        raise e
 
 
 async def json_process(uuid, filename, uploaded_file):
