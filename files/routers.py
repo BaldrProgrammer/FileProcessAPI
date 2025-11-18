@@ -15,8 +15,8 @@ async def uploadfile(uploaded_file: UploadFile):
     filename = file_uuid + file_extension
 
     if file_extension == 'csv':
-        asyncio.create_task(csv_process(filename, uploaded_file))
+        asyncio.create_task(csv_process(file_uuid, filename, uploaded_file))
     elif file_extension == 'json':
-        asyncio.create_task(json_process(filename, uploaded_file))
+        asyncio.create_task(json_process(file_uuid, filename, uploaded_file))
 
     return {'uuid': file_uuid}

@@ -1,22 +1,12 @@
-async def csv_process(filename, uploaded_file):
+from files.dao import FileDAO
+
+async def csv_process(uuid, filename, uploaded_file):
     try:
-        status = 'processing'
+        await FileDAO.change_status_by_id(uuid, 'processing')
         ...
 
         with open(filename, 'wb') as file:
             file.write(uploaded_file.file)
-        status = 'done'
-    except:
-        status = 'error'
-
-
-async def json_process(filename, uploaded_file):
-    try:
-        status = 'processing'
-        ...
-
-        with open(filename, 'wb') as file:
-            file.write(uploaded_file.file)
-        status = 'done'
-    except:
-        status = 'error'
+        await FileDAO.change_status_by_id(uuid, 'done')
+    except Exception as e:
+        await FileDAO.change_status_by_id(uuid, 'error')
