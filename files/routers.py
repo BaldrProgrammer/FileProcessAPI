@@ -1,4 +1,4 @@
-import os.path
+import os
 import random
 import asyncio
 
@@ -42,8 +42,7 @@ async def get_file_streaming(fileid: int) -> StreamingResponse:
 @router.post("/upload")
 async def uploadfile(uploaded_file: UploadFile) -> dict:
     file_id = random.randint(0, 2147483647)
-    file_extension = uploaded_file.filename.split('.')[-1]
-    filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage", file_extension,
+    filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
                             str(file_id) + uploaded_file.filename)
     file_byte = await uploaded_file.read()
 
@@ -51,6 +50,3 @@ async def uploadfile(uploaded_file: UploadFile) -> dict:
     return {'fileid': file_id}
 
 
-@router.delete("/delete/{fileid}")
-async def deletefile(fileid: int) -> dict:
-    pass
