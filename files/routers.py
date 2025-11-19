@@ -23,6 +23,7 @@ async def get_file(fileid: int) -> FileResponse:
     file_obj = await FileDAO.find_by_id(fileid)
     return FileResponse(file_obj.to_dict()['original_path'])
 
+
 @router.get('/get_file_streaming/{fileid}')
 async def get_file_streaming(fileid: int) -> StreamingResponse:
     def iterfile(filepath: str):
@@ -50,3 +51,11 @@ async def uploadfile(uploaded_file: UploadFile) -> dict:
     return {'fileid': file_id}
 
 
+@router.delete("/delete/{fileid}")
+async def deletefile(fileid: int) -> dict:
+    file_obj = await FileDAO.find_by_id(fileid)
+    filedict = file_obj.to_dict()
+
+    await FileDAO.delete(id=filedict['id'])
+    os.remove(filedict['original_path'])
+    return {'fileid': fileid, 'ok': True}
