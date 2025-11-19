@@ -31,9 +31,12 @@ def iterfile(filepath: str):
 
 
 @router.get('/get_file_streaming')
-async def get_file_streaming(fileid: int) -> FileResponse:
+async def get_file_streaming(fileid: int) -> StreamingResponse:
     file_obj = await FileDAO.find_by_id(fileid)
-    return FileResponse(file_obj.to_dict()['original_path'])
+    filedict = file_obj.to_dict()
+    if filedict['filename'].split('.')[-1] == 'mp4':
+        return StreamingResponse(iterfile(filedict['original_path']), media_type=f'video/{filedict['filename'].split('.')[-1]}')
+    return StreamingResponse(iterfile(filedict['original_path']), media_type=f'text/{filedict['filename'].split('.')[-1]}')
 
 
 @router.post("/upload")
