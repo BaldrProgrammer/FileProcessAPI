@@ -18,25 +18,25 @@ async def get_fileinfo(fileid: int) -> SFileGet:
     return file_obj
 
 
-@router.get('/get_file')
+@router.get('/get_file/{fileid}')
 async def get_file(fileid: int) -> FileResponse:
     file_obj = await FileDAO.find_by_id(fileid)
     return FileResponse(file_obj.to_dict()['original_path'])
 
-
-def iterfile(filepath: str):
-    with open(filepath, 'rb') as file:
-        while chunk := file.read(1024 * 1024):
-            yield chunk
-
-
-@router.get('/get_file_streaming')
+@router.get('/get_file_streaming/{fileid}')
 async def get_file_streaming(fileid: int) -> StreamingResponse:
+    def iterfile(filepath: str):
+        with open(filepath, 'rb') as file:
+            while chunk := file.read(1024 * 1024):
+                yield chunk
+
     file_obj = await FileDAO.find_by_id(fileid)
     filedict = file_obj.to_dict()
     if filedict['filename'].split('.')[-1] == 'mp4':
-        return StreamingResponse(iterfile(filedict['original_path']), media_type=f'video/{filedict['filename'].split('.')[-1]}')
-    return StreamingResponse(iterfile(filedict['original_path']), media_type=f'text/{filedict['filename'].split('.')[-1]}')
+        return StreamingResponse(iterfile(filedict['original_path']),
+                                 media_type=f'video/{filedict['filename'].split('.')[-1]}')
+    return StreamingResponse(iterfile(filedict['original_path']),
+                             media_type=f'text/{filedict['filename'].split('.')[-1]}')
 
 
 @router.post("/upload")
@@ -45,9 +45,12 @@ async def uploadfile(uploaded_file: UploadFile) -> dict:
     file_extension = uploaded_file.filename.split('.')[-1]
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage", file_extension,
                             str(file_id) + uploaded_file.filename)
-
     file_byte = await uploaded_file.read()
 
     asyncio.create_task(file_process(file_id, uploaded_file.filename, filepath, file_byte))
-
     return {'fileid': file_id}
+
+
+@router.delete("/delete/{fileid}")
+async def deletefile(fileid: int) -> dict:
+    pass

@@ -1,4 +1,4 @@
-from sqlalchemy import update as sqlalchemy_update
+from sqlalchemy import update as sqlalchemy_update, delete as sqlalchemy_delete
 from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
 from database import async_session_maker
@@ -41,6 +41,18 @@ class BaseDAO:
                 await session.rollback()
                 raise e
             return new_instance
+
+
+    @classmethod
+    async def delete(cls, **filter_by):
+        async with async_session_maker() as session:
+            query = sqlalchemy_delete(cls.model).filter_by(**filter_by)
+            await session.execute(query)
+            try:
+                await session.commit()
+            except SQLAlchemyError as e:
+                await session.rollback()
+                raise e
 
 
     @classmethod
