@@ -3,7 +3,7 @@ import random
 import asyncio
 
 from fastapi import APIRouter, UploadFile
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 
 from funcs import csv_process, json_process
 from files.dao import FileDAO
@@ -20,6 +20,18 @@ async def get_fileinfo(fileid: int) -> SFileGet:
 
 @router.get('/get_file')
 async def get_file(fileid: int) -> FileResponse:
+    file_obj = await FileDAO.find_by_id(fileid)
+    return FileResponse(file_obj.to_dict()['original_path'])
+
+
+def iterfile(filepath: str):
+    with open(filepath, 'rb') as file:
+        while chunk := file.read(1024 * 1024):
+            yield chunk
+
+
+@router.get('/get_file_streaming')
+async def get_file_streaming(fileid: int) -> FileResponse:
     file_obj = await FileDAO.find_by_id(fileid)
     return FileResponse(file_obj.to_dict()['original_path'])
 
