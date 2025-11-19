@@ -5,7 +5,7 @@ import asyncio
 from fastapi import APIRouter, UploadFile
 from fastapi.responses import FileResponse, StreamingResponse
 
-from funcs import csv_process, json_process, mp4_process
+from funcs import file_process
 from files.dao import FileDAO
 from files.schemas import SFileGet
 
@@ -48,11 +48,6 @@ async def uploadfile(uploaded_file: UploadFile) -> dict:
 
     file_byte = await uploaded_file.read()
 
-    if file_extension == 'csv':
-        asyncio.create_task(csv_process(file_id, uploaded_file.filename, filepath, file_byte))
-    elif file_extension == 'json':
-        asyncio.create_task(csv_process(file_id, uploaded_file.filename, filepath, file_byte))
-    elif file_extension == 'mp4':
-        asyncio.create_task(csv_process(file_id, uploaded_file.filename, filepath, file_byte))
+    asyncio.create_task(file_process(file_id, uploaded_file.filename, filepath, file_byte))
 
     return {'fileid': file_id}
