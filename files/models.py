@@ -9,8 +9,8 @@ class FileModel(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     filename: Mapped[str]
-    original_path: Mapped[str]
-    result_path: Mapped[Optional[str]] = mapped_column(default=None)
+    path: Mapped[str]
+    extension: Mapped[str]
     status: Mapped[str] = mapped_column(default='pending')
     stats: Mapped[str] = mapped_column(default='{}')
     error: Mapped[Optional[str]] = mapped_column(None)
@@ -25,8 +25,7 @@ class FileModel(Base):
         return {
             'id': self.id,
             'filename': self.filename,
-            'original_path': self.original_path,
-            'result_path': self.result_path,
+            'path': self.path,
             'status': self.status,
             'stats': self.stats,
             'error': self.error
