@@ -21,7 +21,7 @@ async def get_fileinfo(fileid: int) -> SFileGet:
 @router.get('/get_file/{fileid}')
 async def get_file(fileid: int) -> FileResponse:
     file_obj = await FileDAO.find_by_id(fileid)
-    return FileResponse(file_obj.to_dict()['original_path'])
+    return FileResponse(file_obj.to_dict()['path'])
 
 
 @router.get('/get_file_streaming/{fileid}')
@@ -34,9 +34,9 @@ async def get_file_streaming(fileid: int) -> StreamingResponse:
     file_obj = await FileDAO.find_by_id(fileid)
     filedict = file_obj.to_dict()
     if filedict['filename'].split('.')[-1] == 'mp4':
-        return StreamingResponse(iterfile(filedict['original_path']),
+        return StreamingResponse(iterfile(filedict['path']),
                                  media_type=f'video/{filedict['filename'].split('.')[-1]}')
-    return StreamingResponse(iterfile(filedict['original_path']),
+    return StreamingResponse(iterfile(filedict['path']),
                              media_type=f'text/{filedict['filename'].split('.')[-1]}')
 
 
@@ -47,8 +47,10 @@ async def uploadfile(uploaded_file: UploadFile) -> dict:
                             str(file_id) + uploaded_file.filename)
     file_byte = await uploaded_file.read()
 
-    asyncio.create_task(file_process(file_id, uploaded_file.filename, filepath, file_byte))
-    return {'fileid': file_id}
+    ok = await file_process(file_id, uploaded_file.filename, filepath, file_byte)
+    if ok:
+        return {'ok': True, 'fileid': file_id}
+    return {'ok': False}
 
 
 @router.delete("/delete/{fileid}")
@@ -57,5 +59,5 @@ async def deletefile(fileid: int) -> dict:
     filedict = file_obj.to_dict()
 
     await FileDAO.delete(id=filedict['id'])
-    os.remove(filedict['original_path'])
+    os.remove(filedict['path'])
     return {'fileid': fileid, 'ok': True}
