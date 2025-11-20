@@ -1,6 +1,6 @@
 import os
 import random
-import asyncio
+from typing import List
 
 from fastapi import APIRouter, UploadFile
 from fastapi.responses import FileResponse, StreamingResponse
@@ -51,6 +51,23 @@ async def uploadfile(uploaded_file: UploadFile) -> dict:
     if ok:
         return {'ok': True, 'fileid': file_id}
     return {'ok': False}
+
+
+@router.post("/upload_multiple")
+async def upload_multiple_file(uploaded_files: List[UploadFile]) -> dict:
+    file_ids = []
+    for uploaded_file in uploaded_files:
+        file_id = random.randint(0, 2147483647)
+        filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
+                                str(file_id) + uploaded_file.filename)
+        file_byte = await uploaded_file.read()
+
+        ok = await file_process(file_id, uploaded_file.filename, filepath, file_byte)
+        if not ok:
+            return {'ok': False}
+        file_ids.append(file_id)
+
+    return {'ok': True, 'fileids': str(file_ids)}
 
 
 @router.delete("/delete/{fileid}")
