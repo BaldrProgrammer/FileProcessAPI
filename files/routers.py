@@ -77,4 +77,18 @@ async def deletefile(fileid: int) -> dict:
 
     await FileDAO.delete(id=filedict['id'])
     os.remove(filedict['path'])
-    return {'fileid': fileid, 'ok': True}
+    return {'ok': True, 'fileid': fileid}
+
+
+@router.delete("/delete/multiple/{fileids}")
+async def deletefile(fileids: str) -> dict:
+    file_ids_return = []
+    ids = fileids.split(',')
+    for fileid in ids:
+        file_obj = await FileDAO.find_by_id(int(fileid))
+        filedict = file_obj.to_dict()
+
+        await FileDAO.delete(id=filedict['id'])
+        os.remove(filedict['path'])
+        file_ids_return.append(fileid)
+    return {'ok': True, 'fileid': str(file_ids_return)}
