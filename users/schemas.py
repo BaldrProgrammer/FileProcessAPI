@@ -6,3 +6,11 @@ class SUserGet(BaseModel):
     username: str = Field(..., description='имя пользователя')
     password: str = Field(..., description='пароль')
     is_admin: str = Field(..., description='админка')
+
+
+class SUserAdd(BaseModel):
+    id: int
+    username: str = Field(..., description='имя пользователя')
+    password: str = Field(..., description='пароль')
+    is_admin: str = Field(..., description='админка')
+
