@@ -4,8 +4,6 @@ from datetime import datetime, timezone, timedelta
 
 from settings import get_token_data
 
-# import asyncio
-
 pwd_context = CryptContext(schemes=['bcrypt'])
 
 
