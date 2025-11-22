@@ -56,6 +56,7 @@ async def upload_file(uploaded_files: List[UploadFile]) -> dict:
 
     return {'ok': True, 'fileids': str(file_ids)}
 
+
 @router.delete("/{fileids}")
 async def delete_multiple(fileid: List[str]) -> dict:
     file_ids_return = []

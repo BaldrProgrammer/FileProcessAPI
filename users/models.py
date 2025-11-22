@@ -7,7 +7,7 @@ class UserModel(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str]
-    password: Mapped[str]
+    hashed_password: Mapped[str]
     is_admin: Mapped[bool]
 
     def __str__(self):
@@ -20,6 +20,6 @@ class UserModel(Base):
         return {
             'id': self.id,
             'username': self.username,
-            'password': self.password,
+            'hashed_password': self.hashed_password,
             'is_admin': self.is_admin
         }
