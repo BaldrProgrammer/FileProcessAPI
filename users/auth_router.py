@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from users.dao import UserDAO
 from users.schemas import SUserReg
 
-router = APIRouter(prefix='auth')
+router = APIRouter(prefix='/auth')
 
 
 @router.post('/register')
