@@ -18,6 +18,7 @@ config.set_main_option("sqlalchemy.url", DATABASE_URL)
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 from files.models import FileModel
+from users.models import UserModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
