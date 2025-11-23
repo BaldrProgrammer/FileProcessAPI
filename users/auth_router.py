@@ -3,7 +3,7 @@ from users.dao import UserDAO
 from users.schemas import SUserReg, SUserAuth
 from users.auth import get_hash_password
 
-router = APIRouter(prefix='/auth')
+router = APIRouter(prefix='/auth', tags=['/auth'])
 
 
 @router.post('/register')

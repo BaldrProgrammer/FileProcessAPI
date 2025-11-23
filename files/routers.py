@@ -9,7 +9,7 @@ from funcs import file_process
 from files.dao import FileDAO
 from files.schemas import SFileGet
 
-router = APIRouter(prefix='/files')
+router = APIRouter(prefix='/files', tags=['/files'])
 
 
 @router.get("/{fileid}/info")
