@@ -1,7 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, HTTPException, status
 from users.dao import UserDAO
 from users.schemas import SUserReg, SUserAuth
-from users.auth import get_hash_password
+from users.auth import get_hash_password, verify_password, jwt_encode
 
 router = APIRouter(prefix='/auth', tags=['/auth'])
 
@@ -16,7 +16,20 @@ async def register(user: SUserReg) -> dict:
 
 
 @router.post('/log')
-async def login(auth_data: SUserAuth):
+async def login(response: Response, auth_data: SUserAuth):
     user = await UserDAO.find_one_or_none(username=auth_data.username)
-    if user:
-        return user
+    if not user:
+        return HTTPException(
+            status.HTTP_401_UNAUTHORIZED,
+            'не правильный логин или пароль'
+        )
+
+    if await verify_password(auth_data.password, user.hashed_password):
+        token = await jwt_encode({'user_id': user.id})
+        response.set_cookie('access_token', token, httponly=True)
+        return {'ok': True, 'access_token': token}
+    else:
+        return HTTPException(
+            status.HTTP_401_UNAUTHORIZED,
+            'не правильный логин или пароль'
+        )
