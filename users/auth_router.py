@@ -11,3 +11,10 @@ async def register(user: SUserReg) -> dict:
     if check:
         return {'ok': True}
     return {'ok': False}
+
+
+@router.post('/log')
+async def login(auth_data: SUserAuth):
+    user = await UserDAO.find_one_or_none(username=auth_data.username)
+    if user:
+        return user
