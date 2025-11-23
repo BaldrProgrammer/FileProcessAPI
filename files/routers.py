@@ -2,7 +2,7 @@ import os
 import random
 from typing import List
 
-from fastapi import APIRouter, UploadFile
+from fastapi import APIRouter, UploadFile, HTTPException, status
 from fastapi.responses import FileResponse, StreamingResponse
 
 from funcs import file_process
