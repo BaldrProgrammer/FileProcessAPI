@@ -2,12 +2,14 @@ import os
 import random
 from typing import List
 
-from fastapi import APIRouter, UploadFile, HTTPException, status
+from fastapi import APIRouter, UploadFile, Depends
 from fastapi.responses import FileResponse, StreamingResponse
 
 from funcs import file_process
 from files.dao import FileDAO
 from files.schemas import SFileGet
+from users.schemas import SUserGet
+from users.auth import current_user
 
 router = APIRouter(prefix='/files', tags=['/files'])
 
@@ -41,12 +43,12 @@ async def get_file_streaming(fileid: int) -> StreamingResponse:
 
 
 @router.post("/")
-async def upload_file(uploaded_files: List[UploadFile]) -> dict:
+async def upload_file(uploaded_files: List[UploadFile], user: SUserGet = Depends(current_user)) -> dict:
     file_ids = []
     for uploaded_file in uploaded_files:
         file_id = random.randint(0, 2147483647)
         filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                                str(file_id) + uploaded_file.filename)
+                                str(user.id), str(file_id) + uploaded_file.filename)
         file_byte = await uploaded_file.read()
 
         ok = await file_process(file_id, uploaded_file.filename, filepath, file_byte)

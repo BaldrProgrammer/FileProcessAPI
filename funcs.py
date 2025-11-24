@@ -1,3 +1,4 @@
+import os
 from files.dao import FileDAO
 from files.schemas import SFileAdd
 
@@ -13,6 +14,10 @@ async def file_process(fileid, filename, path, file_byte):
             extension = 'video/' + extension
         else:
             return
+
+        exists = os.path.isdir(path)
+        if not exists:
+            os.mkdir('/'.join(path.split('/')[:-1]))
 
         file_obj = SFileAdd(id=fileid, filename=filename, path=path, extension=extension)
         await FileDAO.add(**file_obj.model_dump())
