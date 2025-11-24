@@ -39,3 +39,9 @@ async def login(response: Response, auth_data: SUserAuth):
             status.HTTP_401_UNAUTHORIZED,
             'не правильный логин или пароль'
         )
+
+
+@router.post('/logout')
+async def logout(response: Response):
+    response.delete_cookie('access_token')
+    return {'ok': True}
