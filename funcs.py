@@ -15,7 +15,7 @@ async def file_process(fileid, filename, path, file_byte):
         else:
             return
 
-        exists = os.path.isdir(path)
+        exists = os.path.isdir('/'.join(path.split('/')[:-1]))
         if not exists:
             os.mkdir('/'.join(path.split('/')[:-1]))
 
