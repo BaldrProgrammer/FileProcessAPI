@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Response, Request
+from fastapi import APIRouter, Depends
 from users.dao import UserDAO
 from users.schemas import SUserGet
-from users.auth import jwt_decode
+from users.auth import current_user
 
 router = APIRouter(prefix='/users', tags=['/users'])
 
@@ -12,10 +12,8 @@ async def get_all_users() -> list[SUserGet]:
 
 
 @router.get('/current')
-async def get_current_user(response: Request):
-    token = response.cookies.get('access_token')
-    user_id = (await jwt_decode(token))['user_id']
-    return await UserDAO.find_by_id(user_id)
+async def get_current_user(user: SUserGet = Depends(current_user)) -> SUserGet:
+    return user
 
 
 @router.get('/{user_id}')

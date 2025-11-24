@@ -1,6 +1,8 @@
+from fastapi import Request
 from passlib.context import CryptContext
 from jose import jwt
 from datetime import datetime, timezone, timedelta
+from users.dao import UserDAO
 
 from settings import get_token_data
 
@@ -26,3 +28,9 @@ async def jwt_encode(data: dict):
 async def jwt_decode(token: str):
     auth_data = get_token_data()
     return jwt.decode(token, key=auth_data['key'])
+
+
+async def current_user(request: Request):
+    token = request.cookies.get('access_token')
+    user_id = (await jwt_decode(token))['user_id']
+    return await UserDAO.find_by_id(user_id)
