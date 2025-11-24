@@ -8,6 +8,8 @@ async def file_process(fileid, filename, path, file_byte):
         extension = filename.split('.')[-1]
         if extension in ['txt', 'json', 'csv']:
             extension = 'text/' + extension
+        elif extension in ['jpg', 'jpeg', 'png']:
+            extension = 'image/' + extension
         elif extension in ['mp3']:
             extension = 'audio/' + extension
         elif extension in ['mp4']:
