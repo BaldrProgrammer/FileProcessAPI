@@ -5,7 +5,7 @@ from database import Base
 class FolderModel(Base):
     __tablename__ = 'folders'
 
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str]
     path: Mapped[str]
     stats: Mapped[str] = mapped_column(default='{}')

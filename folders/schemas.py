@@ -9,6 +9,5 @@ class SFolderGet(BaseModel):
 
 
 class SFolderAdd(BaseModel):
-    id: int
     name: str = Field(..., description='имя папки')
     path: str = Field(..., description='путь к папке')
