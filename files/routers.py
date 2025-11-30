@@ -6,8 +6,8 @@ from fastapi import APIRouter, UploadFile, Depends
 from fastapi.responses import FileResponse, StreamingResponse
 
 from funcs import file_process
-from objects.files.dao import FileDAO
-from objects.files.schemas import SFileGet
+from files.dao import FileDAO
+from files.schemas import SFileGet
 from users.schemas import SUserGet
 from users.auth import current_user
 

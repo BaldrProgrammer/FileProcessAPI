@@ -1,6 +1,6 @@
 from dao.base import BaseDAO
 from database import async_session_maker
-from objects.files.models import FileModel
+from files.models import FileModel
 
 from sqlalchemy import update as update_sqlalchemy
 from sqlalchemy.exc import SQLAlchemyError

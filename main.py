@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from objects.routers import router as object_router
+from files.routers import router as object_router
 from users.routers import router as users_outer
 from users.auth_router import router as auth_router
 
