@@ -17,8 +17,8 @@ config.set_main_option("sqlalchemy.url", DATABASE_URL)
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
-from objects.files.models import FileModel
-from objects.folders.models import FolderModel
+from files.models import FileModel
+from folders.models import FolderModel
 from users.models import UserModel
 
 # this is the Alembic Config object, which provides
