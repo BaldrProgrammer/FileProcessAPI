@@ -43,12 +43,12 @@ async def get_file_streaming(fileid: int) -> StreamingResponse:
 
 
 @router.post("/")
-async def upload_file(uploaded_files: List[UploadFile], user: SUserGet = Depends(current_user)) -> dict:
+async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUserGet = Depends(current_user)) -> dict:
     file_ids = []
     for uploaded_file in uploaded_files:
         file_id = random.randint(0, 2147483647)
         filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                                str(user.id), str(file_id) + uploaded_file.filename)
+                                str(user.id), folder, str(file_id) + uploaded_file.filename)
         file_byte = await uploaded_file.read()
 
         ok = await file_process(file_id, uploaded_file.filename, filepath, file_byte)
