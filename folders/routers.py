@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends
 from folders.dao import FolderDAO
 from folders.schemas import SFolderGet, SFolderAdd
 from users.auth import current_user
+
+from typing import Optional
 import os
 
 router = APIRouter(prefix='/folders', tags=['/folders'])
@@ -28,8 +30,14 @@ async def rmdir(old_name: str, new_name: str, user: SFolderGet = Depends(current
 
 
 @router.delete('/rmdir/{name}')
-async def rmdir(name: str, user: SFolderGet = Depends(current_user)) -> dict:
+async def rmdir(name: str, hard: Optional[bool], user: SFolderGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), name)
+    files_in_dir = os.listdir(path)
+    if files_in_dir and hard:
+        for file in files_in_dir:
+            os.remove(os.path.join(path, file))
+    else:
+        return {'ok': False, 'detail': 'folder is not empty'}
     os.rmdir(path)
     await FolderDAO.delete(path=path)
     return {'ok': True, 'name': name, 'path': path}
