@@ -24,3 +24,13 @@ async def rmdir(name: str, user: SFolderGet = Depends(current_user)) -> dict:
     os.rmdir(path)
     await FolderDAO.delete(path=path)
     return {'ok': True, 'name': name, 'path': path}
+
+
+@router.post('/ren')
+async def rmdir(old_name: str, new_name: str, user: SFolderGet = Depends(current_user)) -> dict:
+    oldpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), old_name)
+    newpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), new_name)
+    os.rename(oldpath, newpath)
+    await FolderDAO.update({'path': oldpath}, {'path': newpath})
+    return {'ok': True, 'oldpath': oldpath, 'newpath': newpath}
+
