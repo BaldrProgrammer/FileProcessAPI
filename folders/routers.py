@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from folders.dao import FolderDAO
-from folders.schemas import SFolderAdd
+from folders.schemas import SFolderAdd, SFolderGet
 from users.auth import current_user
 
 from typing import Optional
@@ -11,13 +11,19 @@ from users.schemas import SUserGet
 router = APIRouter(prefix='/folders', tags=['/folders'])
 
 
-@router.get('/content')
+@router.get('/{folder_path}/items')
 async def get_folder_content(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     return {'ok': True, 'content': os.listdir(path)}
 
 
-@router.post('/mkdir')
+@router.get('/{folder_path}/info')
+async def get_folder_content(folder_path: str, user: SUserGet = Depends(current_user)) -> SFolderGet:
+    path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
+    return await FolderDAO.find_one_or_none(path = path)
+
+
+@router.post('/{folder_path}/mkdir')
 async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     new_instance = SFolderAdd(name=folder_path, path=path)
@@ -37,7 +43,7 @@ async def rendir(old_path: str, new_path: str, user: SUserGet = Depends(current_
     return {'ok': True, 'oldpath': oldpath, 'newpath': newpath}
 
 
-@router.delete('/')
+@router.delete('/{folder_path}/')
 async def rmdir(folder_path: str, hard: Optional[bool], user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     files_in_dir = os.listdir(path)
