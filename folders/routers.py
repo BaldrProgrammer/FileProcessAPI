@@ -18,7 +18,7 @@ async def get_folder_content(folder_path: str, user: SUserGet = Depends(current_
 
 
 @router.get('/{folder_path}/info')
-async def get_folder_content(folder_path: str, user: SUserGet = Depends(current_user)) -> SFolderGet:
+async def get_folder_info(folder_path: str, user: SUserGet = Depends(current_user)) -> SFolderGet:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     return await FolderDAO.find_one_or_none(path = path)
 
