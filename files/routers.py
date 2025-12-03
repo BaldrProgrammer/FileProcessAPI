@@ -1,6 +1,6 @@
 import os
 import random
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, UploadFile, Depends
 from fastapi.responses import FileResponse, StreamingResponse
@@ -60,11 +60,22 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
 
 
 @router.patch('/ren')
-async def ren(fileid: int, newname: str, user: SUserGet = Depends(current_user)):
+async def ren(fileid: int, newname: str):
     file = await FileDAO.find_by_id(fileid)
     filepath = file.path.replace(str(file.id) + file.filename, str(file.id) + newname)
     os.rename(file.path, filepath)
     await FileDAO.rename(fileid, newname, filepath)
+
+    return {'ok': True, 'newpath': filepath}
+
+
+@router.patch('/move')
+async def move(fileid: int, newpath: Optional[str], user: SUserGet = Depends(current_user)):
+    file = await FileDAO.find_by_id(fileid)
+    filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
+                                str(user.id), newpath, str(file.id)+file.filename)
+    os.rename(file.path, filepath)
+    await FileDAO.update({'id': fileid}, {'path': filepath})
 
     return {'ok': True, 'newpath': filepath}
 
