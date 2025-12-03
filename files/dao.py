@@ -1,3 +1,5 @@
+import asyncio
+
 from dao.base import BaseDAO
 from database import async_session_maker
 from files.models import FileModel
@@ -16,6 +18,23 @@ class FileDAO(BaseDAO):
                 update_sqlalchemy(cls.model)
                 .filter_by(id=fileid)
                 .values(status=new_status)
+                .execution_options(synchronize_session='fetch')
+            )
+            await session.execute(query)
+            try:
+                await session.commit()
+            except SQLAlchemyError as e:
+                await session.rollback()
+                raise e
+            return True
+
+    @classmethod
+    async def rename(cls, fileid, new_name, new_path):
+        async with async_session_maker() as session:
+            query = (
+                update_sqlalchemy(cls.model)
+                .filter_by(id=fileid)
+                .values(filename=new_name, path=new_path)
                 .execution_options(synchronize_session='fetch')
             )
             await session.execute(query)
