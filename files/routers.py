@@ -59,6 +59,16 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
     return {'ok': True, 'fileids': str(file_ids)}
 
 
+@router.patch('/ren')
+async def ren(fileid: int, newname: str, user: SUserGet = Depends(current_user)):
+    file = await FileDAO.find_by_id(fileid)
+    filepath = file.path.replace(str(file.id) + file.filename, str(file.id) + newname)
+    os.rename(file.path, filepath)
+    await FileDAO.rename(fileid, newname, filepath)
+
+    return {'ok': True, 'newpath': filepath}
+
+
 @router.delete("/{fileids}")
 async def delete_multiple(fileid: List[str]) -> dict:
     file_ids_return = []
