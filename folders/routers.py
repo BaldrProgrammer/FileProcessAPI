@@ -11,16 +11,21 @@ from users.schemas import SUserGet
 router = APIRouter(prefix='/folders', tags=['/folders'])
 
 
+@router.get('/{filter_value}/info')
+async def get_folder_info(filter_value: str, filter_type: str,
+                          user: SUserGet = Depends(current_user)) -> SFolderGet | None:
+    if filter_type == 'id':
+        return await FolderDAO.find_by_id(int(filter_value))
+    elif filter_type == 'name':
+        path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), filter_value)
+        return await FolderDAO.find_one_or_none(path=path)
+    return
+
+
 @router.get('/{folder_path}/items')
 async def get_folder_content(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     return {'ok': True, 'content': os.listdir(path)}
-
-
-@router.get('/{folder_path}/info')
-async def get_folder_info(folder_path: str, user: SUserGet = Depends(current_user)) -> SFolderGet:
-    path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
-    return await FolderDAO.find_one_or_none(path = path)
 
 
 @router.post('/{folder_path}/mkdir')
