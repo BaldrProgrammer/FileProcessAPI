@@ -11,7 +11,7 @@ from users.schemas import SUserGet
 router = APIRouter(prefix='/folders', tags=['/folders'])
 
 
-@router.get('/{filter_value}/info')
+@router.get('/info')
 async def get_folder_info(filter_value: str, filter_type: str,
                           user: SUserGet = Depends(current_user)) -> SFolderGet | None:
     if filter_type == 'id':
@@ -22,13 +22,16 @@ async def get_folder_info(filter_value: str, filter_type: str,
     return
 
 
-@router.get('/{folder_path}/items')
-async def get_folder_content(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
-    path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
+@router.get('/items')
+async def get_folder_content(filter_value: str, filter_type: str,
+                          user: SUserGet = Depends(current_user)) -> dict | None:
+    if filter_type == 'id':
+        filter_value = (await FolderDAO.find_by_id(int(filter_value))).name
+    path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), filter_value)
     return {'ok': True, 'content': os.listdir(path)}
 
 
-@router.post('/{folder_path}/mkdir')
+@router.post('/mkdir')
 async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     new_instance = SFolderAdd(name=folder_path, path=path)
@@ -48,7 +51,7 @@ async def rendir(old_path: str, new_path: str, user: SUserGet = Depends(current_
     return {'ok': True, 'oldpath': oldpath, 'newpath': newpath}
 
 
-@router.delete('/{folder_path}/')
+@router.delete('/rmdir')
 async def rmdir(folder_path: str, hard: Optional[bool], user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
     files_in_dir = os.listdir(path)
