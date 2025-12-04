@@ -1,5 +1,4 @@
 import requests
-import json
 
 cookies = {}
 URL = 'http://localhost:8000'
