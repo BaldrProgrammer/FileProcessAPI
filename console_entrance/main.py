@@ -10,11 +10,17 @@ text_headers = {
 
 while True:
     if not cookies:
-        print('login!')
-        username = input('enter your username: ')
-        password = input('enter your password: ')
+        logorreg = input('log or reg?')
+
+        if logorreg == 'reg':
+            username = input('enter your username: ')
+            password = input('enter your password: ')
+            response = requests.post(URL + '/auth/register',
+                                     json={"username": username, "hashed_password": "adin", "is_admin": False},
+                                     headers=text_headers)
+            cookies = response.cookies.get_dict().copy()
+
         response = requests.post(URL + '/auth/log',
                                  json={'username': username, 'password': password},
                                  headers=text_headers)
         cookies = response.cookies.get_dict().copy()
-
