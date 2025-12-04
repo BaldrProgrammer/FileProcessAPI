@@ -12,15 +12,22 @@ while True:
     if not cookies:
         logorreg = input('log or reg?')
 
-        if logorreg == 'reg':
+        if logorreg == 'log':
+            username = input('enter your username: ')
+            password = input('enter your password: ')
+
+        elif logorreg == 'reg':
             username = input('enter your username: ')
             password = input('enter your password: ')
             response = requests.post(URL + '/auth/register',
                                      json={"username": username, "hashed_password": "adin", "is_admin": False},
                                      headers=text_headers)
-            cookies = response.cookies.get_dict().copy()
+
+        else:
+            continue
 
         response = requests.post(URL + '/auth/log',
                                  json={'username': username, 'password': password},
                                  headers=text_headers)
         cookies = response.cookies.get_dict().copy()
+        print(cookies)
