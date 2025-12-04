@@ -8,7 +8,7 @@ router = APIRouter(prefix='/auth', tags=['/auth'])
 
 @router.post('/register')
 async def register(user: SUserReg):
-    if await UserDAO.find_one_or_none(username=SUserReg.username):
+    if await UserDAO.find_one_or_none(username=user.username):
         return HTTPException(
             status.HTTP_409_CONFLICT,
             'пользователь уже существует'
