@@ -10,7 +10,7 @@ text_headers = {
 
 while True:
     if not cookies:
-        logorreg = input('log or reg?')
+        logorreg = input('log or reg? ')
 
         if logorreg == 'log':
             username = input('enter your username: ')
@@ -30,4 +30,9 @@ while True:
                                  json={'username': username, 'password': password},
                                  headers=text_headers)
         cookies = response.cookies.get_dict().copy()
-        print(cookies)
+
+    action = input('what will be your next action? ')
+    if action == 'me':
+        me = requests.get(URL+'/users/current',
+                          cookies=cookies).content
+        print(me)
