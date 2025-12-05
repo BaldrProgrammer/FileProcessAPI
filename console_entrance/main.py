@@ -46,7 +46,8 @@ while True:
         if arg == '..':
             cd = '/'.join(arg.split('/')[0:-1])
         else:
-            cd = arg
+            cd = cd + '/' + arg
+        cd = ''.join(cd[1:]) if cd[0] == '/' else cd
 
     elif action == 'files':
         response = requests.get(URL + '/users/files',
