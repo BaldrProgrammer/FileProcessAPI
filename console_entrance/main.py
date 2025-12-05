@@ -51,9 +51,16 @@ while True:
             cd = cd + '/' + arg
         cd = ''.join(cd[1:]) if cd[0] == '/' else cd
 
-    elif action == 'files':
-        response = requests.get(URL + '/users/files',
-                                cookies=cookies).content.decode('utf-8')
-        for file in json.loads(response):
+    elif action == 'ls':
+        if cd:
+            response = json.loads(
+                requests.get(URL + f'/folders/items?filter_value={cd}&filter_type=name',
+                             cookies=cookies).content.decode('utf-8'))['content']
+        else:
+            response = json.loads(
+                requests.get(URL + '/users/files',
+                             cookies=cookies).content.decode('utf-8')
+            )
+        for file in response:
             print(file)
         print('\n')
