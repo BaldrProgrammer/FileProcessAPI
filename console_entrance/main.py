@@ -45,6 +45,8 @@ while True:
         arg = action.split(' ')[1]
         if arg == '..':
             cd = '/'.join(arg.split('/')[0:-1])
+        elif arg == '/':
+            cd = ''
         else:
             cd = cd + '/' + arg
         cd = ''.join(cd[1:]) if cd[0] == '/' else cd
