@@ -35,12 +35,16 @@ while True:
     me = requests.get(URL + '/users/current',
                       cookies=cookies).content.decode('utf-8')
 
-    action = input(cd + '~ ')
+    action = input(cd + ' ~ ')
     if action == 'me':
         print(me)
 
-    if action == 'files':
-        response = requests.get(URL + '/users/files' + cd,
+    elif action.startswith('cd'):
+        folder = action.split(' ')[1]
+        cd = folder
+
+    elif action == 'files':
+        response = requests.get(URL + '/users/files',
                                 cookies=cookies).content.decode('utf-8')
         for file in json.loads(response):
             print(file)
