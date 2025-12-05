@@ -44,12 +44,13 @@ while True:
                                 cookies=cookies).content.decode('utf-8')
         arg = action.split(' ')[1]
         if arg == '..':
-            cd = '/'.join(arg.split('/')[0:-1])
+            cd = '/'.join(cd.split('/')[0:-1])
         elif arg == '/':
             cd = ''
         else:
             cd = cd + '/' + arg
-        cd = ''.join(cd[1:]) if cd[0] == '/' else cd
+        if cd:
+            cd = ''.join(cd[1:]) if cd[0] == '/' else cd
 
     elif action == 'ls':
         if cd:
