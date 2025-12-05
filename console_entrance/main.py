@@ -33,5 +33,5 @@ while True:
     action = input('what will be your next action? ')
     if action == 'me':
         me = requests.get(URL+'/users/current',
-                          cookies=cookies).content
+                          cookies=cookies).content.decode('utf-8')
         print(me)
