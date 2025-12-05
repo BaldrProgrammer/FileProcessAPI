@@ -40,8 +40,13 @@ while True:
         print(me)
 
     elif action.startswith('cd'):
-        folder = action.split(' ')[1]
-        cd = folder
+        response = requests.get(URL + '/users/files',
+                                cookies=cookies).content.decode('utf-8')
+        arg = action.split(' ')[1]
+        if arg == '..':
+            cd = '/'.join(arg.split('/')[0:-1])
+        else:
+            cd = arg
 
     elif action == 'files':
         response = requests.get(URL + '/users/files',
