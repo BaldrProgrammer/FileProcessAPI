@@ -1,5 +1,8 @@
+import json
+
 import requests
 
+cd = ''
 cookies = {}
 URL = 'http://localhost:8000'
 text_headers = {
@@ -32,6 +35,13 @@ while True:
     me = requests.get(URL + '/users/current',
                       cookies=cookies).content.decode('utf-8')
 
-    action = input('what will be your next action? ')
+    action = input(cd + '~ ')
     if action == 'me':
         print(me)
+
+    if action == 'files':
+        response = requests.get(URL + '/users/files' + cd,
+                                cookies=cookies).content.decode('utf-8')
+        for file in json.loads(response):
+            print(file)
+        print('\n')
