@@ -29,9 +29,9 @@ while True:
                                  json={'username': username, 'password': password},
                                  headers=text_headers)
         cookies = response.cookies.get_dict().copy()
+    me = requests.get(URL + '/users/current',
+                      cookies=cookies).content.decode('utf-8')
 
     action = input('what will be your next action? ')
     if action == 'me':
-        me = requests.get(URL+'/users/current',
-                          cookies=cookies).content.decode('utf-8')
         print(me)
