@@ -65,3 +65,11 @@ while True:
         for file in response:
             print(file)
         print('\n')
+
+    elif action.startswith('mkdir'):
+        arg = action.split(' ')[1]
+        response = requests.post(URL + f'/folders/mkdir?folder_path={cd+'/'+arg}',
+                                 cookies=cookies)
+        print(response.status_code)
+        if response.status_code != 200:
+            print(response.content.decode('utf-8'))
