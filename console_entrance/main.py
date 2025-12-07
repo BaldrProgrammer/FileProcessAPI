@@ -32,8 +32,8 @@ while True:
                                  json={'username': username, 'password': password},
                                  headers=text_headers)
         cookies = response.cookies.get_dict().copy()
-    me = requests.get(URL + '/users/current',
-                      cookies=cookies).content.decode('utf-8')
+    me = json.loads(requests.get(URL + '/users/current',
+                      cookies=cookies).content.decode('utf-8'))
 
     action = input(cd + ' ~ ')
     if action == 'me':
@@ -67,6 +67,15 @@ while True:
             print(file)
         print('\n')
 
+    elif action.startswith('di'):
+        if me['is_admin']:
+            args = action.split(' ')
+            response = requests.get(URL + f'/folders/info?filter_value={cd + args[1]}&filter_type={args[2]}',
+                                    cookies=cookies).content.decode('utf-8')
+            print(response)
+        else:
+            print('denied')
+
     elif action.startswith('mkdir'):
         arg = action.split(' ')[1]
         response = requests.post(URL + f'/folders/mkdir?folder_path={cd + arg}',
@@ -77,9 +86,8 @@ while True:
 
 
     elif action.startswith('rmdir'):
-        arg = action.split(' ')[1]
-        hard = action.split(' ')[2]
-        response = requests.delete(URL + f'/folders/rmdir?folder_path={cd + arg}&hard={hard}',
+        args = action.split(' ')
+        response = requests.delete(URL + f'/folders/rmdir?folder_path={cd + args[1]}&hard={args[2]}',
                                  cookies=cookies)
         print(response.status_code)
         if response.status_code != 200:
