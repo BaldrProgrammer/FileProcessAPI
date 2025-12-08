@@ -33,7 +33,7 @@ while True:
                                  headers=text_headers)
         cookies = response.cookies.get_dict().copy()
     me = json.loads(requests.get(URL + '/users/current',
-                      cookies=cookies).content.decode('utf-8'))
+                                 cookies=cookies).content.decode('utf-8'))
 
     action = input(cd + ' ~ ')
     if action == 'me':
@@ -87,11 +87,19 @@ while True:
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
 
+    elif action.startswith('ren'):
+        args = action.split(' ')
+        response = requests.patch(URL + f'/folders/ren?old_path={cd + args[1]}&new_path={cd + args[2]}',
+                                  cookies=cookies)
+        print(response.status_code)
+        if response.status_code != 200:
+            print(response.content.decode('utf-8'))
+
 
     elif action.startswith('rmdir'):
         args = action.split(' ')
         response = requests.delete(URL + f'/folders/rmdir?folder_path={cd + args[1]}&hard={args[2]}',
-                                 cookies=cookies)
+                                   cookies=cookies)
         print(response.status_code)
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
