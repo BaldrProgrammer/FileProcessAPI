@@ -39,6 +39,9 @@ while True:
     if action == 'me':
         print(me)
 
+    elif action == 'logout':
+        cookies.clear()
+
     elif action.startswith('cd'):
         response = requests.get(URL + '/users/files',
                                 cookies=cookies).content.decode('utf-8')
