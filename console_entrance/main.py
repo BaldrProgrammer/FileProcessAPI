@@ -11,6 +11,7 @@ text_headers = {
 }
 
 while True:
+    # --- ОТДЕЛ АВТОРИ-РЕГИСТРАЦИИ
     if not cookies:
         logorreg = input('log or reg? ')
 
@@ -34,6 +35,8 @@ while True:
         cookies = response.cookies.get_dict().copy()
     me = json.loads(requests.get(URL + '/users/current',
                                  cookies=cookies).content.decode('utf-8'))
+
+    # --- ОБЩИЕ ХАНДЛЕРЫ ---
 
     action = input(cd + ' ~ ')
     if action == 'me':
@@ -70,6 +73,10 @@ while True:
             print(file)
         print('\n')
 
+    # --- ОТДЕЛ С ФАЙЛАМИ ---
+
+    # --- ОТДЕЛ С ПАПКАМИ ---
+
     elif action.startswith('di'):
         if me['is_admin']:
             args = action.split(' ')
@@ -95,7 +102,6 @@ while True:
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
 
-
     elif action.startswith('rmdir'):
         args = action.split(' ')
         response = requests.delete(URL + f'/folders/rmdir?folder_path={cd + args[1]}&hard={args[2]}',
@@ -103,3 +109,5 @@ while True:
         print(response.status_code)
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
+
+    # --- КОНЕЦ ОТДЕЛА С ПАПКАМИ
