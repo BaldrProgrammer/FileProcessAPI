@@ -76,6 +76,26 @@ while True:
 
     # --- ОТДЕЛ С ФАЙЛАМИ ---
 
+    elif action == 'upload':
+        paths = askopenfilenames()
+        files = []
+        for path in paths:
+            mime, _ = mimetypes.guess_type(path)
+            print(mime)
+            files.append(
+                ('uploaded_files', (path.split('/')[-1], open(path, 'rb')))
+            )
+
+
+        response = requests.post(URL + '/files/',
+                      cookies=cookies,
+                      params={'folder': cd if cd else '.'},
+                      files=files)
+        print(response.status_code)
+        if response.status_code != 200:
+            pass
+        print(response.content.decode('utf-8'))
+
     # --- ОТДЕЛ С ПАПКАМИ ---
 
     elif action.startswith('di'):
