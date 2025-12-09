@@ -1,5 +1,6 @@
 import os
 import random
+from types import NoneType
 from typing import List, Optional
 
 from fastapi import APIRouter, UploadFile, Depends
@@ -15,7 +16,7 @@ router = APIRouter(prefix='/files', tags=['/files'])
 
 
 @router.get("/info")
-async def get_fileinfo(filter_value: str, filter_type: str, user: SUserGet = Depends(current_user)) -> SFileGet | None:
+async def get_fileinfo(filter_value: str, filter_type: str) -> SFileGet | None:
     if filter_type == 'id':
         file_obj = await FileDAO.find_by_id(int(filter_value))
     elif filter_type == 'name':
@@ -25,9 +26,14 @@ async def get_fileinfo(filter_value: str, filter_type: str, user: SUserGet = Dep
     return file_obj
 
 
-@router.get('/content')
-async def get_file(fileid: int) -> FileResponse:
-    file_obj = await FileDAO.find_by_id(fileid)
+@router.get('/content', response_model=None)
+async def get_file(filter_value: str, filter_type: str) -> FileResponse | None:
+    if filter_type == 'id':
+        file_obj = await FileDAO.find_by_id(int(filter_value))
+    elif filter_type == 'name':
+        file_obj = await FileDAO.find_one_or_none(filename=filter_value)
+    else:
+        return
     return FileResponse(file_obj.to_dict()['path'])
 
 
