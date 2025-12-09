@@ -92,8 +92,7 @@ while True:
                                  files=files)
         print(response.status_code)
         if response.status_code != 200:
-            pass
-        print(response.content.decode('utf-8'))
+            print(response.content.decode('utf-8'))
 
     # --- ОТДЕЛ С ПАПКАМИ ---
 

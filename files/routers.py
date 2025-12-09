@@ -15,8 +15,13 @@ router = APIRouter(prefix='/files', tags=['/files'])
 
 
 @router.get("/{fileid}/info")
-async def get_fileinfo(fileid: int) -> SFileGet:
-    file_obj = await FileDAO.find_by_id(fileid)
+async def get_fileinfo(filter_value: str, filter_type: str, user: SUserGet = Depends(current_user)) -> SFileGet | None:
+    if filter_type == 'id':
+        file_obj = await FileDAO.find_by_id(int(filter_value))
+    elif filter_type == 'name':
+        file_obj = await FileDAO.find_one_or_none(filename=filter_value)
+    else:
+        return
     return file_obj
 
 
@@ -46,7 +51,7 @@ async def get_file_streaming(fileid: int) -> StreamingResponse:
 async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUserGet = Depends(current_user)) -> dict:
     file_ids = []
     for uploaded_file in uploaded_files:
-        file_id = random.randint(0, 2147483647)
+        file_id = random.randint(1000000000, 2147483647)
         filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
                                 str(user.id), folder, str(file_id) + uploaded_file.filename)
         file_byte = await uploaded_file.read()
