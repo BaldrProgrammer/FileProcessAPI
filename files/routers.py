@@ -14,7 +14,7 @@ from users.auth import current_user
 router = APIRouter(prefix='/files', tags=['/files'])
 
 
-@router.get("/{fileid}/info")
+@router.get("/info")
 async def get_fileinfo(filter_value: str, filter_type: str, user: SUserGet = Depends(current_user)) -> SFileGet | None:
     if filter_type == 'id':
         file_obj = await FileDAO.find_by_id(int(filter_value))
@@ -25,13 +25,13 @@ async def get_fileinfo(filter_value: str, filter_type: str, user: SUserGet = Dep
     return file_obj
 
 
-@router.get('/{fileid}/content')
+@router.get('/content')
 async def get_file(fileid: int) -> FileResponse:
     file_obj = await FileDAO.find_by_id(fileid)
     return FileResponse(file_obj.to_dict()['path'])
 
 
-@router.get('/{fileid}/stream')
+@router.get('/stream')
 async def get_file_streaming(fileid: int) -> StreamingResponse:
     def iterfile(filepath: str):
         with open(filepath, 'rb') as file:
@@ -85,7 +85,7 @@ async def move(fileid: int, newpath: Optional[str], user: SUserGet = Depends(cur
     return {'ok': True, 'newpath': filepath}
 
 
-@router.delete("/{fileids}")
+@router.delete("/")
 async def delete_multiple(fileid: List[str]) -> dict:
     file_ids_return = []
     for fid in fileid:
