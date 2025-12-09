@@ -59,7 +59,7 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
     for uploaded_file in uploaded_files:
         file_id = random.randint(1000000000, 2147483647)
         filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                                str(user.id), folder, str(file_id) + uploaded_file.filename)
+                                str(user.id), folder, uploaded_file.filename)
         file_byte = await uploaded_file.read()
 
         ok = await file_process(file_id, uploaded_file.filename, filepath, file_byte)
@@ -71,11 +71,17 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
 
 
 @router.patch('/ren')
-async def ren(fileid: int, newname: str):
-    file = await FileDAO.find_by_id(fileid)
-    filepath = file.path.replace(str(file.id) + file.filename, str(file.id) + newname)
-    os.rename(file.path, filepath)
-    await FileDAO.rename(fileid, newname, filepath)
+async def ren(filter_value: str, filter_type: str, newname: str):
+    if filter_type == 'id':
+        file_obj = await FileDAO.find_by_id(int(filter_value))
+    elif filter_type == 'name':
+        file_obj = await FileDAO.find_one_or_none(filename=filter_value)
+    else:
+        return
+
+    filepath = file_obj.path.replace(file_obj.filename, newname)
+    os.rename(file_obj.path, filepath)
+    await FileDAO.rename(file_obj.id, newname, filepath)
 
     return {'ok': True, 'newpath': filepath}
 
@@ -84,7 +90,7 @@ async def ren(fileid: int, newname: str):
 async def move(fileid: int, newpath: Optional[str], user: SUserGet = Depends(current_user)):
     file = await FileDAO.find_by_id(fileid)
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                            str(user.id), newpath, str(file.id) + file.filename)
+                            str(user.id), newpath, file.filename)
     os.rename(file.path, filepath)
     await FileDAO.update({'id': fileid}, {'path': filepath})
 
