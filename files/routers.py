@@ -87,12 +87,18 @@ async def ren(filter_value: str, filter_type: str, newname: str):
 
 
 @router.patch('/move')
-async def move(fileid: int, newpath: Optional[str], user: SUserGet = Depends(current_user)):
-    file = await FileDAO.find_by_id(fileid)
+async def move(filter_value: str, filter_type: str, newpath: str, user: SUserGet = Depends(current_user)):
+    if filter_type == 'id':
+        file_obj = await FileDAO.find_by_id(int(filter_value))
+    elif filter_type == 'name':
+        file_obj = await FileDAO.find_one_or_none(filename=filter_value)
+    else:
+        return
+
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                            str(user.id), newpath, file.filename)
-    os.rename(file.path, filepath)
-    await FileDAO.update({'id': fileid}, {'path': filepath})
+                            str(user.id), newpath)
+    os.rename(file_obj.path, filepath)
+    await FileDAO.update({'id': file_obj.id}, {'filename': newpath, 'path': filepath})
 
     return {'ok': True, 'newpath': filepath}
 
