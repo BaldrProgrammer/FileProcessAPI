@@ -104,13 +104,18 @@ async def move(filter_value: str, filter_type: str, newpath: str, user: SUserGet
 
 
 @router.delete("/")
-async def delete_multiple(fileid: List[str]) -> dict:
+async def delete_multiple(filter_values: List[str], filter_type: str) -> dict | None:
     file_ids_return = []
-    for fid in fileid:
-        file_obj = await FileDAO.find_by_id(int(fid))
+    for value in filter_values:
+        if filter_type == 'id':
+            file_obj = await FileDAO.find_by_id(int(value))
+        elif filter_type == 'name':
+            file_obj = await FileDAO.find_one_or_none(filename=value)
+        else:
+            return
         filedict = file_obj.to_dict()
 
         await FileDAO.delete(id=filedict['id'])
         os.remove(filedict['path'])
-        file_ids_return.append(fid)
+        file_ids_return.append(file_obj.id)
     return {'ok': True, 'fileid': str(file_ids_return)}
