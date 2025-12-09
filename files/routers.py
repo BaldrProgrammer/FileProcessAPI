@@ -54,9 +54,9 @@ async def get_file_streaming(filter_value: str, filter_type: str) -> StreamingRe
     filedict = file_obj.to_dict()
     if filedict['filename'].split('.')[-1] == 'mp4':
         return StreamingResponse(iterfile(filedict['path']),
-                                 media_type=f'video/{filedict['filename'].split('.')[-1]}')
+                                 media_type=file_obj.extension)
     return StreamingResponse(iterfile(filedict['path']),
-                             media_type=f'text/{filedict['filename'].split('.')[-1]}')
+                             media_type=file_obj.extension)
 
 
 @router.post("/")
