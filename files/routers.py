@@ -1,6 +1,5 @@
 import os
 import random
-from types import NoneType
 from typing import List, Optional
 
 from fastapi import APIRouter, UploadFile, Depends
@@ -51,12 +50,7 @@ async def get_file_streaming(filter_value: str, filter_type: str) -> StreamingRe
     else:
         return
 
-    filedict = file_obj.to_dict()
-    if filedict['filename'].split('.')[-1] == 'mp4':
-        return StreamingResponse(iterfile(filedict['path']),
-                                 media_type=file_obj.extension)
-    return StreamingResponse(iterfile(filedict['path']),
-                             media_type=file_obj.extension)
+    return StreamingResponse(iterfile(file_obj.path), media_type=file_obj.extension)
 
 
 @router.post("/")
