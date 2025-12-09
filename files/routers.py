@@ -37,14 +37,20 @@ async def get_file(filter_value: str, filter_type: str) -> FileResponse | None:
     return FileResponse(file_obj.to_dict()['path'])
 
 
-@router.get('/stream')
-async def get_file_streaming(fileid: int) -> StreamingResponse:
+@router.get('/stream', response_model=None)
+async def get_file_streaming(filter_value: str, filter_type: str) -> StreamingResponse | None:
     def iterfile(filepath: str):
         with open(filepath, 'rb') as file:
             while chunk := file.read(1024 * 1024):
                 yield chunk
 
-    file_obj = await FileDAO.find_by_id(fileid)
+    if filter_type == 'id':
+        file_obj = await FileDAO.find_by_id(int(filter_value))
+    elif filter_type == 'name':
+        file_obj = await FileDAO.find_one_or_none(filename=filter_value)
+    else:
+        return
+
     filedict = file_obj.to_dict()
     if filedict['filename'].split('.')[-1] == 'mp4':
         return StreamingResponse(iterfile(filedict['path']),
@@ -84,7 +90,7 @@ async def ren(fileid: int, newname: str):
 async def move(fileid: int, newpath: Optional[str], user: SUserGet = Depends(current_user)):
     file = await FileDAO.find_by_id(fileid)
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                                str(user.id), newpath, str(file.id)+file.filename)
+                            str(user.id), newpath, str(file.id) + file.filename)
     os.rename(file.path, filepath)
     await FileDAO.update({'id': fileid}, {'path': filepath})
 
