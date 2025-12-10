@@ -79,7 +79,7 @@ while True:
     elif action.startswith('fi'):
         if me['is_admin']:
             args = action.split(' ')
-            response = requests.get(URL + f'/files/info?filter_value={args[1]}&filter_type={args[2]}',
+            response = requests.get(URL + f'/files/info?filter_value={args[2]}&filter_type={args[1]}',
                                     cookies=cookies).content.decode('utf-8')
             print(response)
         else:
@@ -102,6 +102,17 @@ while True:
         print(response.status_code)
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
+
+    elif action.startswith('remove'):
+        args = action.split(' ')
+        data = list(args[1:])
+        print(str(data))
+        response = requests.delete(URL + f'/files?filter_type=name',
+                                   cookies=cookies, data=str(data).replace("'", '"'))
+        print(response.status_code)
+        if response.status_code != 200:
+            print(response.content.decode('utf-8'))
+
 
     # --- ОТДЕЛ С ПАПКАМИ ---
 
