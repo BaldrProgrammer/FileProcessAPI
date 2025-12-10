@@ -76,6 +76,15 @@ while True:
 
     # --- ОТДЕЛ С ФАЙЛАМИ ---
 
+    elif action.startswith('fi'):
+        if me['is_admin']:
+            args = action.split(' ')
+            response = requests.get(URL + f'/files/info?filter_value={args[1]}&filter_type={args[2]}',
+                                    cookies=cookies).content.decode('utf-8')
+            print(response)
+        else:
+            print('denied')
+
     elif action == 'upload':
         paths = askopenfilenames()
         files = []
