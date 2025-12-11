@@ -83,6 +83,13 @@ while True:
         else:
             print('denied')
 
+    elif action.startswith('ui'):
+        if me['is_admin']:
+            response = requests.get(URL + f'/users/{action.split(' ')[1]}')
+            print(response.content.decode('utf-8'))
+        else:
+            print('denied')
+
     elif action.startswith('fi'):
         if me['is_admin']:
             args = action.split(' ')
