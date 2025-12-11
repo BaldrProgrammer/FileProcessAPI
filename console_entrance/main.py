@@ -103,10 +103,18 @@ while True:
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
 
+    elif action.startswith('ren'):
+        args = action.split(' ')
+        response = requests.patch(URL + f'/files/ren?filter_value={cd + args[1]}&filter_type=name&newname={cd + args[2]}',
+                                  cookies=cookies)
+
+        print(response.status_code)
+        if response.status_code != 200:
+            print(response.content.decode('utf-8'))
+
     elif action.startswith('remove'):
         args = action.split(' ')
         data = list(args[1:])
-        print(str(data))
         response = requests.delete(URL + f'/files?filter_type=name',
                                    cookies=cookies, data=str(data).replace("'", '"'))
         print(response.status_code)
