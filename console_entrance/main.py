@@ -112,6 +112,15 @@ while True:
         if response.status_code != 200:
             print(response.content.decode('utf-8'))
 
+    elif action.startswith('move'):
+        args = action.split(' ')
+        response = requests.patch(URL + f'/files/move?filter_value={cd + args[1]}&filter_type=name&newpath={args[2]}',
+                                  cookies=cookies)
+
+        print(response.status_code)
+        if response.status_code != 200:
+            print(response.content.decode('utf-8'))
+
     elif action.startswith('remove'):
         args = action.split(' ')
         data = list(args[1:])
