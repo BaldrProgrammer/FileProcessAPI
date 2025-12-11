@@ -74,7 +74,14 @@ while True:
             print(file)
         print('\n')
 
-    # --- ОТДЕЛ С ФАЙЛАМИ ---
+    # -- ХАНДЛЕРЫ АДМИНА ---
+
+    elif action == 'au':
+        if me['is_admin']:
+            response = requests.get(URL + '/users')
+            print(response.content.decode('utf-8'))
+        else:
+            print('denied')
 
     elif action.startswith('fi'):
         if me['is_admin']:
@@ -84,6 +91,17 @@ while True:
             print(response)
         else:
             print('denied')
+
+    elif action.startswith('di'):
+        if me['is_admin']:
+            args = action.split(' ')
+            response = requests.get(URL + f'/folders/info?filter_value={cd + args[1]}&filter_type={args[2]}',
+                                    cookies=cookies).content.decode('utf-8')
+            print(response)
+        else:
+            print('denied')
+
+    # --- ОТДЕЛ С ФАЙЛАМИ ---
 
     elif action == 'upload':
         paths = askopenfilenames()
@@ -132,15 +150,6 @@ while True:
 
 
     # --- ОТДЕЛ С ПАПКАМИ ---
-
-    elif action.startswith('di'):
-        if me['is_admin']:
-            args = action.split(' ')
-            response = requests.get(URL + f'/folders/info?filter_value={cd + args[1]}&filter_type={args[2]}',
-                                    cookies=cookies).content.decode('utf-8')
-            print(response)
-        else:
-            print('denied')
 
     elif action.startswith('mkdir'):
         arg = action.split(' ')[1]
