@@ -62,7 +62,7 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
                                 str(user.id), folder, uploaded_file.filename)
         file_byte = await uploaded_file.read()
 
-        ok = await file_process(file_id, folder+uploaded_file.filename, filepath, file_byte)
+        ok = await file_process(file_id, folder + uploaded_file.filename, filepath, file_byte)
         if not ok:
             return {'ok': False}
         file_ids.append(file_id)
