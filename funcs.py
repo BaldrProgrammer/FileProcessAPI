@@ -6,6 +6,8 @@ from files.schemas import SFileAdd
 
 async def file_process(fileid, filename, path, file_byte):
     try:
+        with open(path, 'wb') as file:
+            file.write(file_byte)
         extension = magic.from_file(path, mime=True)
         print(extension)
 
@@ -16,8 +18,6 @@ async def file_process(fileid, filename, path, file_byte):
         file_obj = SFileAdd(id=fileid, filename=filename, path=path, extension=extension)
         await FileDAO.add(**file_obj.model_dump())
         await FileDAO.change_status_by_id(fileid, 'processing')
-        with open(path, 'wb') as file:
-            file.write(file_byte)
         await FileDAO.change_status_by_id(fileid, 'done')
         return True
     except Exception as e:
