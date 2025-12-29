@@ -1,12 +1,13 @@
 import os
-import mimetypes
+import magic
 from files.dao import FileDAO
 from files.schemas import SFileAdd
 
 
 async def file_process(fileid, filename, path, file_byte):
     try:
-        extension, _ = mimetypes.guess_type(path)
+        extension = magic.from_file(path, mime=True)
+        print(extension)
 
         exists = os.path.isdir('/'.join(path.split('/')[:-1]))
         if not exists:
