@@ -79,7 +79,11 @@ async def ren(filter_value: str, filter_type: str, newname: str):
     else:
         return
 
-    filepath = file_obj.path.replace(file_obj.filename, newname)
+    filepath = file_obj.path.replace(file_obj.filename[1:], newname[1:])
+    print(file_obj.filename)
+    print(newname)
+    print(file_obj.path)
+    print(filepath)
     os.rename(file_obj.path, filepath)
     await FileDAO.rename(file_obj.id, newname, filepath)
 
