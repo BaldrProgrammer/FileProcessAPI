@@ -70,6 +70,13 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
     return {'ok': True, 'fileids': str(file_ids)}
 
 
+@router.post("/touch")
+async def file_touch(filepath: str, user: SUserGet = Depends(current_user)) -> dict:
+
+
+    return {'ok': True,}
+
+
 @router.patch('/ren')
 async def ren(filter_value: str, filter_type: str, newname: str):
     if filter_type == 'id':
@@ -80,10 +87,6 @@ async def ren(filter_value: str, filter_type: str, newname: str):
         return
 
     filepath = file_obj.path.replace(file_obj.filename[1:], newname[1:])
-    print(file_obj.filename)
-    print(newname)
-    print(file_obj.path)
-    print(filepath)
     os.rename(file_obj.path, filepath)
     await FileDAO.rename(file_obj.id, newname, filepath)
 
@@ -107,7 +110,7 @@ async def move(filter_value: str, filter_type: str, newpath: str, user: SUserGet
     return {'ok': True, 'newpath': filepath}
 
 
-@router.delete("/")
+@router.delete("/remove")
 async def delete_multiple(filter_values: List[str], filter_type: str) -> dict | None:
     file_ids_return = []
     for value in filter_values:
