@@ -6,7 +6,6 @@ from typing import List, Optional
 from fastapi import APIRouter, UploadFile, Depends
 from fastapi.responses import FileResponse, StreamingResponse
 
-from funcs import file_process
 from files.dao import FileDAO
 from files.schemas import SFileGet, SFileAdd
 from users.schemas import SUserGet
@@ -58,15 +57,31 @@ async def get_file_streaming(filter_value: str, filter_type: str) -> StreamingRe
 async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUserGet = Depends(current_user)) -> dict:
     file_ids = []
     for uploaded_file in uploaded_files:
-        file_id = random.randint(1000000000, 2147483647)
-        filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
+        fileid = random.randint(1000000000, 2147483647)
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
                                 str(user.id), folder, uploaded_file.filename)
         file_byte = await uploaded_file.read()
 
-        ok = await file_process(file_id, (folder+"/" if folder != "." else "") + uploaded_file.filename, filepath, file_byte)
-        if not ok:
-            return {'ok': False}
-        file_ids.append(file_id)
+        try:
+            with open(path, 'wb') as file:
+                file.write(file_byte)
+            extension = magic.from_file(path, mime=True)
+            print(extension)
+
+            exists = os.path.isdir('/'.join(path.split('/')[:-1]))
+            if not exists:
+                os.mkdir('/'.join(path.split('/')[:-1]))
+
+            file_obj = SFileAdd(id=fileid, filename=(folder+"/" if folder != "." else "") + uploaded_file.filename, path=path, extension=extension)
+            await FileDAO.add(**file_obj.model_dump())
+            await FileDAO.change_status_by_id(fileid, 'processing')
+            await FileDAO.change_status_by_id(fileid, 'done')
+
+            file_ids.append(fileid)
+
+        except Exception as e:
+            await FileDAO.change_status_by_id(fileid, 'error')
+            raise e
 
     return {'ok': True, 'fileids': str(file_ids)}
 
