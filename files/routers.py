@@ -1,5 +1,6 @@
 import os
 import random
+import magic
 from typing import List, Optional
 
 from fastapi import APIRouter, UploadFile, Depends
@@ -7,7 +8,7 @@ from fastapi.responses import FileResponse, StreamingResponse
 
 from funcs import file_process
 from files.dao import FileDAO
-from files.schemas import SFileGet
+from files.schemas import SFileGet, SFileAdd
 from users.schemas import SUserGet
 from users.auth import current_user
 
@@ -72,9 +73,25 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
 
 @router.post("/touch")
 async def file_touch(filepath: str, user: SUserGet = Depends(current_user)) -> dict:
+    if (await FileDAO.find_one_or_none(filename=filepath)) is None:
+        fileid = random.randint(1000000000, 2147483647)
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
+                                str(user.id), filepath)
 
+        with open(path, 'x') as file:
+            file.write("")
+        extension = magic.from_file(path, mime=True)
+        print(extension)
 
-    return {'ok': True,}
+        exists = os.path.isdir('/'.join(path.split('/')[:-1]))
+        if not exists:
+            os.mkdir('/'.join(path.split('/')[:-1]))
+
+        file_obj = SFileAdd(id=fileid, filename=filepath, path=path, extension=extension)
+        await FileDAO.add(**file_obj.model_dump())
+
+        return {'ok': True,}
+    return {'ok': False,}
 
 
 @router.patch('/ren')
