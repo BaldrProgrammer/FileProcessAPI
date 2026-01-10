@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from folders.dao import FolderDAO
 from folders.schemas import SFolderAdd, SFolderGet
 from users.auth import current_user
@@ -33,13 +33,15 @@ async def get_folder_content(filter_value: str, filter_type: str,
 
 @router.post('/mkdir')
 async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
-    path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
-    new_instance = SFolderAdd(name=folder_path, path=path)
-    os.mkdir(path)
-    check = await FolderDAO.add(**new_instance.model_dump())
-    if check:
-        return {'ok': True, 'name': folder_path, 'path': path}
-    return {'ok': False, 'name': folder_path}
+    if FolderDAO.find_one_or_none(name=folder_path) is None:
+        path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
+        new_instance = SFolderAdd(name=folder_path, path=path)
+        os.mkdir(path)
+        check = await FolderDAO.add(**new_instance.model_dump())
+        if check:
+            return {'ok': True, 'name': folder_path, 'path': path}
+        return {'ok': False, 'name': folder_path}
+    raise HTTPException(status_code=409, detail="folder already exists")
 
 
 @router.patch('/ren')

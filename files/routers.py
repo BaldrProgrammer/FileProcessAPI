@@ -1,9 +1,10 @@
 import os
 import random
+
 import magic
 from typing import List, Optional
 
-from fastapi import APIRouter, UploadFile, Depends
+from fastapi import APIRouter, UploadFile, Depends, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
 
 from files.dao import FileDAO
@@ -57,31 +58,35 @@ async def get_file_streaming(filter_value: str, filter_type: str) -> StreamingRe
 async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUserGet = Depends(current_user)) -> dict:
     file_ids = []
     for uploaded_file in uploaded_files:
-        fileid = random.randint(1000000000, 2147483647)
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
-                                str(user.id), folder, uploaded_file.filename)
-        file_byte = await uploaded_file.read()
+        filename = (folder + "/" if folder != "." else "") + uploaded_file.filename
+        if (await FileDAO.find_one_or_none(filename=filename)) is None:
+            fileid = random.randint(1000000000, 2147483647)
+            path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
+                                    str(user.id), folder, uploaded_file.filename)
+            file_byte = await uploaded_file.read()
 
-        try:
-            with open(path, 'wb') as file:
-                file.write(file_byte)
-            extension = magic.from_file(path, mime=True)
-            print(extension)
+            try:
+                with open(path, 'wb') as file:
+                    file.write(file_byte)
+                extension = magic.from_file(path, mime=True)
+                print(extension)
 
-            exists = os.path.isdir('/'.join(path.split('/')[:-1]))
-            if not exists:
-                os.mkdir('/'.join(path.split('/')[:-1]))
+                exists = os.path.isdir('/'.join(path.split('/')[:-1]))
+                if not exists:
+                    os.mkdir('/'.join(path.split('/')[:-1]))
 
-            file_obj = SFileAdd(id=fileid, filename=(folder+"/" if folder != "." else "") + uploaded_file.filename, path=path, extension=extension)
-            await FileDAO.add(**file_obj.model_dump())
-            await FileDAO.change_status_by_id(fileid, 'processing')
-            await FileDAO.change_status_by_id(fileid, 'done')
+                file_obj = SFileAdd(id=fileid, filename=filename, path=path, extension=extension)
+                await FileDAO.add(**file_obj.model_dump())
+                await FileDAO.change_status_by_id(fileid, 'processing')
+                await FileDAO.change_status_by_id(fileid, 'done')
 
-            file_ids.append(fileid)
+                file_ids.append(fileid)
 
-        except Exception as e:
-            await FileDAO.change_status_by_id(fileid, 'error')
-            raise e
+            except Exception as e:
+                await FileDAO.change_status_by_id(fileid, 'error')
+                raise e
+        else:
+            raise HTTPException(status_code=409, detail=f"file already exists {uploaded_file.filename}")
 
     return {'ok': True, 'fileids': str(file_ids)}
 
@@ -106,7 +111,7 @@ async def file_touch(filepath: str, user: SUserGet = Depends(current_user)) -> d
         await FileDAO.add(**file_obj.model_dump())
 
         return {'ok': True,}
-    return {'ok': False,}
+    raise HTTPException(status_code=409, detail="file already exists")
 
 
 @router.patch('/ren')
