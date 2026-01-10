@@ -17,7 +17,7 @@ async def get_current_user(user: SUserGet = Depends(current_user)) -> SUserGet:
     return user
 
 
-@router.get('/files')
+@router.get('/items')
 async def get_user_files(user: SUserGet = Depends(current_user)):
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                             "../file_storage", str(user.id))

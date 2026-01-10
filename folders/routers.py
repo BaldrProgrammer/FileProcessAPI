@@ -28,7 +28,14 @@ async def get_folder_content(filter_value: str, filter_type: str,
     if filter_type == 'id':
         filter_value = (await FolderDAO.find_by_id(int(filter_value))).name
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), filter_value)
-    return {'ok': True, 'content': os.listdir(path)}
+
+    files = []
+    folders = []
+    for obj in os.listdir(path):
+        (files if '.' in obj else folders).append(obj)
+
+    objects = sorted(folders) + sorted(files)
+    return {'ok': True, 'content': objects}
 
 
 @router.post('/mkdir')
