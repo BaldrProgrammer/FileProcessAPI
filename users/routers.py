@@ -21,7 +21,13 @@ async def get_current_user(user: SUserGet = Depends(current_user)) -> SUserGet:
 async def get_user_files(user: SUserGet = Depends(current_user)):
     filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                             "../file_storage", str(user.id))
-    return os.listdir(filepath)
+    files = []
+    folders = []
+    for obj in os.listdir(filepath):
+        (files if '.' in obj else folders).append(obj)
+
+    objects = sorted(folders) + sorted(files)
+    return objects
 
 
 @router.get('/{user_id}')
