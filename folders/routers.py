@@ -33,7 +33,7 @@ async def get_folder_content(filter_value: str, filter_type: str,
 
 @router.post('/mkdir')
 async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
-    if FolderDAO.find_one_or_none(name=folder_path) is None:
+    if (await FolderDAO.find_one_or_none(name=folder_path)) is None:
         path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
         new_instance = SFolderAdd(name=folder_path, path=path)
         os.mkdir(path)
