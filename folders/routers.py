@@ -46,12 +46,13 @@ async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dic
 
 @router.patch('/ren')
 async def rendir(old_path: str, new_path: str, user: SUserGet = Depends(current_user)) -> dict:
-    oldpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), old_path)
-    newpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), new_path)
-    os.rename(oldpath, newpath)
-    await FolderDAO.update({'path': oldpath}, {'path': newpath})
-    return {'ok': True, 'oldpath': oldpath, 'newpath': newpath}
-
+    if (await FolderDAO.find_one_or_none(name=new_path)) is None:
+        oldpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), old_path)
+        newpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), new_path)
+        os.rename(oldpath, newpath)
+        await FolderDAO.update({'path': oldpath}, {'path': newpath})
+        return {'ok': True, 'oldpath': oldpath, 'newpath': newpath}
+    raise HTTPException(status_code=409, detail='folder already exists')
 
 @router.delete('/rmdir')
 async def rmdir(folder_path: str, hard: Optional[bool], user: SUserGet = Depends(current_user)) -> dict:

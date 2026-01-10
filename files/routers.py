@@ -116,18 +116,20 @@ async def file_touch(filepath: str, user: SUserGet = Depends(current_user)) -> d
 
 @router.patch('/ren')
 async def ren(filter_value: str, filter_type: str, newname: str):
-    if filter_type == 'id':
-        file_obj = await FileDAO.find_by_id(int(filter_value))
-    elif filter_type == 'name':
-        file_obj = await FileDAO.find_one_or_none(filename=filter_value)
-    else:
-        return
+    if (await FileDAO.find_one_or_none(filename=newname)) is None:
+        if filter_type == 'id':
+            file_obj = await FileDAO.find_by_id(int(filter_value))
+        elif filter_type == 'name':
+            file_obj = await FileDAO.find_one_or_none(filename=filter_value)
+        else:
+            return
 
-    filepath = file_obj.path.replace(file_obj.filename[1:], newname[1:])
-    os.rename(file_obj.path, filepath)
-    await FileDAO.rename(file_obj.id, newname, filepath)
+        filepath = file_obj.path.replace(file_obj.filename[1:], newname[1:])
+        os.rename(file_obj.path, filepath)
+        await FileDAO.rename(file_obj.id, newname, filepath)
 
-    return {'ok': True, 'newpath': filepath}
+        return {'ok': True, 'newpath': filepath}
+    raise HTTPException(status_code=409, detail="file already exists")
 
 
 @router.patch('/move')
