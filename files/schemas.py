@@ -7,8 +7,8 @@ class SFileGet(BaseModel):
     filename: str = Field(..., description='имя файла')
     path: str = Field(..., description='путь к необ. файлу')
     extension: str = Field(..., description='расширение файла')
+    owner_id: int = Field(..., description='владелец файла')
     status: str = Field(..., description='статус обработки')
-    stats: str = Field(..., description='стата файла')
     error: Optional[str] = Field(None, description='ошибка(если есть)')
 
 
@@ -17,3 +17,4 @@ class SFileAdd(BaseModel):
     filename: str = Field(..., description='имя файла')
     path: str = Field(..., description='путь к необ. файлу')
     extension: str = Field(..., description='расширение файла')
+    owner_id: int = Field(..., description='владелец файла')

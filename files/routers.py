@@ -75,7 +75,7 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
                 if not exists:
                     os.mkdir('/'.join(path.split('/')[:-1]))
 
-                file_obj = SFileAdd(id=fileid, filename=filename, path=path, extension=extension)
+                file_obj = SFileAdd(id=fileid, filename=filename, path=path, extension=extension, owner_id=user.id)
                 await FileDAO.add(**file_obj.model_dump())
                 await FileDAO.change_status_by_id(fileid, 'processing')
                 await FileDAO.change_status_by_id(fileid, 'done')
