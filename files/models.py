@@ -11,7 +11,7 @@ class FileModel(Base):
     filename: Mapped[str]
     path: Mapped[str]
     extension: Mapped[str]
-    owner_id: Mapped[int] = mapped_column()
+    owner_id: Mapped[int]
     status: Mapped[str] = mapped_column(default='pending')
     error: Mapped[Optional[str]] = mapped_column(None)
 

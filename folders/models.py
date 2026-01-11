@@ -8,6 +8,7 @@ class FolderModel(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str]
     path: Mapped[str]
+    owner_id: Mapped[int]
     stats: Mapped[str] = mapped_column(default='{}')
 
     def __str__(self):
@@ -21,5 +22,6 @@ class FolderModel(Base):
             'id': self.id,
             'name': self.name,
             'path': self.path,
+            'owner_id': self.owner_id,
             'stats': self.stats,
         }

@@ -107,7 +107,7 @@ async def file_touch(filepath: str, user: SUserGet = Depends(current_user)) -> d
         if not exists:
             os.mkdir('/'.join(path.split('/')[:-1]))
 
-        file_obj = SFileAdd(id=fileid, filename=filepath, path=path, extension=extension)
+        file_obj = SFileAdd(id=fileid, filename=filepath, path=path, extension=extension, owner_id=user.id)
         await FileDAO.add(**file_obj.model_dump())
 
         return {'ok': True,}
