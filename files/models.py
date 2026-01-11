@@ -11,8 +11,8 @@ class FileModel(Base):
     filename: Mapped[str]
     path: Mapped[str]
     extension: Mapped[str]
+    owner_id: Mapped[int] = mapped_column()
     status: Mapped[str] = mapped_column(default='pending')
-    stats: Mapped[str] = mapped_column(default='{}')
     error: Mapped[Optional[str]] = mapped_column(None)
 
     def __str__(self):
@@ -27,6 +27,6 @@ class FileModel(Base):
             'filename': self.filename,
             'path': self.path,
             'status': self.status,
-            'stats': self.stats,
+            'owner_id': self.owner_id,
             'error': self.error
         }
