@@ -42,7 +42,7 @@ async def get_folder_content(filter_value: str, filter_type: str,
 async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dict:
     if (await FolderDAO.find_one_or_none(name=folder_path)) is None:
         path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
-        new_instance = SFolderAdd(name=folder_path, path=path)
+        new_instance = SFolderAdd(name=folder_path, path=path, owner_id=user.id)
         os.mkdir(path)
         check = await FolderDAO.add(**new_instance.model_dump())
         if check:
