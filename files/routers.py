@@ -59,7 +59,7 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
     file_ids = []
     for uploaded_file in uploaded_files:
         filename = (folder + "/" if folder != "." else "") + uploaded_file.filename
-        if (await FileDAO.find_one_or_none(filename=filename)) is None:
+        if (await FileDAO.find_one_or_none(filename=filename, owner_id=user.id)) is None:
             fileid = random.randint(1000000000, 2147483647)
             path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
                                     str(user.id), folder, uploaded_file.filename)
@@ -93,7 +93,7 @@ async def upload_file(uploaded_files: List[UploadFile], folder: str, user: SUser
 
 @router.post("/touch")
 async def file_touch(filepath: str, user: SUserGet = Depends(current_user)) -> dict:
-    if (await FileDAO.find_one_or_none(filename=filepath)) is None:
+    if (await FileDAO.find_one_or_none(filename=filepath, owner_id=user.id)) is None:
         fileid = random.randint(1000000000, 2147483647)
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "../file_storage",
                                 str(user.id), filepath)
