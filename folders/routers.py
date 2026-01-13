@@ -65,12 +65,15 @@ async def rendir(old_path: str, new_path: str, user: SUserGet = Depends(current_
 @router.delete('/rmdir')
 async def rmdir(folder_path: str, hard: Optional[bool], user: SUserGet = Depends(current_user)) -> dict:
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), folder_path)
-    files_in_dir = os.listdir(path)
-    if (not files_in_dir) or hard:
-        for file in files_in_dir:
-            os.remove(os.path.join(path, file))
+    if await FolderDAO.find_one_or_none(path=path):
+        files_in_dir = os.listdir(path)
+        if (not files_in_dir) or hard:
+            for file in files_in_dir:
+                os.remove(os.path.join(path, file))
+        else:
+            return {'ok': False, 'detail': 'folder is not empty'}
+        os.rmdir(path)
+        await FolderDAO.delete(path=path)
+        return {'ok': True, 'name': folder_path, 'path': path}
     else:
-        return {'ok': False, 'detail': 'folder is not empty'}
-    os.rmdir(path)
-    await FolderDAO.delete(path=path)
-    return {'ok': True, 'name': folder_path, 'path': path}
+        raise HTTPException(status_code=404, detail='folder not found.')
