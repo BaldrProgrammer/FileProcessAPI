@@ -150,15 +150,19 @@ async def move(filter_value: str, filter_type: str, newpath: str, user: SUserGet
 
 
 @router.delete("/remove")
-async def delete_multiple(filter_values: List[str], filter_type: str) -> dict | None:
+async def delete_multiple(filter_values: List[str], filter_type: str, user: SUserGet = Depends(current_user)) -> dict | None:
     file_ids_return = []
     for value in filter_values:
         if filter_type == 'id':
             file_obj = await FileDAO.find_by_id(int(value))
         elif filter_type == 'name':
-            file_obj = await FileDAO.find_one_or_none(filename=value)
+            file_obj = await FileDAO.find_one_or_none(filename=value, owner_id=user.id)
         else:
             return
+
+        if not file_obj:
+            raise HTTPException(status_code=404, detail='file not found.')
+
         filedict = file_obj.to_dict()
 
         await FileDAO.delete(id=filedict['id'])
