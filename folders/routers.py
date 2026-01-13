@@ -24,7 +24,7 @@ async def get_folder_info(filter_value: str, filter_type: str,
 
 @router.get('/items')
 async def get_folder_content(filter_value: str, filter_type: str,
-                          user: SUserGet = Depends(current_user)) -> dict | None:
+                             user: SUserGet = Depends(current_user)) -> dict | None:
     if filter_type == 'id':
         filter_value = (await FolderDAO.find_by_id(int(filter_value))).name
     path = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), filter_value)
@@ -53,13 +53,14 @@ async def mkdir(folder_path: str, user: SUserGet = Depends(current_user)) -> dic
 
 @router.patch('/ren')
 async def rendir(old_path: str, new_path: str, user: SUserGet = Depends(current_user)) -> dict:
-    if (await FolderDAO.find_one_or_none(name=new_path)) is None:
+    if (await FolderDAO.find_one_or_none(name=new_path, owner_id=user.id)) is None:
         oldpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), old_path)
         newpath = os.path.join(os.path.dirname(__file__), '../file_storage', str(user.id), new_path)
         os.rename(oldpath, newpath)
-        await FolderDAO.update({'path': oldpath}, {'path': newpath})
+        await FolderDAO.update({'path': oldpath, 'owner_id': user.id}, {'name': new_path, 'path': newpath})
         return {'ok': True, 'oldpath': oldpath, 'newpath': newpath}
     raise HTTPException(status_code=409, detail='folder already exists')
+
 
 @router.delete('/rmdir')
 async def rmdir(folder_path: str, hard: Optional[bool], user: SUserGet = Depends(current_user)) -> dict:
