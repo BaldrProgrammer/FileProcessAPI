@@ -4,7 +4,7 @@ import logo from '../../assets/image_2026-10-26_03-19-40.png'
 function Logo() {
     return (
         <a href="http://localhost:5173/">
-            <img src={logo} alt="logo"/>
+            <img width="288px" src={logo} alt="logo"/>
         </a>
     )
 }
