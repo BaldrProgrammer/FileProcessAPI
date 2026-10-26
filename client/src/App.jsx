@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import './App.css'
+import Logo from './components/Logo/Logo.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-
+        <section>
+            <Logo/>
+        </section>
     </>
   )
 }
