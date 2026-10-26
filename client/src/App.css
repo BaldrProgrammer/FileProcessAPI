@@ -2,3 +2,9 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.leftSideBar {
+    width: 384px;
+    height: 100vh;
+    background: rgb(240, 240, 240);
+}
