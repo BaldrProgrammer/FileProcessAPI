@@ -1,4 +1,5 @@
 import Logo from './components/Logo/Logo.jsx'
+import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import './App.css'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
         <section className="leftSideBar">
             <Logo/>
+            <Suchenfeld></Suchenfeld>
         </section>
     </>
   )
