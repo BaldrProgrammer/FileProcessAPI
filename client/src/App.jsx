@@ -5,7 +5,7 @@ import './App.css'
 function App() {
   return (
     <>
-        <section className="leftSideBar">
+        <section className="linkeSeitenLeiste">
             <Logo/>
             <Suchenfeld></Suchenfeld>
         </section>
