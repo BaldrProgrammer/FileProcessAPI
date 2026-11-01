@@ -17,7 +17,7 @@ function App() {
             <Logo/>
         </section>
         <section className="oberSeitenLeiste">
-            <Suchenfeld onTasteDruecken={(e) => suchen(e)}/>
+            <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
         </section>
 
     </>
