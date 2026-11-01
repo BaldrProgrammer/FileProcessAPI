@@ -1,8 +1,8 @@
 import './Suchenfeld.css'
 
-function Suchenfeld() {
+function Suchenfeld({ onTasteDruecken }) {
     return (
-        <input placeholder="Suchen"></input>
+        <input placeholder="Suchen" onKeyDown={onTasteDruecken}></input>
     )
 }
 
