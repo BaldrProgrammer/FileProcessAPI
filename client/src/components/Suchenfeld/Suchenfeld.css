@@ -1,0 +1,11 @@
+input {
+    position: relative;
+    top: 28px;
+    height: 44px;
+    width: 500px;
+    border: rgb(225, 225, 225) solid 2px;
+    border-radius: 0 10px 10px 0;
+    border-left: none;
+    font-weight: 12;
+    background: rgb(240, 240, 240);
+}

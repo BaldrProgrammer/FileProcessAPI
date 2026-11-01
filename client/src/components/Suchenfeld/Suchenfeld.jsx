@@ -1,3 +1,5 @@
+import './Suchenfeld.css'
+
 function Suchenfeld() {
     return (
         <input placeholder="Suchen"></input>
