@@ -7,7 +7,9 @@ function App() {
     <>
         <section className="linkeSeitenLeiste">
             <Logo/>
-            <Suchenfeld></Suchenfeld>
+        </section>
+        <section className="oberSeitenLeiste">
+            <Suchenfeld/>
         </section>
     </>
   )
