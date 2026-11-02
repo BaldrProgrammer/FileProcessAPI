@@ -24,5 +24,13 @@ body {
     left: 288px;
     height: 100px;
     width: 1632px;
-    background: lightgray;
+}
+
+.wegDiv {
+    position: relative;
+    top: 25px;
+    height: 50px;
+    width: 1632px;
+    cursor: pointer;
+    background: rgb(225, 225, 225);
 }
