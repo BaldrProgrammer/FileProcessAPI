@@ -16,10 +16,9 @@ function App() {
         <section className="linkeSeitenLeiste">
             <Logo/>
         </section>
-        <section className="oberSeitenLeiste">
+        <section className="oberTeil">
             <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
         </section>
-
     </>
   )
 }

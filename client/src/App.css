@@ -10,7 +10,7 @@ body {
     background: rgb(240, 240, 240);
 }
 
-.oberSeitenLeiste {
+.oberTeil {
     position: absolute;
     top: 0;
     left: 288px;
