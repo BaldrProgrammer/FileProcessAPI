@@ -19,6 +19,9 @@ function App() {
         <section className="oberTeil">
             <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
         </section>
+        <section className="wegTeil">
+
+        </section>
     </>
   )
 }
