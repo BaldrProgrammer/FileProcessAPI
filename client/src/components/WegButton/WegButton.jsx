@@ -1,5 +1,9 @@
-function WegButton() {
+import './WegButton.css'
+
+function WegButton({ text }) {
     return (
-        <button className="WegButton"></button>
+        <button className="WegButton">{text}</button>
     )
 }
+
+export default WegButton

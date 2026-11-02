@@ -1,5 +1,6 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
+import WegButton from "./components/WegButton/WegButton.jsx";
 import './App.css'
 import {useState} from 'react';
 
@@ -20,7 +21,12 @@ function App() {
             <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
         </section>
         <section className='wegTeil'>
-            <div className='wegDiv'></div>
+            <div className='wegDiv'>
+                <WegButton text="⏴"/>
+                <WegButton text="Weg"/>
+                <WegButton text="Zu"/>
+                <WegButton text="Filename"/>
+            </div>
         </section>
     </>
   )
