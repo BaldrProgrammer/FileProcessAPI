@@ -12,6 +12,13 @@ function App() {
       }
   }
 
+  function pfeilButton(richtung) {
+      if (richtung === 'linke') {
+          console.log('der linke Pfeil')
+      } else if (richtung === 'rechte') {
+          console.log('der rechte Pfeil')
+  }}
+
   return (
     <>
         <aside className='linkeSeitenLeiste'>
@@ -22,12 +29,12 @@ function App() {
         </section>
         <section className='wegTeil'>
             <div className='wegDiv'>
-                <WegButton text="⏴" welscheSeitePfeil=" LinkerPfeil"/>
+                <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
                 <WegButton text="Hauptfestplatte"/>
                 <WegButton text="Weg"/>
                 <WegButton text="Zu"/>
                 <WegButton text="Filename"/>
-                <WegButton text="⏵" welscheSeitePfeil=" RechterPfeil"/>
+                <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
             </div>
         </section>
     </>
