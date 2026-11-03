@@ -22,12 +22,12 @@ function App() {
         </section>
         <section className='wegTeil'>
             <div className='wegDiv'>
-                <WegButton text="⏴" isPfeil={true}/>
+                <WegButton text="⏴" welscheSeitePfeil=" LinkerPfeil"/>
                 <WegButton text="Hauptfestplatte"/>
                 <WegButton text="Weg"/>
                 <WegButton text="Zu"/>
                 <WegButton text="Filename"/>
-                {/*<WegPfeilButton text="⏵"/>*/}
+                <WegButton text="⏵" welscheSeitePfeil=" RechterPfeil"/>
             </div>
         </section>
     </>

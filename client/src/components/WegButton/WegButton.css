@@ -1,18 +1,19 @@
 .WegButton {
     color: white;
     background: rgb(195, 195, 195);
-    position: relative;
-    top: 0;
-    left: 0;
-    vertical-align: top;
     height: 50px;
     min-width: 50px;
     border: rgb(155, 155, 155) solid 1px;
     font-size: 18px;
 }
 
-.WegButton.Pfeil {
-    left: -35px;
+.WegButton.LinkerPfeil {
+    margin-left: -35px;
+    min-width: 35px;
+    font-size: 25px;
+}
+
+.WegButton.RechterPfeil {
     min-width: 35px;
     font-size: 25px;
 }

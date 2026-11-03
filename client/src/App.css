@@ -28,6 +28,7 @@ body {
 
 .wegDiv {
     position: relative;
+    display: flex;
     top: 25px;
     height: 50px;
     width: 1632px;

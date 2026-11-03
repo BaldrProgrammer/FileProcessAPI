@@ -1,9 +1,8 @@
 import './WegButton.css'
 
-function WegButton({ text, isPfeil }) {
+function WegButton({ text, welscheSeitePfeil }) {
     let classes = 'WegButton'
-
-    classes += isPfeil ? ' Pfeil' : ''
+    classes += welscheSeitePfeil ? welscheSeitePfeil : ''
 
     return (
         <button className={classes}>{text}</button>
