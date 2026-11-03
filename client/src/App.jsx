@@ -7,6 +7,7 @@ import './App.css'
 function App() {
   const [aktuellPfad, setAktuellPfad] = useState("/")
   const [suchtext, setSuchtext] = useState("")
+  const [aktivButton, setAktivButton] = useState(null)
   const buttonRefs = [
       useRef(null),
       useRef(null),
@@ -22,6 +23,10 @@ function App() {
 
   function wegButton(buttonIndex) {
       buttonRefs[buttonIndex].current.classList.add('aktiv')
+      if (aktivButton) {
+          aktivButton.classList.remove('aktiv')
+      }
+      setAktivButton(buttonRefs[buttonIndex].current)
   }
 
   function pfeilButton(richtung) {
