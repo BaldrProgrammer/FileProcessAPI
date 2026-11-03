@@ -6,4 +6,5 @@ function WegButton({ text }) {
     )
 }
 
+
 export default WegButton

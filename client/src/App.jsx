@@ -1,6 +1,7 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
+import WegPfeilButton from "./components/WegButton/WegPfeilButton.jsx";
 import './App.css'
 import {useState} from 'react';
 
@@ -22,10 +23,11 @@ function App() {
         </section>
         <section className='wegTeil'>
             <div className='wegDiv'>
-                <WegButton text="⏴"/>
-                <WegButton text="Weg"/>
+                <WegPfeilButton text="⏴"/>
+                <WegButton text="Hauptfestplatte"/>
                 <WegButton text="Zu"/>
                 <WegButton text="Filename"/>
+                <WegPfeilButton text="⏵"/>
             </div>
         </section>
     </>
