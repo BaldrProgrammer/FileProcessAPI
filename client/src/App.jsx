@@ -1,9 +1,8 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
-import WegPfeilButton from "./components/WegButton/WegPfeilButton.jsx";
-import './App.css'
 import {useState} from 'react';
+import './App.css'
 
 function App() {
   const [suchtext, setSuchtext] = useState("")
@@ -15,19 +14,20 @@ function App() {
 
   return (
     <>
-        <section className='linkeSeitenLeiste'>
+        <aside className='linkeSeitenLeiste'>
             <Logo/>
-        </section>
+        </aside>
         <section className='oberTeil'>
             <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
         </section>
         <section className='wegTeil'>
             <div className='wegDiv'>
-                <WegPfeilButton text="⏴"/>
+                <WegButton text="⏴" isPfeil={true}/>
                 <WegButton text="Hauptfestplatte"/>
+                <WegButton text="Weg"/>
                 <WegButton text="Zu"/>
                 <WegButton text="Filename"/>
-                <WegPfeilButton text="⏵"/>
+                {/*<WegPfeilButton text="⏵"/>*/}
             </div>
         </section>
     </>
