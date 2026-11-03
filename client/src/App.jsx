@@ -5,6 +5,7 @@ import {useState} from 'react';
 import './App.css'
 
 function App() {
+  const [aktuellPfad, setAktuellPfad] = useState("/")
   const [suchtext, setSuchtext] = useState("")
   function suchen(event) {
       if (event.key === 'Enter') {
