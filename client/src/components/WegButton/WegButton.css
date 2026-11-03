@@ -23,6 +23,6 @@
     font-size: 25px;
 }
 
-.RechterPfeil:active, .LinkerPfeil:active {
+.WegButton.aktiv, .RechterPfeil:active, .LinkerPfeil:active {
     background: rgb(185, 185, 185);;
 }

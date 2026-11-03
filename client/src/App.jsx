@@ -1,16 +1,27 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import './App.css'
 
 function App() {
   const [aktuellPfad, setAktuellPfad] = useState("/")
   const [suchtext, setSuchtext] = useState("")
+  const buttonRefs = [
+      useRef(null),
+      useRef(null),
+      useRef(null),
+      useRef(null)
+  ]
+
   function suchen(event) {
       if (event.key === 'Enter') {
           console.log(suchtext)
       }
+  }
+
+  function wegButton(buttonIndex) {
+      buttonRefs[buttonIndex].current.classList.add('aktiv')
   }
 
   function pfeilButton(richtung) {
@@ -31,10 +42,10 @@ function App() {
         <section className='wegTeil'>
             <div className='wegDiv'>
                 <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
-                <WegButton text="Hauptfestplatte"/>
-                <WegButton text="Weg"/>
-                <WegButton text="Zu"/>
-                <WegButton text="Filename"/>
+                <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
+                <WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>
+                <WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>
+                <WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>
                 <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
             </div>
         </section>
