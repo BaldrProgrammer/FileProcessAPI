@@ -41,5 +41,13 @@ body {
     left: 288px;
     height: 50px;
     width: 1632px;
-    background: rgb(215, 225, 225);
+}
+
+
+main {
+    position: absolute;
+    top: 210px;
+    left: 288px;
+    height: 756px;
+    width: 1632px;
 }
