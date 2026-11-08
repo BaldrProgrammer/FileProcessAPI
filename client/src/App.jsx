@@ -54,6 +54,9 @@ function App() {
                 <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
             </div>
         </section>
+        <section className="sortTeil">
+
+        </section>
     </>
   )
 }

@@ -22,7 +22,7 @@ body {
     position: absolute;
     top: 100px;
     left: 288px;
-    height: 100px;
+    height: 60px;
     width: 1632px;
 }
 
@@ -33,4 +33,13 @@ body {
     height: 35px;
     width: 1632px;
     background: rgb(225, 225, 225);
+}
+
+.sortTeil {
+    position: absolute;
+    top: 160px;
+    left: 288px;
+    height: 50px;
+    width: 1632px;
+    background: rgb(215, 225, 225);
 }
