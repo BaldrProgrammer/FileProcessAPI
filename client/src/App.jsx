@@ -37,6 +37,10 @@ function App() {
           console.log('der rechte Pfeil')
   }}
 
+  function sortButton(name) {
+      console.log(`jetzt das sortiert nach ${name}`)
+  }
+
   return (
     <>
         <aside className='linkeSeitenLeiste'>
@@ -56,13 +60,13 @@ function App() {
             </div>
         </div>
         <div className="sortTeil">
-            <button className="nameSortButton">
+            <button className="nameSortButton" onClick={() => sortButton('Name')}>
                 Name
             </button>
-            <button className="anderungSortButton">
+            <button className="anderungSortButton" onClick={() => sortButton('Anderung')}>
                 Änderung
             </button>
-            <button className="grosseSortButton">
+            <button className="grosseSortButton" onClick={() => sortButton('Grosse')}>
                 Größe
             </button>
         </div>

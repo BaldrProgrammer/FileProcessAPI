@@ -58,6 +58,7 @@ body {
 }
 
 .sortTeil button:hover {
+    color: rgb(45, 45, 45);
     background: rgb(245, 245, 245);
 }
 
