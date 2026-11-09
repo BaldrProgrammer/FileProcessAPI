@@ -42,10 +42,10 @@ function App() {
         <aside className='linkeSeitenLeiste'>
             <Logo/>
         </aside>
-        <section className='oberTeil'>
+        <div className='oberTeil'>
             <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
-        </section>
-        <section className='wegTeil'>
+        </div>
+        <div className='wegTeil'>
             <div className='wegDiv'>
                 <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
                 <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
@@ -54,8 +54,8 @@ function App() {
                 <WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>
                 <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
             </div>
-        </section>
-        <section className="sortTeil">
+        </div>
+        <div className="sortTeil">
             <button className="nameSortButton">
                 Name
             </button>
@@ -65,7 +65,7 @@ function App() {
             <button className="grosseSortButton">
                 Größe
             </button>
-        </section>
+        </div>
         <main className="dateiTeil">
 
         </main>
