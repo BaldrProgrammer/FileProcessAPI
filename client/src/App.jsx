@@ -57,13 +57,13 @@ function App() {
         </section>
         <section className="sortTeil">
             <button className="nameSortButton">
-
+                Name
             </button>
-            <button className="veranderungSortButton">
-
+            <button className="anderungSortButton">
+                Änderung
             </button>
             <button className="grosseSortButton">
-
+                Größe
             </button>
         </section>
         <main className="dateiTeil">
