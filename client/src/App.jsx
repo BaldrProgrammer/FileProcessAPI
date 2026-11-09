@@ -27,6 +27,7 @@ function App() {
           aktivButton.classList.remove('aktiv')
       }
       setAktivButton(buttonRefs[buttonIndex].current)
+      console.log(buttonRefs[buttonIndex].current.textContent)
   }
 
   function pfeilButton(richtung) {
