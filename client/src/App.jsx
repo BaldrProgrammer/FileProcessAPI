@@ -1,6 +1,7 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
+import Ordner from "./components/Ordner/Ordner.jsx";
 import {useState, useRef} from 'react';
 import './App.css'
 
@@ -63,15 +64,15 @@ function App() {
             <button className="nameSortButton" onClick={() => sortButton('Name')}>
                 Name
             </button>
-            <button className="anderungSortButton" onClick={() => sortButton('Anderung')}>
+            <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
                 Änderung
             </button>
-            <button className="grosseSortButton" onClick={() => sortButton('Grosse')}>
+            <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
                 Größe
             </button>
         </div>
         <main className="dateiTeil">
-
+            <Ordner name="Austria" ordnerPfad="/Austria"/>
         </main>
     </>
   )
