@@ -72,7 +72,7 @@ function App() {
             </button>
         </div>
         <main className="dateiTeil">
-            <Ordner name="Austria" ordnerPfad="/Austria"/>
+            <Ordner name='Austria' ordnerPfad='/Austria'/>
         </main>
     </>
   )
