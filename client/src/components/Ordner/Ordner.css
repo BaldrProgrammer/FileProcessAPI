@@ -23,3 +23,19 @@
     top: 15px;
     left: 80px;
 }
+
+.einOrdner p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ordnerName {
+    position: absolute;
+    top: 16px;
+    left: 110px;
+    width: max-content;
+    max-width: 840px;
+    margin: 0;
+    font-size: 17px;
+}

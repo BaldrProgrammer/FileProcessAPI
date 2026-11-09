@@ -72,7 +72,7 @@ function App() {
             </button>
         </div>
         <main className="dateiTeil">
-            <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria'/>
+            <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria' letztAnderung='01.10.26 01:23'/>
         </main>
     </>
   )
