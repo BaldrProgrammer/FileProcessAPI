@@ -50,7 +50,12 @@ body {
     color: rgb(75, 75, 75);
     font-size: 18px;
     background: white;
-    border: white;
+    border: 0;
+    cursor: pointer;
+}
+
+.sortTeil button:hover {
+    background: rgb(245, 245, 245);
 }
 
 
