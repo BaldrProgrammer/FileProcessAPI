@@ -42,7 +42,7 @@ body {
     top: 160px;
     left: 288px;
     height: 50px;
-    width: 1550px;
+    width: 1566px;
 }
 
 .sortTeil::after {
@@ -78,6 +78,10 @@ button.nameSortButton {
 
 
 main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    align-content: flex-start;
     position: absolute;
     top: 210px;
     left: 288px;

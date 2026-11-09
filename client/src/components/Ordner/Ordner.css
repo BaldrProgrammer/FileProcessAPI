@@ -1,15 +1,17 @@
-.einOrdner {
-    position: absolute;
-    width: 100%;
+.einOrdnerVerpackung {
+    width: 1632px;
     height: 50px;
 }
 
-.einOrdner:hover {
+.einOrdner {
+    position: absolute;
+}
+
+.einOrdnerVerpackung:hover {
     background: rgb(245, 245, 245);
 }
 
-.einOrdner::after {
-    position: absolute;
+.einOrdnerVerpackung::after {
     left: 0;
     content: '';
     height: 1px;
@@ -30,7 +32,6 @@
     margin: 0;
     font-size: 17px;
     width: max-content;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
