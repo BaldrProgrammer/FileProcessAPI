@@ -53,9 +53,9 @@ function App() {
             <div className='wegDiv'>
                 <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
                 <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
-                <WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>
-                <WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>
-                <WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>
+                {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
+                {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
+                {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}
                 <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
             </div>
         </div>
