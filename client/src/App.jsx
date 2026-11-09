@@ -56,7 +56,15 @@ function App() {
             </div>
         </section>
         <section className="sortTeil">
+            <button className="nameSortButton">
 
+            </button>
+            <button className="veranderungSortButton">
+
+            </button>
+            <button className="grosseSortButton">
+
+            </button>
         </section>
         <main className="dateiTeil">
 
