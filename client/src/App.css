@@ -36,11 +36,14 @@ body {
 }
 
 .sortTeil {
+    margin: 0;
+    padding: 0 16px 0 66px;
     position: absolute;
     top: 160px;
     left: 288px;
     height: 50px;
-    width: 1632px;
+    width: 1550px;
+    border-bottom: 1px solid rgb(155, 155, 155);
 }
 
 .sortTeil button {
@@ -60,7 +63,7 @@ body {
 
 
 button.nameSortButton {
-    width: 1032px;
+    width: 950px;
 }
 
 
