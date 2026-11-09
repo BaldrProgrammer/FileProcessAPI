@@ -37,7 +37,7 @@ body {
 
 .sortTeil {
     margin: 0;
-    padding: 0 16px 0 66px;
+    padding-left: 66px;
     position: absolute;
     top: 160px;
     left: 288px;

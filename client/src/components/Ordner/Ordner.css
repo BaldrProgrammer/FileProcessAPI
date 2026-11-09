@@ -25,17 +25,26 @@
 }
 
 .einOrdner p {
+    position: absolute;
+    top: 16px;
+    margin: 0;
+    font-size: 17px;
+    width: max-content;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .ordnerName {
-    position: absolute;
-    top: 16px;
     left: 110px;
-    width: max-content;
     max-width: 840px;
-    margin: 0;
-    font-size: 17px;
+}
+
+
+.ordnerAnderung {
+    left: 1022px;
+}
+
+.ordnerGrosse {
+    left: 1322px;
 }
