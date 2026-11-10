@@ -5,20 +5,22 @@
 
 .einOrdner {
     position: absolute;
+    height: 50px;
 }
 
 .einOrdnerVerpackung:hover {
     background: rgb(245, 245, 245);
 }
 
-.einOrdnerVerpackung::after {
-    left: 0;
-    content: '';
-    height: 1px;
-    background: rgb(185, 185, 185);
-    bottom: 0;
-    width: 100%;
-}
+/*.einOrdner::after {*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    content: '';*/
+/*    height: 1px;*/
+/*    background: rgb(185, 185, 185);*/
+/*    bottom: 0;*/
+/*    width: 1632px;*/
+/*}*/
 
 .ordnerIcon {
     position: relative;
