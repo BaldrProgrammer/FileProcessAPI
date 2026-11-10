@@ -6,6 +6,7 @@ function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
     if (grosse >= 1000) {
         MfI = 'KB'
         grosse /= 1000
+    }
     if (grosse >= 1000) {
         MfI = 'MB'
         grosse /= 1000
@@ -25,7 +26,7 @@ function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
             </div>
         </div>
     )
-}}
+}
 
 
 export default Datei
