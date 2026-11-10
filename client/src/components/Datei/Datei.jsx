@@ -14,15 +14,14 @@ function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
         MfI = 'GB'
         grosse /= 1000
     }
-    grosse = grosse.toFixed(1)
 
     return (
-        <div className="einOrdnerVerpackung">
-            <div onClick={onClick} className="einOrdner">
-                <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
-                <p className='ordnerName'>{name}</p>
-                <p className='ordnerAnderung'>{letztAnderung}</p>
-                <p className='ordnerGrosse'>{grosse}{MfI}</p>
+        <div className="dateiVerpackung">
+            <div onClick={onClick} className="datei">
+                <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
+                <p className='dateiName'>{name}</p>
+                <p className='dateiAnderung'>{letztAnderung}</p>
+                <p className='dateiGrosse'>{grosse.toFixed(1)}{MfI}</p>
             </div>
         </div>
     )

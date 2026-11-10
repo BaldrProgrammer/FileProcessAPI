@@ -1,18 +1,18 @@
-.einOrdnerVerpackung {
+.dateiVerpackung {
     width: 1632px;
     height: 50px;
 }
 
-.einOrdner {
+.datei {
     position: absolute;
     height: 50px;
 }
 
-.einOrdnerVerpackung:hover {
+.dateiVerpackung:hover {
     background: rgb(245, 245, 245);
 }
 
-.einOrdner::after {
+.datei::after {
     position: absolute;
     left: 0;
     content: '';
@@ -22,13 +22,13 @@
     width: 1632px;
 }
 
-.ordnerIcon {
+.dateiIcon {
     position: relative;
     top: 15px;
     left: 80px;
 }
 
-.einOrdner p {
+.datei p {
     position: absolute;
     top: 16px;
     margin: 0;
@@ -38,16 +38,16 @@
     text-overflow: ellipsis;
 }
 
-.ordnerName {
+.dateiName {
     left: 110px;
     max-width: 840px;
 }
 
 
-.ordnerAnderung {
+.dateiAnderung {
     left: 1022px;
 }
 
-.ordnerGrosse {
+.dateiGrosse {
     left: 1322px;
 }
