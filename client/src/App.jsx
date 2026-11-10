@@ -2,6 +2,7 @@ import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
+import Datei from "./components/Datei/Datei.jsx";
 import {useState, useRef} from 'react';
 import './App.css'
 
@@ -76,6 +77,7 @@ function App() {
             <Ordner onClick={() => sortButton('czechia')} name='Czechia' ordnerPfad='/Czechia' letztAnderung='28.08.26 14:02'/>
             <Ordner onClick={() => sortButton('Germany')} name='Germany' ordnerPfad='/Germany' letztAnderung='08.11.26 02:08'/>
             <Ordner onClick={() => sortButton('hungary')} name='Hungary' ordnerPfad='/Hungary' letztAnderung='09.02.26 19:30'/>
+            <Datei onClick={() => sortButton('etwasfolo.jpg')} name='etwasfolo.jpg' ordnerPfad='/etwasfolo.jpg' letztAnderung='10.11.26 22:23' grosse={5784}/>
         </main>
     </>
   )
