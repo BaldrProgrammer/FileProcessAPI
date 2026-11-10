@@ -1,0 +1,53 @@
+.einOrdnerVerpackung {
+    width: 1632px;
+    height: 50px;
+}
+
+.einOrdner {
+    position: absolute;
+    height: 50px;
+}
+
+.einOrdnerVerpackung:hover {
+    background: rgb(245, 245, 245);
+}
+
+.einOrdner::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    height: 1px;
+    background: rgb(185, 185, 185);
+    bottom: 0;
+    width: 1632px;
+}
+
+.ordnerIcon {
+    position: relative;
+    top: 15px;
+    left: 80px;
+}
+
+.einOrdner p {
+    position: absolute;
+    top: 16px;
+    margin: 0;
+    font-size: 17px;
+    width: max-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ordnerName {
+    left: 110px;
+    max-width: 840px;
+}
+
+
+.ordnerAnderung {
+    left: 1022px;
+}
+
+.ordnerGrosse {
+    left: 1322px;
+}

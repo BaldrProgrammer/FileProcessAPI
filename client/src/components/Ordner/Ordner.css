@@ -12,15 +12,15 @@
     background: rgb(245, 245, 245);
 }
 
-/*.einOrdner::after {*/
-/*    position: absolute;*/
-/*    left: 0;*/
-/*    content: '';*/
-/*    height: 1px;*/
-/*    background: rgb(185, 185, 185);*/
-/*    bottom: 0;*/
-/*    width: 1632px;*/
-/*}*/
+.einOrdner::after {
+    position: absolute;
+    left: 0;
+    content: '';
+    height: 1px;
+    background: rgb(185, 185, 185);
+    bottom: 0;
+    width: 1632px;
+}
 
 .ordnerIcon {
     position: relative;
