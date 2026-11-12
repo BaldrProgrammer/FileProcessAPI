@@ -1,3 +1,3 @@
-let a = 2612
-a /= 1000
-console.log(a)
+if (['jpg', 'png', 'webm'].includes('png')) {
+    console.log(true)
+}
