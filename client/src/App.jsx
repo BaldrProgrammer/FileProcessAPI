@@ -75,7 +75,7 @@ function App() {
         <main className="dateiTeil">
             <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria' letztAnderung='01.10.26 01:23'/>
             <Ordner onClick={() => sortButton('czechia')} name='Czechia' ordnerPfad='/Czechia' letztAnderung='28.08.26 14:02'/>
-            <Ordner onClick={() => sortButton('Germany')} name='Germany' ordnerPfad='/Germany' letztAnderung='08.11.26 02:08'/>
+            <Ordner onClick={() => sortButton('germany')} name='Germany' ordnerPfad='/Germany' letztAnderung='08.11.26 02:08'/>
             <Ordner onClick={() => sortButton('hungary')} name='Hungary' ordnerPfad='/Hungary' letztAnderung='09.02.26 19:30'/>
             <Datei onClick={() => sortButton('etwasfolo.jpg')} name='etwasfolo.jpg' ordnerPfad='/etwasfolo.jpg' letztAnderung='10.11.26 22:23' grosse={5784}/>
         </main>

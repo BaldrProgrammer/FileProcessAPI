@@ -1,7 +1,6 @@
 import './Datei.css'
-import icon from '../../assets/ordnerIcon.png'
 
-function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
+function Datei({ name, dateiendung, ordnerPfad, letztAnderung, grosse, onClick }) {
     let MfI = 'B'
     if (grosse >= 1000) {
         MfI = 'KB'
@@ -16,10 +15,12 @@ function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
         grosse /= 1000
     }
 
+
+
     return (
-        <div className="dateiVerpackung">
-            <div onClick={onClick} className="datei">
-                <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
+        <div onClick={onClick} className="dateiVerpackung">
+            <div className="datei">
+                <img className='dateiIcon' src='../../assets/logo.png' alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{name}</p>
                 <p className='dateiAnderung'>{letztAnderung}</p>
                 <p className='dateiGrosse'>{grosse.toFixed(1)}{MfI}</p>
