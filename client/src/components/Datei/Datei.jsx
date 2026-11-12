@@ -1,16 +1,18 @@
 import './Datei.css'
-import image from '../../assets/image.png'
-import text from '../../assets/textfile.png'
+import abbildung from '../../assets/dateiBildIcon.png'
+import text from '../../assets/dateiTextIcon.png'
 
 const DATEIENDUNGEN_UND_ICONS = {
-    jpg: image,
-    jpeg: image,
-    png: image,
-    webm: image,
+    jpg: abbildung,
+    jpeg: abbildung,
+    png: abbildung,
+    webm: abbildung,
+    svg: abbildung,
+
     txt: text
 }
 
-function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
+function Datei({name, ordnerPfad, letztAnderung, grosse, onClick}) {
     let MfI = 'B'
     if (grosse >= 1000) {
         MfI = 'KB'
@@ -26,7 +28,6 @@ function Datei({ name, ordnerPfad, letztAnderung, grosse, onClick }) {
     }
 
 
-    console.log(name.split('.').at(-1))
     let icon
     if (name.includes('.')) {
         icon = DATEIENDUNGEN_UND_ICONS[name.split('.').at(-1)]
