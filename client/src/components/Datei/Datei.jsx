@@ -54,7 +54,7 @@ function Datei({name, ordnerPfad, letztAnderung, grosse, onClick}) {
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{name}</p>
                 <p className='dateiAnderung'>{letztAnderung}</p>
-                <p className='dateiGrosse'>{grosse.toFixed(1)}{MfI}</p>
+                <p className='dateiGrosse'>{grosse % 1 === 0 ? grosse : grosse.toFixed(1)}{MfI}</p>
             </div>
         </div>
     )
