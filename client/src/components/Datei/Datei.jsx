@@ -1,15 +1,27 @@
 import './Datei.css'
-import abbildung from '../../assets/dateiBildIcon.png'
-import text from '../../assets/dateiTextIcon.png'
+import abbildungIcon from '../../assets/dateiBildIcon.png'
+import audioIcon from '../../assets/dateiAudioIcon.png'
+import videoIcon from '../../assets/dateiVideoIcon.png'
+import textIcon from '../../assets/dateiTextIcon.png'
 
 const DATEIENDUNGEN_UND_ICONS = {
-    jpg: abbildung,
-    jpeg: abbildung,
-    png: abbildung,
-    webm: abbildung,
-    svg: abbildung,
+    txt: textIcon,
 
-    txt: text
+    jpg: abbildungIcon,
+    jpeg: abbildungIcon,
+    png: abbildungIcon,
+    webm: abbildungIcon,
+    svg: abbildungIcon,
+
+    mp3: audioIcon,
+    m4a: audioIcon,
+    wav: audioIcon,
+    ogg: audioIcon,
+
+    mp4: videoIcon,
+    mov: videoIcon,
+    mkv: videoIcon,
+    avi: videoIcon,
 }
 
 function Datei({name, ordnerPfad, letztAnderung, grosse, onClick}) {
