@@ -5,7 +5,7 @@ import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import {useState, useRef} from 'react';
 import './App.css'
-
+ 
 function App() {
   const [aktuellPfad, setAktuellPfad] = useState("/")
   const [suchtext, setSuchtext] = useState("")
