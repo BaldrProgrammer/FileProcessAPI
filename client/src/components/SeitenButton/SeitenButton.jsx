@@ -1,9 +1,9 @@
 import './SeitenButton.css'
 
-function SeitenButton() {
+function SeitenButton({ text, funktion, istNeuButton }) {
     return (
-        <button className="seitenButton">
-
+        <button onClick={funktion} className={`seitenButton${istNeuButton===true ? ' neuButton' : ''}`}>
+            {text}
         </button>
     )
 }

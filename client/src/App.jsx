@@ -49,7 +49,7 @@ function App() {
         <aside className='seitenLeiste'>
             <Logo/>
             <div className="seitenButtonsTeil">
-                <SeitenButton/>
+                <SeitenButton text="Neu" istNeuButton={true}/>
             </div>
             <div className="speicherTeil">
 

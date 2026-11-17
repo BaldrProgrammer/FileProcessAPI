@@ -1,3 +1,8 @@
 .seitenButton {
-
+    width: 200px;
 }
+
+.seitenButton.neuButton {
+    width: 100px;
+}
+
