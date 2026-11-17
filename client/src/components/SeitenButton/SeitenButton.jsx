@@ -1,7 +1,11 @@
+import './SeitenButton.css'
+
 function SeitenButton() {
     return (
-        <div className="SeitenButton">
+        <button className="seitenButton">
 
-        </div>
+        </button>
     )
 }
+
+export default SeitenButton

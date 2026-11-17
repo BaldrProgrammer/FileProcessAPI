@@ -3,6 +3,7 @@ import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
+import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
 import {useState, useRef} from 'react';
 import './App.css'
 
@@ -48,7 +49,7 @@ function App() {
         <aside className='seitenLeiste'>
             <Logo/>
             <div className="seitenButtonsTeil">
-
+                <SeitenButton/>
             </div>
             <div className="speicherTeil">
 
