@@ -47,6 +47,9 @@ function App() {
     <>
         <aside className='seitenLeiste'>
             <Logo/>
+            <div className="seitenButtonsTeil">
+
+            </div>
         </aside>
         <div className='oberTeil'>
             <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
