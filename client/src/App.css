@@ -11,7 +11,12 @@ body {
 }
 
 .seitenButtonsTeil {
-    height: 700px;
+    height: 716px;
+    width: 288px;
+}
+
+.speicherTeil {
+    height: 150px;
     width: 288px;
 }
 
