@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-        <aside className='linkeSeitenLeiste'>
+        <aside className='seitenLeiste'>
             <Logo/>
         </aside>
         <div className='oberTeil'>
