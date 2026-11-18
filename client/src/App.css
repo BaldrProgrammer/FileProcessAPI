@@ -11,8 +11,13 @@ body {
 }
 
 .seitenButtonsTeil {
+    padding: 25px 44px 0 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-content: flex-start;
     height: 716px;
-    width: 288px;
+    width: 200px;
 }
 
 .speicherTeil {

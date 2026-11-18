@@ -50,6 +50,10 @@ function App() {
             <Logo/>
             <div className="seitenButtonsTeil">
                 <SeitenButton text="Neu" istNeuButton={true}/>
+                <SeitenButton text="Favoriten"/>
+                <SeitenButton text="Kürzlich"/>
+                <SeitenButton text="Geteilt"/>
+                <SeitenButton text="Papierkorb"/>
             </div>
             <div className="speicherTeil">
 
