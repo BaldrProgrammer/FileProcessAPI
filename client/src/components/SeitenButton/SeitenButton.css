@@ -1,10 +1,29 @@
 .seitenButton {
-    width: 200px;
+    width: 240px;
     height: 35px;
-    margin: 0 44px;
+    margin: 0 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.seitenButton:hover {
+    background: rgb(220, 220, 220);
 }
 
 .seitenButton.neuButton {
+    width: 210px;
+    height: 75px;
     margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 25px;
+    background: rgb(215, 215, 215);
 }
 
+.seitenButton.neuButton:hover {
+    background: rgb(225, 225, 225);
+}
+
+.seitenButton.neuButton:active {
+    background: rgb(220, 220, 220);
+}
