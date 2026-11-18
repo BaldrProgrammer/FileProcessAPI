@@ -1,10 +1,11 @@
 .seitenButton {
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 15px;
     width: 240px;
     height: 35px;
     margin: 0 24px;
+    padding-left: 15px;
     border: none;
     border-radius: 5px;
     font-size: 18px;

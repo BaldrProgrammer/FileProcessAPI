@@ -53,6 +53,7 @@ function App() {
                 <SeitenButton text="Favoriten"/>
                 <SeitenButton text="Kürzlich"/>
                 <SeitenButton text="Geteilt"/>
+                <SeitenButton text="Freunden"/>
                 <SeitenButton text="Papierkorb"/>
             </div>
             <div className="speicherTeil">

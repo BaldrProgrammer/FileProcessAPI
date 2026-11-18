@@ -1,17 +1,24 @@
 import './SeitenButton.css'
-import textIcon from "../../assets/dateiTextIcon.png";
-import abbildungIcon from "../../assets/dateiBildIcon.png";
-import audioIcon from "../../assets/dateiAudioIcon.png";
-import videoIcon from "../../assets/dateiVideoIcon.png";
+import neuIcon from '../../assets/buttonNeuIcon.png'
+import favoritenIcon from '../../assets/buttonFavoritenIcon.png'
+import kurzlichIcon from '../../assets/buttonKurzlichIcon.png'
+import geteiltIcon from '../../assets/buttonGeteiltIcon.png'
+import freundeIcon from '../../assets/buttonFreundenIcon.png'
+import papierkorbIcon from '../../assets/buttonPapierkorbIcon.png'
 
 const BUTTONS_UND_ICONS = {
-    Neu: textIcon
+    Neu: neuIcon,
+    Favoriten: favoritenIcon,
+    Kurzlich: kurzlichIcon,
+    Geteilt: geteiltIcon,
+    Freunden: freundeIcon,
+    Papierkorb: papierkorbIcon
 }
 
 function SeitenButton({ text, funktion, istNeuButton }) {
     return (
         <button onClick={funktion} className={`seitenButton${istNeuButton===true ? ' neuButton' : ''}`}>
-            <img src={textIcon} width='20px'></img>
+            <img src={BUTTONS_UND_ICONS[text.replace('ü', 'u')]} alt='' width='20px'></img>
             {text}
         </button>
     )
