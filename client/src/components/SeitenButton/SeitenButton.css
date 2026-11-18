@@ -1,11 +1,10 @@
 .seitenButton {
     width: 200px;
     height: 35px;
-
     margin: 0 44px;
 }
 
 .seitenButton.neuButton {
-
+    margin-top: 25px;
 }
 
