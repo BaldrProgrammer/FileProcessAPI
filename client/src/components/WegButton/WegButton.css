@@ -3,6 +3,7 @@
     background: rgb(215, 215, 215);
     height: 35px;
     min-width: 50px;
+    padding: 0 4px;
     border: rgb(195, 195, 195) solid 1px;
     font-size: 18px;
     cursor: pointer;
