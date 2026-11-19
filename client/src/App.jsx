@@ -8,94 +8,96 @@ import {useState, useRef} from 'react';
 import './App.css'
 
 function App() {
-  const [aktuellPfad, setAktuellPfad] = useState("/")
-  const [suchtext, setSuchtext] = useState("")
-  const [aktivButton, setAktivButton] = useState(null)
-  const buttonRefs = [
-      useRef(null),
-      useRef(null),
-      useRef(null),
-      useRef(null)
-  ]
+    const [aktuellPfad, setAktuellPfad] = useState("/")
+    const [suchtext, setSuchtext] = useState("")
+    const [aktivButton, setAktivButton] = useState(null)
+    const buttonRefs = [
+        useRef(null),
+        useRef(null),
+        useRef(null),
+        useRef(null)
+    ]
 
-  function suchen(event) {
-      if (event.key === 'Enter') {
-          console.log(suchtext)
-      }
-  }
 
-  function wegButton(buttonIndex) {
-      buttonRefs[buttonIndex].current.classList.add('aktiv')
-      if (aktivButton) {
-          aktivButton.classList.remove('aktiv')
-      }
-      setAktivButton(buttonRefs[buttonIndex].current)
-      console.log(buttonRefs[buttonIndex].current.textContent)
-  }
+    function suchen(event) {
+        if (event.key === 'Enter') {
+            console.log(suchtext)
+        }
+    }
 
-  function pfeilButton(richtung) {
-      if (richtung === 'linke') {
-          console.log('der linke Pfeil')
-      } else if (richtung === 'rechte') {
-          console.log('der rechte Pfeil')
-  }}
 
-  function sortButton(name) {
-      console.log(`jetzt das sortiert nach ${name}`)
-  }
+    function pfeilButton(richtung) {
+        if (richtung === 'linke') {
+            console.log('der linke Pfeil')
+        } else if (richtung === 'rechte') {
+            console.log('der rechte Pfeil')
+        }
+    }
 
-  return (
-    <>
-        <aside className='seitenLeiste'>
-            <Logo/>
-            <div className="seitenButtonsTeil">
-                <SeitenButton text="Neu" istNeuButton={true}/>
-                <SeitenButton text="Favoriten"/>
-                <SeitenButton text="Kürzlich"/>
-                <SeitenButton text="Geteilt"/>
-                <SeitenButton text="Freunden"/>
-                <SeitenButton text="Papierkorb"/>
+    function sortButton(name) {
+        console.log(`jetzt das sortiert nach ${name}`)
+    }
+
+    return (
+        <>
+            <aside className='seitenLeiste'>
+                <Logo/>
+                <div className="seitenButtonsTeil">
+                    <SeitenButton text="Neu" istNeuButton={true}/>
+                    <SeitenButton text="Favoriten"/>
+                    <SeitenButton text="Kürzlich"/>
+                    <SeitenButton text="Geteilt"/>
+                    <SeitenButton text="Freunden"/>
+                    <SeitenButton text="Papierkorb"/>
+                </div>
+                <div className="speicherTeil">
+
+                </div>
+            </aside>
+            <div className='oberTeil'>
+                <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
             </div>
-            <div className="speicherTeil">
-
+            <div className='wegTeil'>
+                <div className='wegDiv'>
+                    <WegButton args={{text: '⏴', welcheSeitePfeil: ' LinkerPfeil'}}/>
+                    {/*<WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>*/}
+                    {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
+                    {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
+                    {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}
+                    {/*<WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>*/}
+                </div>
             </div>
-        </aside>
-        <div className='oberTeil'>
-            <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
-        </div>
-        <div className='wegTeil'>
-            <div className='wegDiv'>
-                <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
-                <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
-                {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
-                {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
-                {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}
-                <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
+            <div className="sortTeil">
+                <button className="nameSortButton" onClick={() => sortButton('Name')}>
+                    Name
+                </button>
+                <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
+                    Änderung
+                </button>
+                <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
+                    Größe
+                </button>
             </div>
-        </div>
-        <div className="sortTeil">
-            <button className="nameSortButton" onClick={() => sortButton('Name')}>
-                Name
-            </button>
-            <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
-                Änderung
-            </button>
-            <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
-                Größe
-            </button>
-        </div>
-        <main className="dateiTeil">
-            <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria' letztAnderung='01.10.26 01:23'/>
-            <Ordner onClick={() => sortButton('czechia')} name='Czechia' ordnerPfad='/Czechia' letztAnderung='28.08.26 14:02'/>
-            <Ordner onClick={() => sortButton('germany')} name='Germany' ordnerPfad='/Germany' letztAnderung='08.11.26 02:08'/>
-            <Ordner onClick={() => sortButton('hungary')} name='Hungary' ordnerPfad='/Hungary' letztAnderung='09.02.26 19:30'/>
-            <Datei onClick={() => sortButton('photo.jpg')} name='photo.jpg' ordnerPfad='/photo.jpg' letztAnderung='10.11.26 22:23' grosse={5784}/>
-            <Datei onClick={() => sortButton('audio.mp3')} name='audio.mp3' ordnerPfad='/audio.mp3' letztAnderung='13.11.26 00:49' grosse={2334875}/>
-            <Datei onClick={() => sortButton('video.mp4')} name='video.mp4' ordnerPfad='/video.mp4' letztAnderung='13.11.26 01:10' grosse={14354875}/>
-            <Datei onClick={() => sortButton('text.txt')} name='text.txt' ordnerPfad='/text.txt' letztAnderung='13.11.26 00:08' grosse={154}/>
-        </main>
-    </>
-  )
+            <main className="dateiTeil">
+                <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria'
+                        letztAnderung='01.10.26 01:23'/>
+                <Ordner onClick={() => sortButton('czechia')} name='Czechia' ordnerPfad='/Czechia'
+                        letztAnderung='28.08.26 14:02'/>
+                <Ordner onClick={() => sortButton('germany')} name='Germany' ordnerPfad='/Germany'
+                        letztAnderung='08.11.26 02:08'/>
+                <Ordner onClick={() => sortButton('hungary')} name='Hungary' ordnerPfad='/Hungary'
+                        letztAnderung='09.02.26 19:30'/>
+                <Datei onClick={() => sortButton('photo.jpg')} name='photo.jpg' ordnerPfad='/photo.jpg'
+                       letztAnderung='10.11.26 22:23' grosse={5784}/>
+                <Datei onClick={() => sortButton('audio.mp3')} name='audio.mp3' ordnerPfad='/audio.mp3'
+                       letztAnderung='13.11.26 00:49' grosse={2334875}/>
+                <Datei onClick={() => sortButton('video.mp4')} name='video.mp4' ordnerPfad='/video.mp4'
+                       letztAnderung='13.11.26 01:10' grosse={14354875}/>
+                <Datei onClick={() => sortButton('text.txt')} name='text.txt' ordnerPfad='/text.txt'
+                       letztAnderung='13.11.26 00:08' grosse={154}/>
+            </main>
+        </>
+    )
 }
 
 export default App
