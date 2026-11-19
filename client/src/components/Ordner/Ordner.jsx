@@ -4,7 +4,7 @@ import icon from '../../assets/ordnerIcon.png'
 function Ordner(props) {
     function ordnerOffnen(ordnerPfad) {
         console.log(`jetzt auf ${ordnerPfad}`)
-        props.args.setAktuellPfad(ordnerPfad)
+        props.setAktuellPfad(ordnerPfad)
     }
 
     return (

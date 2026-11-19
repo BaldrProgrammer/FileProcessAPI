@@ -19,10 +19,10 @@ function App() {
     ]
 
     const [ordnerListe, setOrdnerListe] = useState([
-        {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad},
-        {id: 2, name: 'Czechia', ordnerPfad: '/Czechia', letztAnderung: '28.08.26 14:02', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad},
-        {id: 3, name: 'Germany', ordnerPfad: '/Germany', letztAnderung: '08.11.26 02:08', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad},
-        {id: 4, name: 'Hungary', ordnerPfad: '/Hungary', letztAnderung: '09.02.26 19:30', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad}
+        {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
+        {id: 2, name: 'Czechia', ordnerPfad: '/Czechia', letztAnderung: '28.08.26 14:02'},
+        {id: 3, name: 'Germany', ordnerPfad: '/Germany', letztAnderung: '08.11.26 02:08'},
+        {id: 4, name: 'Hungary', ordnerPfad: '/Hungary', letztAnderung: '09.02.26 19:30'}
     ])
 
     const [dateiListe, setDateiListe] = useState([
@@ -101,7 +101,7 @@ function App() {
             </div>
             <main className="dateiTeil">
                 {ordnerListe.map(ordner =>
-                    <Ordner args={ordner} key={ordner.id}/>
+                    <Ordner args={ordner} key={ordner.id} setAktuellPfad={setAktuellPfad}/>
                 )}
                 {dateiListe.map(datei =>
                     <Datei args={datei} key={datei.id}/>
