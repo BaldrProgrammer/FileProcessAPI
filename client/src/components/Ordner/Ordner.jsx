@@ -1,7 +1,11 @@
 import './Ordner.css'
 import icon from '../../assets/ordnerIcon.png'
 
-function Ordner({ name, ordnerPfad, letztAnderung, onClick }) {
+function Ordner(props) {
+    function ordnerOffnen(ordnerPfad) {
+        console.log(`jetzt auf ${ordnerPfad}`)
+    }
+
     return (
         <div onClick={onClick} className="einOrdnerVerpackung">
             <div onClick={onClick} className="einOrdner">

@@ -84,7 +84,7 @@ function App() {
                 Größe
             </button>
         </div>
-        <main className="dateiTeil">
+        <main className="dateiTeil"> {}
             <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria' letztAnderung='01.10.26 01:23'/>
             <Ordner onClick={() => sortButton('czechia')} name='Czechia' ordnerPfad='/Czechia' letztAnderung='28.08.26 14:02'/>
             <Ordner onClick={() => sortButton('germany')} name='Germany' ordnerPfad='/Germany' letztAnderung='08.11.26 02:08'/>
