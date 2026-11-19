@@ -18,18 +18,18 @@ function App() {
         useRef(null)
     ]
 
-    const [ordnerArgs, setOrdnerArgs] = useState([
-        {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
-        {id: 2, name: 'Czechia', ordnerPfad: '/Czechia', letztAnderung: '28.08.26 14:02'},
-        {id: 3, name: 'Germany', ordnerPfad: '/Germany', letztAnderung: '08.11.26 02:08'},
-        {id: 4, name: 'Hungary', ordnerPfad: '/Hungary', letztAnderung: '09.02.26 19:30'}
+    const [ordnerListe, setOrdnerListe] = useState([
+        {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad},
+        {id: 2, name: 'Czechia', ordnerPfad: '/Czechia', letztAnderung: '28.08.26 14:02', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad},
+        {id: 3, name: 'Germany', ordnerPfad: '/Germany', letztAnderung: '08.11.26 02:08', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad},
+        {id: 4, name: 'Hungary', ordnerPfad: '/Hungary', letztAnderung: '09.02.26 19:30', aktuellPfad: aktuellPfad, setAktuellPfad: setAktuellPfad}
     ])
 
-    const [dateiArgs, setDateiArgs] = useState([
+    const [dateiListe, setDateiListe] = useState([
         {id: 1, name: 'photo.jpg', dateiPfad: '/photo.jpg', letztAnderung: '10.11.26 22:23', grosse: 5784},
         {id: 2, name: 'audio.mp3', dateiPfad: '/audio.mp3', letztAnderung: '13.11.26 00:49', grosse: 2334875},
         {id: 3, name: 'video.mp4', dateiPfad: '/video.mp4', letztAnderung: '13.11.26 01:10', grosse: 14354875},
-        {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154}
+        {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
 
     function suchen(event) {
@@ -100,10 +100,10 @@ function App() {
                 </button>
             </div>
             <main className="dateiTeil">
-                {ordnerArgs.map(ordner =>
+                {ordnerListe.map(ordner =>
                     <Ordner args={ordner} key={ordner.id}/>
                 )}
-                {dateiArgs.map(datei =>
+                {dateiListe.map(datei =>
                     <Datei args={datei} key={datei.id}/>
                 )}
             </main>
