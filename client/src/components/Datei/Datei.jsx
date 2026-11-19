@@ -24,7 +24,7 @@ const DATEIENDUNGEN_UND_ICONS = {
     avi: videoIcon,
 }
 
-function Datei({name, ordnerPfad, letztAnderung, grosse, onClick}) {
+function Datei(props) {
     let MfI = 'B'
     if (grosse >= 1000) {
         MfI = 'KB'
@@ -46,9 +46,13 @@ function Datei({name, ordnerPfad, letztAnderung, grosse, onClick}) {
         icon = textIcon
     }
 
+    function dateiOffnen(dateiPfad) {
+        console.log(`${dateiPfad} öffnet sich`)
+    }
+
 
     return (
-        <div onClick={onClick} className="dateiVerpackung">
+        <div onClick={() => dateiOffnen(dateiPfad)} className="dateiVerpackung">
             <div className="datei">
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{name}</p>
