@@ -39,12 +39,11 @@ function Datei({name, ordnerPfad, letztAnderung, grosse, onClick}) {
         grosse /= 1000
     }
 
-
     let icon
     if (name.includes('.')) {
         icon = DATEIENDUNGEN_UND_ICONS[name.split('.').at(-1)]
     } else {
-        icon = text
+        icon = textIcon
     }
 
 
