@@ -84,11 +84,11 @@ function App() {
                 Größe
             </button>
         </div>
-        <main className="dateiTeil"> {}
-            <Ordner onClick={() => sortButton('austria')} name='Austria' ordnerPfad='/Austria' letztAnderung='01.10.26 01:23'/>
-            <Ordner onClick={() => sortButton('czechia')} name='Czechia' ordnerPfad='/Czechia' letztAnderung='28.08.26 14:02'/>
-            <Ordner onClick={() => sortButton('germany')} name='Germany' ordnerPfad='/Germany' letztAnderung='08.11.26 02:08'/>
-            <Ordner onClick={() => sortButton('hungary')} name='Hungary' ordnerPfad='/Hungary' letztAnderung='09.02.26 19:30'/>
+        <main className="dateiTeil">
+            <Ordner args={{name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'}}/>
+            <Ordner args={{name: 'Czechia', ordnerPfad: '/Czechia', letztAnderung: '28.08.26 14:02'}}/>
+            <Ordner args={{name: 'Germany', ordnerPfad: '/Germany', letztAnderung:'08.11.26 02:08'}}/>
+            <Ordner args={{name: 'Hungary', ordnerPfad: '/Hungary', letztAnderung: '09.02.26 19:30'}}/>
             <Datei onClick={() => sortButton('photo.jpg')} name='photo.jpg' ordnerPfad='/photo.jpg' letztAnderung='10.11.26 22:23' grosse={5784}/>
             <Datei onClick={() => sortButton('audio.mp3')} name='audio.mp3' ordnerPfad='/audio.mp3' letztAnderung='13.11.26 00:49' grosse={2334875}/>
             <Datei onClick={() => sortButton('video.mp4')} name='video.mp4' ordnerPfad='/video.mp4' letztAnderung='13.11.26 01:10' grosse={14354875}/>

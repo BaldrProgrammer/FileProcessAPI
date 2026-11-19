@@ -7,11 +7,11 @@ function Ordner(props) {
     }
 
     return (
-        <div onClick={onClick} className="einOrdnerVerpackung">
-            <div onClick={onClick} className="einOrdner">
+        <div onClick={() => ordnerOffnen(props.args.ordnerPfad)} className="einOrdnerVerpackung">
+            <div className="einOrdner">
                 <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
-                <p className='ordnerName'>{name}</p>
-                <p className='ordnerAnderung'>{letztAnderung}</p>
+                <p className='ordnerName'>{props.args.name}</p>
+                <p className='ordnerAnderung'>{props.args.letztAnderung}</p>
                 <p className='ordnerGrosse'>--</p>
             </div>
         </div>
