@@ -26,22 +26,22 @@ const DATEIENDUNGEN_UND_ICONS = {
 
 function Datei(props) {
     let MfI = 'B'
-    if (grosse >= 1000) {
+    if (props.args.grosse >= 1000) {
         MfI = 'KB'
-        grosse /= 1000
+        props.args.grosse /= 1000
     }
-    if (grosse >= 1000) {
+    if (props.args.grosse >= 1000) {
         MfI = 'MB'
-        grosse /= 1000
+        props.args.grosse /= 1000
     }
-    if (grosse >= 1000) {
+    if (props.args.grosse >= 1000) {
         MfI = 'GB'
-        grosse /= 1000
+        props.args.grosse /= 1000
     }
 
     let icon
-    if (name.includes('.')) {
-        icon = DATEIENDUNGEN_UND_ICONS[name.split('.').at(-1)]
+    if (props.args.name.includes('.')) {
+        icon = DATEIENDUNGEN_UND_ICONS[props.args.name.split('.').at(-1)]
     } else {
         icon = textIcon
     }
@@ -52,12 +52,12 @@ function Datei(props) {
 
 
     return (
-        <div onClick={() => dateiOffnen(dateiPfad)} className="dateiVerpackung">
+        <div onClick={() => dateiOffnen(props.args.dateiPfad)} className="dateiVerpackung">
             <div className="datei">
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
-                <p className='dateiName'>{name}</p>
-                <p className='dateiAnderung'>{letztAnderung}</p>
-                <p className='dateiGrosse'>{grosse % 1 === 0 ? grosse : grosse.toFixed(1)}{MfI}</p>
+                <p className='dateiName'>{props.args.name}</p>
+                <p className='dateiAnderung'>{props.args.letztAnderung}</p>
+                <p className='dateiGrosse'>{props.args.grosse % 1 === 0 ? props.args.grosse : props.args.grosse.toFixed(1)}{MfI}</p>
             </div>
         </div>
     )
