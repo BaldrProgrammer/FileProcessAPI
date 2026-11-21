@@ -1,14 +1,10 @@
 import './Ordner.css'
 import icon from '../../assets/ordnerIcon.png'
-import { useContext } from "react";
-import { PfadContext} from "../../context/PfadContext.js";
 
 function Ordner(props) {
-    const aktuellPfad = useContext(PfadContext)
     function ordnerOffnen(ordnerPfad) {
-        props.setAktuellPfad(aktuellPfad+ordnerPfad)
+        props.setAktuellPfad(ordnerPfad)
     }
-    console.log(`jetzt auf ${aktuellPfad}`)
 
     return (
         <div onClick={() => ordnerOffnen(props.args.ordnerPfad)} className="einOrdnerVerpackung">

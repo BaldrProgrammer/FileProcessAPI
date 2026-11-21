@@ -45,64 +45,53 @@ function App() {
     }
 
     return (
-        <PfadContext.Provider
-            value={
-                aktuellPfad
-            }
-        >
-            <div>
-                <aside className='seitenLeiste'>
-                    <Logo/>
-                    <div className="seitenButtonsTeil">
-                        <SeitenButton text="Neu" istNeuButton={true}/>
-                        <SeitenButton text="Favoriten"/>
-                        <SeitenButton text="Kürzlich"/>
-                        <SeitenButton text="Geteilt"/>
-                        <SeitenButton text="Freunden"/>
-                        <SeitenButton text="Papierkorb"/>
-                    </div>
-                    <div className="speicherTeil">
+        <>
+            <aside className='seitenLeiste'>
+                <Logo/>
+                <div className="seitenButtonsTeil">
+                    <SeitenButton text="Neu" istNeuButton={true}/>
+                    <SeitenButton text="Favoriten"/>
+                    <SeitenButton text="Kürzlich"/>
+                    <SeitenButton text="Geteilt"/>
+                    <SeitenButton text="Freunden"/>
+                    <SeitenButton text="Papierkorb"/>
+                </div>
+                <div className="speicherTeil">
 
-                    </div>
-                </aside>
-                <div className='oberTeil'>
-                    <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
                 </div>
-                <div className='wegTeil'>
-                    <div className='wegDiv'>
-                        <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
-                        {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
-                            <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
-                        )}
-
-                        {/*<WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>*/}
-                        {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
-                        {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
-                        {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}
-                        <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
-                    </div>
-                </div>
-                <div className="sortTeil">
-                    <button className="nameSortButton" onClick={() => sortButton('Name')}>
-                        Name
-                    </button>
-                    <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
-                        Änderung
-                    </button>
-                    <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
-                        Größe
-                    </button>
-                </div>
-                <main className="dateiTeil">
-                    {ordnerListe.map(ordner =>
-                        <Ordner args={ordner} setAktuellPfad={setAktuellPfad} key={ordner.id}/>
-                    )}
-                    {dateiListe.map(datei =>
-                        <Datei args={datei} key={datei.id}/>
-                    )}
-                </main>
+            </aside>
+            <div className='oberTeil'>
+                <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
             </div>
-        </PfadContext.Provider>
+            <div className='wegTeil'>
+                <div className='wegDiv'>
+                    <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
+                    {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
+                        <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
+                    )}
+                    <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
+                </div>
+            </div>
+            <div className="sortTeil">
+                <button className="nameSortButton" onClick={() => sortButton('Name')}>
+                    Name
+                </button>
+                <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
+                    Änderung
+                </button>
+                <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
+                    Größe
+                </button>
+            </div>
+            <main className="dateiTeil">
+                {ordnerListe.map(ordner =>
+                    <Ordner args={ordner} setAktuellPfad={setAktuellPfad} key={ordner.id}/>
+                )}
+                {dateiListe.map(datei =>
+                    <Datei args={datei} key={datei.id}/>
+                )}
+            </main>
+        </>
     )
 }
 
