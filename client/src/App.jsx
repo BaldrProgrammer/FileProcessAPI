@@ -72,7 +72,7 @@ function App() {
                     <div className='wegDiv'>
                         <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
                         {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
-                            <WegButton text={ordnerName} key={index} setAktuellPfad={setAktuellPfad}/>
+                            <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
                         )}
 
                         {/*<WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>*/}
@@ -95,7 +95,7 @@ function App() {
                 </div>
                 <main className="dateiTeil">
                     {ordnerListe.map(ordner =>
-                        <Ordner args={ordner} key={ordner.id} setAktuellPfad={setAktuellPfad}/>
+                        <Ordner args={ordner} setAktuellPfad={setAktuellPfad} key={ordner.id}/>
                     )}
                     {dateiListe.map(datei =>
                         <Datei args={datei} key={datei.id}/>
