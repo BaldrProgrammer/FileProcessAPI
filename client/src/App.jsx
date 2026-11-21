@@ -4,11 +4,12 @@ import WegButton from "./components/WegButton/WegButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
+import { PfadContext } from "./context/PfadContext.js";
 import {useState, useRef} from 'react';
 import './App.css'
 
 function App() {
-    const [aktuellPfad, setAktuellPfad] = useState("/")
+    const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
     const [suchtext, setSuchtext] = useState("")
     const [aktivButton, setAktivButton] = useState(null)
     const buttonRefs = [
@@ -60,54 +61,60 @@ function App() {
     }
 
     return (
-        <>
-            <aside className='seitenLeiste'>
-                <Logo/>
-                <div className="seitenButtonsTeil">
-                    <SeitenButton text="Neu" istNeuButton={true}/>
-                    <SeitenButton text="Favoriten"/>
-                    <SeitenButton text="Kürzlich"/>
-                    <SeitenButton text="Geteilt"/>
-                    <SeitenButton text="Freunden"/>
-                    <SeitenButton text="Papierkorb"/>
-                </div>
-                <div className="speicherTeil">
+        <PfadContext.Provider
+            value={
+                aktuellPfad
+            }
+        >
+            <div>
+                <aside className='seitenLeiste'>
+                    <Logo/>
+                    <div className="seitenButtonsTeil">
+                        <SeitenButton text="Neu" istNeuButton={true}/>
+                        <SeitenButton text="Favoriten"/>
+                        <SeitenButton text="Kürzlich"/>
+                        <SeitenButton text="Geteilt"/>
+                        <SeitenButton text="Freunden"/>
+                        <SeitenButton text="Papierkorb"/>
+                    </div>
+                    <div className="speicherTeil">
 
+                    </div>
+                </aside>
+                <div className='oberTeil'>
+                    <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
                 </div>
-            </aside>
-            <div className='oberTeil'>
-                <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
-            </div>
-            <div className='wegTeil'>
-                <div className='wegDiv'>
-                    <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
-                    <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
-                    {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
-                    {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
-                    {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}
-                    <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
+                <div className='wegTeil'>
+                    <div className='wegDiv'>
+                        <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
+                        <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
+                        {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
+                        {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
+                        {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}
+                        <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
+                    </div>
                 </div>
+                <div className="sortTeil">
+                    <button className="nameSortButton" onClick={() => sortButton('Name')}>
+                        Name
+                    </button>
+                    <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
+                        Änderung
+                    </button>
+                    <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
+                        Größe
+                    </button>
+                </div>
+                <main className="dateiTeil">
+                    {ordnerListe.map(ordner =>
+                        <Ordner args={ordner} key={ordner.id} setAktuellPfad={setAktuellPfad}/>
+                    )}
+                    {dateiListe.map(datei =>
+                        <Datei args={datei} key={datei.id}/>
+                    )}
+                </main>
             </div>
-            <div className="sortTeil">
-                <button className="nameSortButton" onClick={() => sortButton('Name')}>
-                    Name
-                </button>
-                <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
-                    Änderung
-                </button>
-                <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
-                    Größe
-                </button>
-            </div>
-            <main className="dateiTeil">
-                {ordnerListe.map(ordner =>
-                    <Ordner args={ordner} key={ordner.id} setAktuellPfad={setAktuellPfad}/>
-                )}
-                {dateiListe.map(datei =>
-                    <Datei args={datei} key={datei.id}/>
-                )}
-            </main>
-        </>
+        </PfadContext.Provider>
     )
 }
 
