@@ -1,11 +1,15 @@
 import './WegButton.css'
 
-function WegButton({ text, ref, welscheSeitePfeil, onClick }) {
+function WegButton(props) {
     let classes = 'WegButton'
-    classes += welscheSeitePfeil ? welscheSeitePfeil : ''
+    classes += props.welscheSeitePfeil ? props.welscheSeitePfeil : ''
+
+    function pfadVerandern() {
+
+    }
 
     return (
-        <button className={classes} ref={ref} onClick={onClick}>{text}</button>
+        <button className={classes} onClick={pfadVerandern}>{props.text}</button>
     )
 }
 

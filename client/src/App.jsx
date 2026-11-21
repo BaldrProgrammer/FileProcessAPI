@@ -72,7 +72,7 @@ function App() {
                     <div className='wegDiv'>
                         <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
                         {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
-                            <WegButton text={ordnerName} key={index}/>
+                            <WegButton text={ordnerName} key={index} setAktuellPfad={setAktuellPfad}/>
                         )}
 
                         {/*<WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>*/}
