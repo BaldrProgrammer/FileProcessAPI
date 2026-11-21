@@ -11,13 +11,6 @@ import './App.css'
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
     const [suchtext, setSuchtext] = useState("")
-    const [aktivButton, setAktivButton] = useState(null)
-    const buttonRefs = [
-        useRef(null),
-        useRef(null),
-        useRef(null),
-        useRef(null)
-    ]
 
     const [ordnerListe, setOrdnerListe] = useState([
         {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
@@ -37,15 +30,6 @@ function App() {
         if (event.key === 'Enter') {
             console.log(suchtext)
         }
-    }
-
-    function wegButton(buttonIndex) {
-        buttonRefs[buttonIndex].current.classList.add('aktiv')
-        if (aktivButton) {
-            aktivButton.classList.remove('aktiv')
-        }
-        setAktivButton(buttonRefs[buttonIndex].current)
-        console.log(buttonRefs[buttonIndex].current.textContent)
     }
 
     function pfeilButton(richtung) {
@@ -87,7 +71,11 @@ function App() {
                 <div className='wegTeil'>
                     <div className='wegDiv'>
                         <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
-                        <WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>
+                        {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
+                            <WegButton text={ordnerName} key={index}/>
+                        )}
+
+                        {/*<WegButton text="Hauptfestplatte" ref={buttonRefs[0]} onClick={() => wegButton(0)}/>*/}
                         {/*<WegButton text="Weg" ref={buttonRefs[1]} onClick={() => wegButton(1)}/>*/}
                         {/*<WegButton text="Zu" ref={buttonRefs[2]} onClick={() => wegButton(2)}/>*/}
                         {/*<WegButton text="Filename" ref={buttonRefs[3]} onClick={() => wegButton(3)}/>*/}

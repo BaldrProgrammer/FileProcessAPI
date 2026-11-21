@@ -6,10 +6,9 @@ import { PfadContext} from "../../context/PfadContext.js";
 function Ordner(props) {
     const aktuellPfad = useContext(PfadContext)
     function ordnerOffnen(ordnerPfad) {
-        console.log(`jetzt auf ${ordnerPfad}`)
-        props.setAktuellPfad(ordnerPfad)
+        props.setAktuellPfad(aktuellPfad+ordnerPfad)
     }
-    console.log(aktuellPfad)
+    console.log(`jetzt auf ${aktuellPfad}`)
 
     return (
         <div onClick={() => ordnerOffnen(props.args.ordnerPfad)} className="einOrdnerVerpackung">
