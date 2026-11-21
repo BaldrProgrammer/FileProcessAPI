@@ -4,13 +4,11 @@ import WegButton from "./components/WegButton/WegButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
-import { PfadContext } from "./context/PfadContext.js";
 import {useState, useRef} from 'react';
 import './App.css'
 
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
-    const [suchtext, setSuchtext] = useState("")
 
     const [ordnerListe, setOrdnerListe] = useState([
         {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
@@ -25,20 +23,6 @@ function App() {
         {id: 3, name: 'video.mp4', dateiPfad: '/video.mp4', letztAnderung: '13.11.26 01:10', grosse: 14354875},
         {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
-
-    function suchen(event) {
-        if (event.key === 'Enter') {
-            console.log(suchtext)
-        }
-    }
-
-    function pfeilButton(richtung) {
-        if (richtung === 'linke') {
-            console.log('der linke Pfeil')
-        } else if (richtung === 'rechte') {
-            console.log('der rechte Pfeil')
-        }
-    }
 
     function sortButton(name) {
         console.log(`jetzt das sortiert nach ${name}`)
@@ -65,11 +49,11 @@ function App() {
             </div>
             <div className='wegTeil'>
                 <div className='wegDiv'>
-                    <WegButton text="⏴" onClick={() => pfeilButton('linke')} welscheSeitePfeil=" LinkerPfeil"/>
+                    <WegButton text="⏴" welscheSeitePfeil=" LinkerPfeil"/>
                     {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
                         <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
                     )}
-                    <WegButton text="⏵" onClick={() => pfeilButton('rechte')} welscheSeitePfeil=" RechterPfeil"/>
+                    <WegButton text="⏵" welscheSeitePfeil=" RechterPfeil"/>
                 </div>
             </div>
             <div className="sortTeil">
