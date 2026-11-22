@@ -3,14 +3,15 @@ import {useContext} from "react";
 import {HauptContext} from "../../context/HauptContext.js";
 import './HellDunkelButton.css'
 
-function HellDunkelButton() {
+function HellDunkelButton({ setThema }) {
     const context = useContext(HauptContext)
     function modusWechseln() {
-        console.log(context)
+        setThema(context.thema === 'hell' ? 'dunkel' : 'hell')
     }
+    console.log(context.thema)
 
     return (
-        <img className='HellDunkelButton' onClick={modusWechseln} src={icon} alt='' width='50px' height='50px'/>
+        <img className={`HellDunkelButton ${context.thema === 'hell' ? 'hell' : 'dunkel'}`} onClick={modusWechseln} src={icon} alt='' width='50px' height='50px'/>
     )
 }
 

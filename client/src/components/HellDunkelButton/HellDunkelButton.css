@@ -3,7 +3,12 @@
     border-radius: 15px;
 }
 
-.HellDunkelButton:hover {
+.HellDunkelButton.hell, .HellDunkelButton.dunkel:hover {
+    background: white;
+    content: url("../../assets/dunkelthema.png");
+}
+
+.HellDunkelButton.dunkel, .HellDunkelButton.hell:hover  {
     background: black;
     content: url("../../assets/hellthema.png");
 }

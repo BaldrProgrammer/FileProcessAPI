@@ -69,9 +69,9 @@ function App() {
     ])
 
     return (
-        <HauptContext.Provider value={
+        <HauptContext.Provider value={{
             thema
-        }>
+        }}>
             <>
                 <aside className='seitenLeiste'>
                     <Logo/>
@@ -90,7 +90,7 @@ function App() {
                 <div className='oberTeil'>
                     <Suchenfeld/>
                     <div className='oberButtonsTeil'>
-                        <HellDunkelButton/>
+                        <HellDunkelButton setThema={setThema}/>
                     </div>
                 </div>
                 <div className='wegTeil'>
