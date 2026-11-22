@@ -1,6 +1,7 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
+import SortButton from "./components/SortButton/SortButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
@@ -23,10 +24,6 @@ function App() {
         {id: 3, name: 'video.mp4', dateiPfad: '/video.mp4', letztAnderung: '13.11.26 01:10', grosse: 14354875},
         {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
-
-    function sortButton(name) {
-        console.log(`jetzt das sortiert nach ${name}`)
-    }
 
     return (
         <>
@@ -57,15 +54,9 @@ function App() {
                 </div>
             </div>
             <div className="sortTeil">
-                <button className="nameSortButton" onClick={() => sortButton('Name')}>
-                    Name
-                </button>
-                <button className="anderungSortButton" onClick={() => sortButton('Änderung')}>
-                    Änderung
-                </button>
-                <button className="grosseSortButton" onClick={() => sortButton('Größe')}>
-                    Größe
-                </button>
+                <SortButton text='Name'/>
+                <SortButton text='Änderung'/>
+                <SortButton text='Größe'/>
             </div>
             <main className="dateiTeil">
                 {ordnerListe.map(ordner =>
