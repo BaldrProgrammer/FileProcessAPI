@@ -11,44 +11,6 @@ import {useState, useRef} from 'react';
 import './App.css'
 
 
-// export function App() {
-//     const [menu, setMenu] = useState(null);
-//
-//     const handleContextMenu = (e) => {
-//         e.preventDefault();
-//         setMenu({ x: e.clientX, y: e.clientY });
-//     };
-//
-//     const closeMenu = () => setMenu(null);
-//
-//     return (
-//         <div
-//             onContextMenu={handleContextMenu}
-//             onClick={closeMenu}
-//             style={{ minHeight: '300px', border: '1px solid #ccc', padding: '16px' }}
-//         >
-//             <p>Нажмите правой кнопкой мыши в этой области</p>
-//
-//             {menu && (
-//                 <div
-//                     onClick={(e) => e.stopPropagation()}
-//                     style={{
-//                         position: 'fixed',
-//                         top: menu.y,
-//                         left: menu.x,
-//                         background: '#fff',
-//                         border: '1px solid #333',
-//                         padding: '12px',
-//                         zIndex: 1000,
-//                     }}
-//                 >
-//                     <p>Окно по правому клику</p>
-//                     <button onClick={closeMenu}>Закрыть</button>
-//                 </div>
-//             )}
-//         </div>
-//     );
-// }
 
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
@@ -68,11 +30,15 @@ function App() {
         {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
 
+    function probnik() {
+        console.log('a')
+    }
+
     return (
         <HauptContext.Provider value={{
             thema
         }}>
-            <>
+            <div className='app' onClick={probnik}>
                 <aside className='seitenLeiste'>
                     <Logo/>
                     <div className="seitenButtonsTeil">
@@ -115,7 +81,7 @@ function App() {
                         <Datei args={datei} key={datei.id}/>
                     )}
                 </main>
-            </>
+            </div>
         </HauptContext.Provider>
     )
 }
