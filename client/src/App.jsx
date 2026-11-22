@@ -8,6 +8,46 @@ import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
 import {useState, useRef} from 'react';
 import './App.css'
 
+
+// export function App() {
+//     const [menu, setMenu] = useState(null);
+//
+//     const handleContextMenu = (e) => {
+//         e.preventDefault();
+//         setMenu({ x: e.clientX, y: e.clientY });
+//     };
+//
+//     const closeMenu = () => setMenu(null);
+//
+//     return (
+//         <div
+//             onContextMenu={handleContextMenu}
+//             onClick={closeMenu}
+//             style={{ minHeight: '300px', border: '1px solid #ccc', padding: '16px' }}
+//         >
+//             <p>Нажмите правой кнопкой мыши в этой области</p>
+//
+//             {menu && (
+//                 <div
+//                     onClick={(e) => e.stopPropagation()}
+//                     style={{
+//                         position: 'fixed',
+//                         top: menu.y,
+//                         left: menu.x,
+//                         background: '#fff',
+//                         border: '1px solid #333',
+//                         padding: '12px',
+//                         zIndex: 1000,
+//                     }}
+//                 >
+//                     <p>Окно по правому клику</p>
+//                     <button onClick={closeMenu}>Закрыть</button>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// }
+
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
 
