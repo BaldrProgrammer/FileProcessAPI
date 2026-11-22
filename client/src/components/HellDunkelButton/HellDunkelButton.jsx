@@ -3,6 +3,8 @@ import './HellDunkelButton.css'
 
 function HellDunkelButton() {
     return (
-        <img className='HellDunkelButton' src={icon} alt=''/>
+        <img className='HellDunkelButton' src={icon} alt='' width='50px' height='50px'/>
     )
 }
+
+export default HellDunkelButton

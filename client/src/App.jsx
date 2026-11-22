@@ -1,5 +1,6 @@
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
+import HellDunkelButton from "./components/HellDunkelButton/HellDunkelButton.jsx";
 import WegButton from "./components/WegButton/WegButton.jsx";
 import SortButton from "./components/SortButton/SortButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
@@ -84,7 +85,7 @@ function App() {
             <div className='oberTeil'>
                 <Suchenfeld/>
                 <div className='oberButtonsTeil'>
-
+                    <HellDunkelButton/>
                 </div>
             </div>
             <div className='wegTeil'>

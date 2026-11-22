@@ -35,7 +35,7 @@
 .oberButtonsTeil {
     position: absolute;
     display: flex;
-    justify-content: left;
+    justify-content: flex-end;
     top: 0;
     left: 1132px;
     width: 500px;
