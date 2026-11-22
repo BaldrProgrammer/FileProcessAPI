@@ -32,6 +32,16 @@
     width: 1632px;
 }
 
+.oberButtonsTeil {
+    position: absolute;
+    display: flex;
+    justify-content: left;
+    top: 0;
+    left: 1132px;
+    width: 500px;
+    height: 100px;
+}
+
 .wegTeil {
     position: absolute;
     top: 100px;

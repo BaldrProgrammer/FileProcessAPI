@@ -83,6 +83,9 @@ function App() {
             </aside>
             <div className='oberTeil'>
                 <Suchenfeld/>
+                <div className='oberButtonsTeil'>
+
+                </div>
             </div>
             <div className='wegTeil'>
                 <div className='wegDiv'>
