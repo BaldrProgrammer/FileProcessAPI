@@ -1,3 +1,9 @@
 .HellDunkelButton {
     margin: 25px;
+    border-radius: 15px;
+}
+
+.HellDunkelButton:hover {
+    background: black;
+    content: url("../../assets/hellmodus.png");
 }
