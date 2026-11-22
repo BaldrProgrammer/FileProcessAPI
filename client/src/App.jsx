@@ -6,6 +6,7 @@ import SortButton from "./components/SortButton/SortButton.jsx";
 import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
+import {HauptContext} from "./context/HauptContext.js";
 import {useState, useRef} from 'react';
 import './App.css'
 
@@ -51,6 +52,7 @@ import './App.css'
 
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
+    const [thema, setThema] = useState('hell')
 
     const [ordnerListe, setOrdnerListe] = useState([
         {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
@@ -67,50 +69,54 @@ function App() {
     ])
 
     return (
-        <>
-            <aside className='seitenLeiste'>
-                <Logo/>
-                <div className="seitenButtonsTeil">
-                    <SeitenButton text="Neu" istNeuButton={true}/>
-                    <SeitenButton text="Favoriten"/>
-                    <SeitenButton text="Kürzlich"/>
-                    <SeitenButton text="Geteilt"/>
-                    <SeitenButton text="Freunden"/>
-                    <SeitenButton text="Papierkorb"/>
-                </div>
-                <div className="speicherTeil">
+        <HauptContext.Provider value={
+            thema
+        }>
+            <>
+                <aside className='seitenLeiste'>
+                    <Logo/>
+                    <div className="seitenButtonsTeil">
+                        <SeitenButton text="Neu" istNeuButton={true}/>
+                        <SeitenButton text="Favoriten"/>
+                        <SeitenButton text="Kürzlich"/>
+                        <SeitenButton text="Geteilt"/>
+                        <SeitenButton text="Freunden"/>
+                        <SeitenButton text="Papierkorb"/>
+                    </div>
+                    <div className="speicherTeil">
 
+                    </div>
+                </aside>
+                <div className='oberTeil'>
+                    <Suchenfeld/>
+                    <div className='oberButtonsTeil'>
+                        <HellDunkelButton/>
+                    </div>
                 </div>
-            </aside>
-            <div className='oberTeil'>
-                <Suchenfeld/>
-                <div className='oberButtonsTeil'>
-                    <HellDunkelButton/>
+                <div className='wegTeil'>
+                    <div className='wegDiv'>
+                        <WegButton text="⏴" welscheSeitePfeil=" LinkerPfeil"/>
+                        {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
+                            <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
+                        )}
+                        <WegButton text="⏵" welscheSeitePfeil=" RechterPfeil"/>
+                    </div>
                 </div>
-            </div>
-            <div className='wegTeil'>
-                <div className='wegDiv'>
-                    <WegButton text="⏴" welscheSeitePfeil=" LinkerPfeil"/>
-                    {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
-                        <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
+                <div className="sortTeil">
+                    <SortButton text='Name'/>
+                    <SortButton text='Änderung'/>
+                    <SortButton text='Größe'/>
+                </div>
+                <main className="dateiTeil">
+                    {ordnerListe.map(ordner =>
+                        <Ordner args={ordner} setAktuellPfad={setAktuellPfad} key={ordner.id}/>
                     )}
-                    <WegButton text="⏵" welscheSeitePfeil=" RechterPfeil"/>
-                </div>
-            </div>
-            <div className="sortTeil">
-                <SortButton text='Name'/>
-                <SortButton text='Änderung'/>
-                <SortButton text='Größe'/>
-            </div>
-            <main className="dateiTeil">
-                {ordnerListe.map(ordner =>
-                    <Ordner args={ordner} setAktuellPfad={setAktuellPfad} key={ordner.id}/>
-                )}
-                {dateiListe.map(datei =>
-                    <Datei args={datei} key={datei.id}/>
-                )}
-            </main>
-        </>
+                    {dateiListe.map(datei =>
+                        <Datei args={datei} key={datei.id}/>
+                    )}
+                </main>
+            </>
+        </HauptContext.Provider>
     )
 }
 
