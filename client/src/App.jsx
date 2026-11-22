@@ -42,7 +42,7 @@ function App() {
                 </div>
             </aside>
             <div className='oberTeil'>
-                <Suchenfeld beiTasteDruecken={(e) => suchen(e)} beiAenderung={(e) => setSuchtext(e.target.value)}/>
+                <Suchenfeld/>
             </div>
             <div className='wegTeil'>
                 <div className='wegDiv'>
