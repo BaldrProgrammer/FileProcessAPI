@@ -7,7 +7,7 @@ function Ordner(props) {
     }
 
     return (
-        <div onClick={() => ordnerOffnen(props.args.ordnerPfad)} className="einOrdnerVerpackung">
+        <div className="einOrdnerVerpackung" onContextMenu={props.handleContextMenu} onClick={() => ordnerOffnen(props.args.ordnerPfad)}>
             <div className="einOrdner">
                 <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='ordnerName'>{props.args.name}</p>

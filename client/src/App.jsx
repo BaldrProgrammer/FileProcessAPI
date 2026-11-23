@@ -43,7 +43,7 @@ function App() {
         <HauptContext.Provider value={{
             thema, menu
         }}>
-            <div className='app' onContextMenu={handleContextMenu} onClick={closeMenu}>
+            <div className='app' onClick={closeMenu}>
                 {menu && (
                     <OrdnerContextMenu closeMenu={closeMenu}/>
                 )}
@@ -83,10 +83,10 @@ function App() {
                 </div>
                 <main className="dateiTeil">
                     {ordnerListe.map(ordner =>
-                        <Ordner args={ordner} setAktuellPfad={setAktuellPfad} key={ordner.id}/>
+                        <Ordner args={ordner} setAktuellPfad={setAktuellPfad} handleContextMenu={handleContextMenu} key={ordner.id}/>
                     )}
                     {dateiListe.map(datei =>
-                        <Datei args={datei} key={datei.id}/>
+                        <Datei args={datei} handleContextMenu={handleContextMenu} key={datei.id}/>
                     )}
                 </main>
             </div>
