@@ -16,6 +16,7 @@ import './App.css'
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
     const [thema, setThema] = useState('hell')
+    const [menu, setMenu] = useState(null);
 
     const [ordnerListe, setOrdnerListe] = useState([
         {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
@@ -31,8 +32,6 @@ function App() {
         {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
 
-    const [menu, setMenu] = useState(null);
-
     const handleContextMenu = (e) => {
         e.preventDefault();
         setMenu({ x: e.clientX, y: e.clientY });
@@ -40,17 +39,13 @@ function App() {
 
     const closeMenu = () => setMenu(null);
 
-    function probnik() {
-        console.log('a')
-    }
-
     return (
         <HauptContext.Provider value={{
             thema, menu
         }}>
             <div className='app' onContextMenu={handleContextMenu} onClick={closeMenu}>
                 {menu && (
-                    <OrdnerContextMenu/>
+                    <OrdnerContextMenu closeMenu={closeMenu}/>
                 )}
                 <aside className='seitenLeiste'>
                     <Logo/>

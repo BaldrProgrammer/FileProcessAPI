@@ -8,7 +8,6 @@ function HellDunkelButton({ setThema }) {
     function modusWechseln() {
         setThema(context.thema === 'hell' ? 'dunkel' : 'hell')
     }
-    console.log(context.thema)
 
     return (
         <img className={`HellDunkelButton ${context.thema === 'hell' ? 'hell' : 'dunkel'}`} onClick={modusWechseln} src={icon} alt='' width='50px' height='50px'/>
