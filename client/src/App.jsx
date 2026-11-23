@@ -1,3 +1,4 @@
+import {OrdnerContextMenu} from "./components/OrdnerContextMenu/OrdnerContextMenu.jsx";
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import HellDunkelButton from "./components/HellDunkelButton/HellDunkelButton.jsx";
@@ -30,15 +31,27 @@ function App() {
         {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
 
+    const [menu, setMenu] = useState(null);
+
+    const handleContextMenu = (e) => {
+        e.preventDefault();
+        setMenu({ x: e.clientX, y: e.clientY });
+    };
+
+    const closeMenu = () => setMenu(null);
+
     function probnik() {
         console.log('a')
     }
 
     return (
         <HauptContext.Provider value={{
-            thema
+            thema, menu
         }}>
-            <div className='app' onClick={probnik}>
+            <div className='app' onContextMenu={handleContextMenu} onClick={closeMenu}>
+                {menu && (
+                    <OrdnerContextMenu/>
+                )}
                 <aside className='seitenLeiste'>
                     <Logo/>
                     <div className="seitenButtonsTeil">
