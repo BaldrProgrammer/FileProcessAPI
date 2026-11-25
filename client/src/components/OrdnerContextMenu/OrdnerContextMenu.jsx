@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import {HauptContext} from "../../context/HauptContext.js";
+import ContextMenuItem from '../ContextMenuItem/ContextMenuItem.jsx'
 import './OrdnerContextMenu.css'
 
 export function OrdnerContextMenu(props) {
@@ -7,8 +8,10 @@ export function OrdnerContextMenu(props) {
 
     return (
         <div className='ContextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {e.stopPropagation(); props.closeMenu();}}>
-            <p>Окно по правому клику</p>
-            <button>Закрыть</button>
+            <ContextMenuItem text='copy'/>
+            <ContextMenuItem text='copy'/>
+            <ContextMenuItem text='copy'/>
+            <ContextMenuItem text='copy'/>
         </div>
     );
 }

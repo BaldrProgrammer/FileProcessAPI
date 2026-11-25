@@ -1,6 +1,6 @@
-import './ContextMenuButton.css'
+import './ContextMenuItem.css'
 
-function ContextMenuButton(props) {
+function ContextMenuItem(props) {
     return (
         <button className='ContextMenuButton'>
             {props.text}
@@ -8,4 +8,4 @@ function ContextMenuButton(props) {
     )
 }
 
-export default ContextMenuButton
+export default ContextMenuItem
