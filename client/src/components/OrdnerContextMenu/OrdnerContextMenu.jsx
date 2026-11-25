@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {HauptContext} from "../../context/HauptContext.js";
-import ContextMenuItem from '../ContextMenuItem/ContextMenuItem.jsx'
+import ContextMenuPunkt from '../ContextMenuPunkt/ContextMenuPunkt.jsx'
 import './OrdnerContextMenu.css'
 
 export function OrdnerContextMenu(props) {
@@ -8,16 +8,16 @@ export function OrdnerContextMenu(props) {
 
     return (
         <div className='ContextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {e.stopPropagation(); props.closeMenu();}}>
-            <ContextMenuItem text='Herunterladen'/>
-            <ContextMenuItem text='geteilen'/>
+            <ContextMenuPunkt text='Herunterladen'/>
+            <ContextMenuPunkt text='geteilen'/>
             <hr/>
-            <ContextMenuItem text='Umbenennen'/>
-            <ContextMenuItem text='kopieren'/>
-            <ContextMenuItem text='einfügen'/>
-            <ContextMenuItem text='ausschneiden'/>
+            <ContextMenuPunkt text='Umbenennen'/>
+            <ContextMenuPunkt text='kopieren'/>
+            <ContextMenuPunkt text='einfügen'/>
+            <ContextMenuPunkt text='ausschneiden'/>
             <hr/>
-            <ContextMenuItem text='Eigenschaften'/>
-            <ContextMenuItem text='löschen'/>
+            <ContextMenuPunkt text='Eigenschaften'/>
+            <ContextMenuPunkt text='löschen'/>
         </div>
     );
 }
