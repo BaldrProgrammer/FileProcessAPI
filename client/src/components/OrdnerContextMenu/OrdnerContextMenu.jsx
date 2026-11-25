@@ -9,10 +9,15 @@ export function OrdnerContextMenu(props) {
     return (
         <div className='ContextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {e.stopPropagation(); props.closeMenu();}}>
             <ContextMenuItem text='Herunterladen'/>
-            <ContextMenuItem text='Umbenennen'/>
+            <ContextMenuItem text='geteilen'/>
             <hr/>
-            <ContextMenuItem text='copy'/>
-            <ContextMenuItem text='copy'/>
+            <ContextMenuItem text='Umbenennen'/>
+            <ContextMenuItem text='kopieren'/>
+            <ContextMenuItem text='einfügen'/>
+            <ContextMenuItem text='ausschneiden'/>
+            <hr/>
+            <ContextMenuItem text='Eigenschaften'/>
+            <ContextMenuItem text='löschen'/>
         </div>
     );
 }
