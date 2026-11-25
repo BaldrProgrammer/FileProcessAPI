@@ -1,8 +1,8 @@
 import './Datei.css'
-import abbildungIcon from '../../assets/dateiBildIcon.png'
-import audioIcon from '../../assets/dateiAudioIcon.png'
-import videoIcon from '../../assets/dateiVideoIcon.png'
-import textIcon from '../../assets/dateiTextIcon.png'
+import abbildungIcon from '../../assets/dateiIcon/dateiIconBild.png'
+import audioIcon from '../../assets/dateiIcon/dateiIconAudio.png'
+import videoIcon from '../../assets/dateiIcon/dateiIconVideo.png'
+import textIcon from '../../assets/dateiIcon/dateiIconText.png'
 
 const DATEIENDUNGEN_UND_ICONS = {
     txt: textIcon,

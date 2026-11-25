@@ -1,5 +1,5 @@
 import './Ordner.css'
-import icon from '../../assets/ordnerIcon.png'
+import icon from '../../assets/dateiIcon/ordnerIcon.png'
 
 function Ordner(props) {
     function ordnerOffnen(ordnerPfad) {

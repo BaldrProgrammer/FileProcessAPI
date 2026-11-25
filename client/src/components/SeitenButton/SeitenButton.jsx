@@ -1,10 +1,10 @@
 import './SeitenButton.css'
-import neuIcon from '../../assets/buttonNeuIcon.png'
-import favoritenIcon from '../../assets/buttonFavoritenIcon.png'
-import kurzlichIcon from '../../assets/buttonKurzlichIcon.png'
-import geteiltIcon from '../../assets/buttonGeteiltIcon.png'
-import freundeIcon from '../../assets/buttonFreundenIcon.png'
-import papierkorbIcon from '../../assets/buttonPapierkorbIcon.png'
+import neuIcon from '../../assets/seitenButtonIcon/seitenButtonIconNeu.png'
+import favoritenIcon from '../../assets/seitenButtonIcon/seitenButtonIconFavoriten.png'
+import kurzlichIcon from '../../assets/seitenButtonIcon/seitenButtonIconKurzlich.png'
+import geteiltIcon from '../../assets/seitenButtonIcon/seitenButtonIconGeteilt.png'
+import freundeIcon from '../../assets/seitenButtonIcon/seitenButtonIconFreunden.png'
+import papierkorbIcon from '../../assets/seitenButtonIcon/seitenButtonIconPapierkorb.png'
 
 const BUTTONS_UND_ICONS = {
     Neu: neuIcon,
