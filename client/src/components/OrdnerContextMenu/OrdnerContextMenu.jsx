@@ -8,8 +8,9 @@ export function OrdnerContextMenu(props) {
 
     return (
         <div className='ContextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {e.stopPropagation(); props.closeMenu();}}>
-            <ContextMenuItem text='copy'/>
-            <ContextMenuItem text='copy'/>
+            <ContextMenuItem text='Herunterladen'/>
+            <ContextMenuItem text='Umbenennen'/>
+            <hr/>
             <ContextMenuItem text='copy'/>
             <ContextMenuItem text='copy'/>
         </div>

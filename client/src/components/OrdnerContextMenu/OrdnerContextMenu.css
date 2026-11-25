@@ -1,7 +1,15 @@
 .ContextMenu {
     position: absolute;
     display: flex;
+    flex-wrap: wrap;
     padding: 12px 0;
-    background: rgb(55, 55, 55);
+    width: 300px;
+    background: rgb(155, 155, 155);
     z-index: 1000;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    width: 300px;
 }
