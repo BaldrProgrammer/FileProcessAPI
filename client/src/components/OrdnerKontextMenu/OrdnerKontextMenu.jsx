@@ -1,23 +1,35 @@
 import {useContext} from "react";
 import {HauptContext} from "../../context/HauptContext.js";
-import { KontextMenuPunkt, HerunterladenPunkt} from '../KontextMenuPunkt/KontextMenuPunkt.jsx'
+import {
+    HerunterladenPunkt,
+    TeilenPunkt,
+    UmbenennenPunkt,
+    KopierenPunkt,
+    EinfugenPunkt,
+    AusschneidenPunkt,
+    EigenschaftenPunkt,
+    LoschenPunkt
+} from '../KontextMenuPunkt/KontextMenuPunkt.jsx'
 import './OrdnerKontextMenu.css'
 
 function OrdnerKontextMenu(props) {
     const context = useContext(HauptContext)
 
     return (
-        <div className='KontextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {e.stopPropagation(); props.closeMenu();}}>
+        <div className='KontextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {
+            e.stopPropagation();
+            props.closeMenu();
+        }}>
             <HerunterladenPunkt/>
-            <KontextMenuPunkt text='Teilen'/>
+            <TeilenPunkt/>
             <hr/>
-            <KontextMenuPunkt text='Umbenennen'/>
-            <KontextMenuPunkt text='Kopieren'/>
-            <KontextMenuPunkt text='Einfügen'/>
-            <KontextMenuPunkt text='Ausschneiden'/>
+            <UmbenennenPunkt/>
+            <KopierenPunkt/>
+            <EinfugenPunkt/>
+            <AusschneidenPunkt/>
             <hr/>
-            <KontextMenuPunkt text='Eigenschaften'/>
-            <KontextMenuPunkt text='Löschen'/>
+            <EigenschaftenPunkt/>
+            <LoschenPunkt/>
         </div>
     );
 }

@@ -24,7 +24,7 @@ function KontextMenuPunkt(props) {
 
     return (
         <button className='KontextMenuPunkt' onClick={props.onClick}>
-            <img src={BUTTONS_UND_ICONS[iconSchlussel]} alt='gfd,' width='30px'/>
+            <img src={BUTTONS_UND_ICONS[iconSchlussel]} alt='' width='30px'/>
             {props.text}
         </button>
     )
@@ -40,4 +40,83 @@ function HerunterladenPunkt() {
     )
 }
 
-export { KontextMenuPunkt, HerunterladenPunkt }
+function TeilenPunkt() {
+    function teilen() {
+        console.log('TeilenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Teilen' onClick={teilen}/>
+    )
+}
+
+function UmbenennenPunkt() {
+    function umbenennen() {
+        console.log('UmbenennenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Umbenennen' onClick={umbenennen}/>
+    )
+}
+
+function KopierenPunkt() {
+    function kopieren() {
+        console.log('KopierenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Kopieren' onClick={kopieren}/>
+    )
+}
+
+function EinfugenPunkt() {
+    function einfugen() {
+        console.log('EinfugenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Einfügen' onClick={einfugen}/>
+    )
+}
+
+function AusschneidenPunkt() {
+    function ausschneiden() {
+        console.log('AusschneidenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Ausschneiden' onClick={ausschneiden}/>
+    )
+}
+
+function EigenschaftenPunkt() {
+    function eigenschaften() {
+        console.log('EigenschaftenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Eigenschaften' onClick={eigenschaften}/>
+    )
+}
+
+function LoschenPunkt() {
+    function loschen() {
+        console.log('LoschenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Löschen' onClick={loschen}/>
+    )
+}
+
+export {
+    HerunterladenPunkt,
+    TeilenPunkt,
+    UmbenennenPunkt,
+    KopierenPunkt,
+    EinfugenPunkt,
+    AusschneidenPunkt,
+    EigenschaftenPunkt,
+    LoschenPunkt
+}
