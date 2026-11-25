@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {HauptContext} from "../../context/HauptContext.js";
-import KontextMenuPunkt from '../KontextMenuPunkt/KontextMenuPunkt.jsx'
+import { KontextMenuPunkt, HerunterladenPunkt} from '../KontextMenuPunkt/KontextMenuPunkt.jsx'
 import './OrdnerKontextMenu.css'
 
 function OrdnerKontextMenu(props) {
@@ -8,7 +8,7 @@ function OrdnerKontextMenu(props) {
 
     return (
         <div className='KontextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {e.stopPropagation(); props.closeMenu();}}>
-            <KontextMenuPunkt text='Herunterladen'/>
+            <HerunterladenPunkt/>
             <KontextMenuPunkt text='Teilen'/>
             <hr/>
             <KontextMenuPunkt text='Umbenennen'/>

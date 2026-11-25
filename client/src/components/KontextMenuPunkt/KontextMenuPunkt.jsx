@@ -30,4 +30,14 @@ function KontextMenuPunkt(props) {
     )
 }
 
-export default KontextMenuPunkt
+function HerunterladenPunkt() {
+    function herunterladen() {
+        console.log('HerunterladenPunkt')
+    }
+
+    return (
+        <KontextMenuPunkt text='Herunterladen' onClick={herunterladen}/>
+    )
+}
+
+export { KontextMenuPunkt, HerunterladenPunkt }
