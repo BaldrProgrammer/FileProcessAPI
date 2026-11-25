@@ -1,4 +1,4 @@
-.ContextMenuPunkt {
+.KontextMenuPunkt {
     display: flex;
     align-items: center;
     color: white;
@@ -10,10 +10,10 @@
     background: rgb(55, 55, 55);
 }
 
-.ContextMenuPunkt img {
+.KontextMenuPunkt img {
     margin: 0 10px;
 }
 
-.ContextMenuPunkt:hover {
+.KontextMenuPunkt:hover {
     background: rgb(155, 155, 155);
 }

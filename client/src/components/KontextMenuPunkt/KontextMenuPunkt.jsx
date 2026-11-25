@@ -1,4 +1,4 @@
-import './ContextMenuPunkt.css'
+import './KontextMenuPunkt.css'
 import herunterladenIcon from '../../assets/punktIcon/punktIconHerunterladen.png'
 import teilenIcon from '../../assets/punktIcon/punktIconTeilen.png'
 import umbenennenIcon from '../../assets/punktIcon/punktIconUmbenennen.png'
@@ -19,13 +19,15 @@ const BUTTONS_UND_ICONS = {
     Loschen: loschenIcon
 }
 
-function ContextMenuPunkt(props) {
+function KontextMenuPunkt(props) {
+    let iconSchlussel = props.text.replace('ü', 'u').replace('ö', 'o')
+
     return (
-        <button className='ContextMenuPunkt'>
-            <img src={BUTTONS_UND_ICONS[props.text.replace('ü', 'u').replace('ö', 'o')]} alt='gfd,' width='30px'/>
+        <button className='KontextMenuPunkt' onClick={props.onClick}>
+            <img src={BUTTONS_UND_ICONS[iconSchlussel]} alt='gfd,' width='30px'/>
             {props.text}
         </button>
     )
 }
 
-export default ContextMenuPunkt
+export default KontextMenuPunkt
