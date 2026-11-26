@@ -1,13 +1,8 @@
 import './Ordner.css'
-import {useState, useContext} from 'react';
-import {HauptContext} from "../../context/HauptContext.js";
 import icon from '../../assets/dateiIcon/ordnerIcon.png'
 
 function Ordner(props) {
-    const context = useContext(HauptContext)
-
     function ordnerOffnen(ordnerPfad) {
-        console.log(props.ref.current)
         props.setAktuellPfad(ordnerPfad)
     }
 

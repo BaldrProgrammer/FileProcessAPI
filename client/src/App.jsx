@@ -10,7 +10,6 @@ import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
 import {HauptContext} from "./context/HauptContext.js";
 import { useState, useRef } from 'react';
 import './App.css'
-import {node} from "globals";
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
 
-    const [ausgewahlt, setAusgewahlt] = useState(null)
+    const [ausgewahlt, setAusgewahlt] = useState([])
 
     const ordnerRef = useRef(new Map())
     const dateiRef = useRef(new Map())
@@ -46,7 +45,7 @@ function App() {
 
     return (
         <HauptContext.Provider value={{
-            thema, menu, ordnerRef
+            thema, menu
         }}>
             <div className='app' onClick={closeMenu}>
                 {menu && (
