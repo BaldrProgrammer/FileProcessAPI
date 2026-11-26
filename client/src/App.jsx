@@ -8,16 +8,17 @@ import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
 import {HauptContext} from "./context/HauptContext.js";
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import './App.css'
-
 
 
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("")
-    const [ausgewahlt, setAusgewahlt] = useState()
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
+
+    const ordnerRef = useRef(new Map())
+    const dateiRef = useRef(new Map())
 
     const [ordnerListe, setOrdnerListe] = useState([
         {id: 1, name: 'Austria', ordnerPfad: '/Austria', letztAnderung: '01.10.26 01:23'},
@@ -84,7 +85,18 @@ function App() {
                 </div>
                 <main className="dateiTeil">
                     {ordnerListe.map(ordner =>
-                        <Ordner args={ordner} setAktuellPfad={setAktuellPfad} handleContextMenu={handleContextMenu} key={ordner.id}/>
+                        <Ordner
+                            key={ordner.id}
+                            ref={(elemente) => {
+                                if (elemente) {
+                                    ordnerRef.current.set(ordner.id, elemente)
+                                } else {
+                                    ordnerRef.current.delete(ordner.id)
+                                }
+                            }}
+                            args={ordner}
+                            setAktuellPfad={setAktuellPfad}
+                            handleContextMenu={handleContextMenu}/>
                     )}
                     {dateiListe.map(datei =>
                         <Datei args={datei} handleContextMenu={handleContextMenu} key={datei.id}/>
