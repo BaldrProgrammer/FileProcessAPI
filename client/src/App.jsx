@@ -10,12 +10,15 @@ import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
 import {HauptContext} from "./context/HauptContext.js";
 import { useState, useRef } from 'react';
 import './App.css'
+import {node} from "globals";
 
 
 function App() {
     const [aktuellPfad, setAktuellPfad] = useState("")
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
+
+    const [ausgewahlt, setAusgewahlt] = useState(null)
 
     const ordnerRef = useRef(new Map())
     const dateiRef = useRef(new Map())
@@ -43,7 +46,7 @@ function App() {
 
     return (
         <HauptContext.Provider value={{
-            thema, menu
+            thema, menu, ordnerRef
         }}>
             <div className='app' onClick={closeMenu}>
                 {menu && (
@@ -103,9 +106,9 @@ function App() {
                             key={datei.id}
                             ref={(elemente) => {
                                 if (elemente) {
-                                    ordnerRef.current.set(datei.id, elemente)
+                                    dateiRef.current.set(datei.id, elemente)
                                 } else {
-                                    ordnerRef.current.delete(datei.id)
+                                    dateiRef.current.delete(datei.id)
                                 }
                             }}
                             args={datei}
