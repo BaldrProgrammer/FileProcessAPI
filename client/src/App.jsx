@@ -18,7 +18,6 @@ function App() {
     const [menu, setMenu] = useState(null);
 
     const [ausgewahlt, setAusgewahlt] = useState([])
-    console.log(ausgewahlt)
 
     const ordnerRef = useRef(new Map())
     const dateiRef = useRef(new Map())

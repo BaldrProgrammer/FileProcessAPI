@@ -3,13 +3,17 @@
     height: 50px;
 }
 
+.einOrdnerVerpackung:hover {
+    background: rgb(245, 245, 245);
+}
+
+.einOrdnerVerpackung.ausgewahlt {
+    background: rgb(225, 225, 225);
+}
+
 .einOrdner {
     position: absolute;
     height: 50px;
-}
-
-.einOrdnerVerpackung:hover {
-    background: rgb(245, 245, 245);
 }
 
 .einOrdner::after {

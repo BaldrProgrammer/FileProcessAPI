@@ -15,7 +15,7 @@ function Ordner(props) {
     }
 
     return (
-        <div className="einOrdnerVerpackung" ref={props.ref} onContextMenu={props.handleContextMenu} onClick={ordnerWahlen} onDoubleClick={() => ordnerOffnen(props.args.ordnerPfad)}>
+        <div className={`einOrdnerVerpackung ${context.ausgewahlt[0] === props.args.id ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={ordnerWahlen} onDoubleClick={() => ordnerOffnen(props.args.ordnerPfad)}>
             <div className="einOrdner">
                 <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='ordnerName'>{props.args.name}</p>
