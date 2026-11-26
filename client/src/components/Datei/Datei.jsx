@@ -52,7 +52,7 @@ function Datei(props) {
 
 
     return (
-        <div  className="dateiVerpackung" onContextMenu={props.handleContextMenu} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
+        <div  className="dateiVerpackung" ref={props.ref} onContextMenu={props.handleContextMenu} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
             <div className="datei">
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{props.args.name}</p>

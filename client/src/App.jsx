@@ -99,7 +99,17 @@ function App() {
                             handleContextMenu={handleContextMenu}/>
                     )}
                     {dateiListe.map(datei =>
-                        <Datei args={datei} handleContextMenu={handleContextMenu} key={datei.id}/>
+                        <Datei
+                            key={datei.id}
+                            ref={(elemente) => {
+                                if (elemente) {
+                                    ordnerRef.current.set(datei.id, elemente)
+                                } else {
+                                    ordnerRef.current.delete(datei.id)
+                                }
+                            }}
+                            args={datei}
+                            handleContextMenu={handleContextMenu}/>
                     )}
                 </main>
             </div>
