@@ -14,7 +14,8 @@ import './App.css'
 
 
 function App() {
-    const [aktuellPfad, setAktuellPfad] = useState("/Hauptfestplatte")
+    const [aktuellPfad, setAktuellPfad] = useState("")
+    const [ausgewahlt, setAusgewahlt] = useState()
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
 
