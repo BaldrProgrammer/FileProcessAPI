@@ -13,6 +13,8 @@ import './App.css'
 
 
 function App() {
+    const [istCtrl, setIstCtrl] = useState(false)
+
     const [aktuellPfad, setAktuellPfad] = useState("")
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
@@ -36,12 +38,18 @@ function App() {
         {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
 
-    const handleContextMenu = (e) => {
+    function handleContextMenu(e) {
         e.preventDefault();
         setMenu({ x: e.clientX, y: e.clientY });
-    };
+    }
 
-    const closeMenu = () => setMenu(null);
+    function closeMenu () {
+        setMenu(null);
+    }
+
+    function handleKeyPress(e) {
+
+    }
 
     return (
         <HauptContext.Provider value={{
