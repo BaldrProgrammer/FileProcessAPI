@@ -55,7 +55,7 @@ function App() {
         }}>
             <div className='app' onClick={appOnClick}>
                 {menu && (
-                    <OrdnerDateiKontextMenu closeMenu={closeMenu}/>
+                    <OrdnerDateiKontextMenu closeMenu={setMenu(null)}/>
                 )}
                 <aside className='seitenLeiste'>
                     <Logo/>
