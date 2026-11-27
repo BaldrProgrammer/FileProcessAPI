@@ -10,9 +10,9 @@ import {
     EigenschaftenPunkt,
     LoschenPunkt
 } from '../KontextMenuPunkt/KontextMenuPunkt.jsx'
-import './OrdnerKontextMenu.css'
+import './OrdnerDateiKontextMenu.css'
 
-function OrdnerKontextMenu(props) {
+function OrdnerDateiKontextMenu(props) {
     const context = useContext(HauptContext)
 
     return (
@@ -34,4 +34,4 @@ function OrdnerKontextMenu(props) {
     );
 }
 
-export default OrdnerKontextMenu
+export default OrdnerDateiKontextMenu

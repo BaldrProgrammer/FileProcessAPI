@@ -1,4 +1,4 @@
-import OrdnerKontextMenu from "./components/OrdnerKontextMenu/OrdnerKontextMenu.jsx";
+import OrdnerDateiKontextMenu from "./components/OrdnerDateiKontextMenu/OrdnerDateiKontextMenu.jsx";
 import Logo from './components/Logo/Logo.jsx'
 import Suchenfeld from "./components/Suchenfeld/Suchenfeld.jsx";
 import HellDunkelButton from "./components/HellDunkelButton/HellDunkelButton.jsx";
@@ -52,7 +52,7 @@ function App() {
         }}>
             <div className='app' onClick={closeMenu}>
                 {menu && (
-                    <OrdnerKontextMenu closeMenu={closeMenu}/>
+                    <OrdnerDateiKontextMenu closeMenu={closeMenu}/>
                 )}
                 <aside className='seitenLeiste'>
                     <Logo/>
