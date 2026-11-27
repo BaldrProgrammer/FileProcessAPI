@@ -51,6 +51,7 @@ function Datei(props) {
     }
 
     function dateiWahlen(e) {
+        e.stopPropagation();
         if (e.ctrlKey || e.metaKey) {
             props.setDateienAusgewahlt([...context.dateienAusgewahlt, props.args.id])
         } else {

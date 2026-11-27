@@ -7,7 +7,7 @@ function Ordner(props) {
     const context = useContext(HauptContext)
 
     function ordnerWahlen(e) {
-        console.log(e.ctrlKey, context.ordnernAusgewahlt)
+        e.stopPropagation();
         if (e.ctrlKey || e.metaKey) {
             props.setOrdnernAusgewahlt([...context.ordnernAusgewahlt, props.args.id])
         } else {

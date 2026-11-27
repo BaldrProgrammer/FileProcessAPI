@@ -42,7 +42,10 @@ function App() {
         setMenu({x: e.clientX, y: e.clientY});
     }
 
-    function closeMenu() {
+    function appOnClick() {
+        setOrdnernAusgewahlt([])
+        setDateienAusgewahlt([])
+
         setMenu(null);
     }
 
@@ -50,7 +53,7 @@ function App() {
         <HauptContext.Provider value={{
             thema, menu, ordnernAusgewahlt, dateienAusgewahlt
         }}>
-            <div className='app' onClick={closeMenu}>
+            <div className='app' onClick={appOnClick}>
                 {menu && (
                     <OrdnerDateiKontextMenu closeMenu={closeMenu}/>
                 )}
