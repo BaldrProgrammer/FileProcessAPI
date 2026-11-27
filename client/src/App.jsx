@@ -30,10 +30,10 @@ function App() {
     ])
 
     const [dateiListe, setDateiListe] = useState([
-        {id: 1, name: 'photo.jpg', dateiPfad: '/photo.jpg', letztAnderung: '10.11.26 22:23', grosse: 5784},
-        {id: 2, name: 'audio.mp3', dateiPfad: '/audio.mp3', letztAnderung: '13.11.26 00:49', grosse: 2334875},
-        {id: 3, name: 'video.mp4', dateiPfad: '/video.mp4', letztAnderung: '13.11.26 01:10', grosse: 14354875},
-        {id: 4, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
+        {id: 5, name: 'photo.jpg', dateiPfad: '/photo.jpg', letztAnderung: '10.11.26 22:23', grosse: 5784},
+        {id: 6, name: 'audio.mp3', dateiPfad: '/audio.mp3', letztAnderung: '13.11.26 00:49', grosse: 2334875},
+        {id: 7, name: 'video.mp4', dateiPfad: '/video.mp4', letztAnderung: '13.11.26 01:10', grosse: 14354875},
+        {id: 8, name: 'text.txt', dateiPfad: '/text.txt', letztAnderung: '13.11.26 00:08', grosse: 154},
     ])
 
     function handleContextMenu(e) {
@@ -116,6 +116,7 @@ function App() {
                                 }
                             }}
                             args={datei}
+                            setAusgewahlt={setAusgewahlt}
                             handleContextMenu={handleContextMenu}/>
                     )}
                 </main>

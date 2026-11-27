@@ -1,3 +1,5 @@
+import {useContext} from "react";
+import {HauptContext} from "../../context/HauptContext.js";
 import './Datei.css'
 import abbildungIcon from '../../assets/dateiIcon/dateiIconBild.png'
 import audioIcon from '../../assets/dateiIcon/dateiIconAudio.png'
@@ -25,6 +27,8 @@ const DATEIENDUNGEN_UND_ICONS = {
 }
 
 function Datei(props) {
+    const context = useContext(HauptContext)
+
     let MfI = 'B'
     if (props.args.grosse >= 1000) {
         MfI = 'KB'
@@ -48,9 +52,9 @@ function Datei(props) {
 
     function dateiWahlen(e) {
         if (e.ctrlKey || e.metaKey) {
-            console.log('mit ctrl')
+            props.setAusgewahlt([...context.ausgewahlt, props.args.id])
         } else {
-            console.log('ohne ctrl')
+            props.setAusgewahlt([props.args.id])
         }
     }
 
@@ -60,7 +64,7 @@ function Datei(props) {
 
 
     return (
-        <div  className="dateiVerpackung " ref={props.ref} onContextMenu={props.handleContextMenu} onClick={dateiWahlen} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
+        <div  className={`dateiVerpackung ${context.ausgewahlt.includes(props.args.id) ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={dateiWahlen} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
             <div className="datei">
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{props.args.name}</p>
