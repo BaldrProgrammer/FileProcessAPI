@@ -46,13 +46,21 @@ function Datei(props) {
         icon = textIcon
     }
 
+    function dateiWahlen(e) {
+        if (e.ctrlKey || e.metaKey) {
+            console.log('mit ctrl')
+        } else {
+            console.log('ohne ctrl')
+        }
+    }
+
     function dateiOffnen(dateiPfad) {
         console.log(`${dateiPfad} öffnet sich`)
     }
 
 
     return (
-        <div  className="dateiVerpackung" ref={props.ref} onContextMenu={props.handleContextMenu} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
+        <div  className="dateiVerpackung " ref={props.ref} onContextMenu={props.handleContextMenu} onClick={dateiWahlen} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
             <div className="datei">
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{props.args.name}</p>

@@ -3,13 +3,17 @@
     height: 50px;
 }
 
+.dateiVerpackung:hover {
+    background: rgb(245, 245, 245);
+}
+
+.dateiVerpackung.ausgewahlt {
+    background: rgb(235, 235, 235);
+}
+
 .datei {
     position: absolute;
     height: 50px;
-}
-
-.dateiVerpackung:hover {
-    background: rgb(245, 245, 245);
 }
 
 .datei::after {

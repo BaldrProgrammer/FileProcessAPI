@@ -13,8 +13,6 @@ import './App.css'
 
 
 function App() {
-    const [istCtrl, setIstCtrl] = useState(false)
-
     const [aktuellPfad, setAktuellPfad] = useState("")
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
@@ -46,7 +44,7 @@ function App() {
     function closeMenu() {
         setMenu(null);
     }
-    
+
     return (
         <HauptContext.Provider value={{
             thema, menu, ausgewahlt
