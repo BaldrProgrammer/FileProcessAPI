@@ -6,8 +6,13 @@ import icon from '../../assets/dateiIcon/ordnerIcon.png'
 function Ordner(props) {
     const context = useContext(HauptContext)
 
-    function ordnerWahlen() {
-        props.setAusgewahlt([props.args.id])
+    function ordnerWahlen(e) {
+        console.log(e.ctrlKey, context.ausgewahlt)
+        if (e.ctrlKey || e.metaKey) {
+            props.setAusgewahlt([...context.ausgewahlt, props.args.id])
+        } else {
+            props.setAusgewahlt([props.args.id])
+        }
     }
 
     function ordnerOffnen(ordnerPfad) {
@@ -15,7 +20,7 @@ function Ordner(props) {
     }
 
     return (
-        <div className={`einOrdnerVerpackung ${context.ausgewahlt[0] === props.args.id ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={ordnerWahlen} onDoubleClick={() => ordnerOffnen(props.args.ordnerPfad)}>
+        <div className={`einOrdnerVerpackung ${context.ausgewahlt.includes(props.args.id) ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={ordnerWahlen} onDoubleClick={() => ordnerOffnen(props.args.ordnerPfad)}>
             <div className="einOrdner">
                 <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='ordnerName'>{props.args.name}</p>

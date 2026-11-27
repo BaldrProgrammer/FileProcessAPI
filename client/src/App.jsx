@@ -8,7 +8,7 @@ import Ordner from "./components/Ordner/Ordner.jsx";
 import Datei from "./components/Datei/Datei.jsx";
 import SeitenButton from "./components/SeitenButton/SeitenButton.jsx";
 import {HauptContext} from "./context/HauptContext.js";
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect, useRef} from 'react';
 import './App.css'
 
 
@@ -40,39 +40,13 @@ function App() {
 
     function handleContextMenu(e) {
         e.preventDefault();
-        setMenu({ x: e.clientX, y: e.clientY });
+        setMenu({x: e.clientX, y: e.clientY});
     }
 
-    function closeMenu () {
+    function closeMenu() {
         setMenu(null);
     }
-
-    function handleKeyDown(e) {
-        if (e.key === 'Control') {
-            setIstCtrl(true)
-        }
-    }
-
-    function handleKeyUp(e) {
-        if (e.key === 'Control') {
-            setIstCtrl(false)
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown)
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [])
-
-    useEffect(() => {
-        document.addEventListener('keyup', handleKeyUp)
-        return () => {
-            document.removeEventListener('keyup', handleKeyUp)
-        }
-    }, [])
-
+    
     return (
         <HauptContext.Provider value={{
             thema, menu, ausgewahlt
@@ -105,7 +79,9 @@ function App() {
                     <div className='wegDiv'>
                         <WegButton text="⏴" welscheSeitePfeil=" LinkerPfeil"/>
                         {aktuellPfad.split('/').toSpliced(0, 1).map((ordnerName, index) =>
-                            <WegButton text={ordnerName} ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index+1)} idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
+                            <WegButton text={ordnerName}
+                                       ordnerPfad={aktuellPfad.split('/').toSpliced(0, 1).slice(0, index + 1)}
+                                       idid={index} setAktuellPfad={setAktuellPfad} key={index}/>
                         )}
                         <WegButton text="⏵" welscheSeitePfeil=" RechterPfeil"/>
                     </div>
