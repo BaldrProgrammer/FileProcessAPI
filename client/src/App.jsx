@@ -53,9 +53,9 @@ function App() {
         <HauptContext.Provider value={{
             thema, menu, ordnernAusgewahlt, dateienAusgewahlt
         }}>
-            <div className='app' onClick={appOnClick}>
+            <div className='app' onClick={appOnClick} onContextMenu={handleContextMenu}>
                 {menu && (
-                    <OrdnerDateiKontextMenu closeMenu={setMenu(null)}/>
+                    <OrdnerDateiKontextMenu setMenu={setMenu}/>
                 )}
                 <aside className='seitenLeiste'>
                     <Logo/>
@@ -108,7 +108,9 @@ function App() {
                             setAktuellPfad={setAktuellPfad}
                             setDateienAusgewahlt={setDateienAusgewahlt}
                             setOrdnernAusgewahlt={setOrdnernAusgewahlt}
-                            handleContextMenu={handleContextMenu}/>
+                            handleContextMenu={handleContextMenu}
+                            setMenu={setMenu}
+                        />
                     )}
                     {dateiListe.map(datei =>
                         <Datei
@@ -123,7 +125,9 @@ function App() {
                             args={datei}
                             setOrdnernAusgewahlt={setOrdnernAusgewahlt}
                             setDateienAusgewahlt={setDateienAusgewahlt}
-                            handleContextMenu={handleContextMenu}/>
+                            handleContextMenu={handleContextMenu}
+                            setMenu={setMenu}
+                        />
                     )}
                 </main>
             </div>

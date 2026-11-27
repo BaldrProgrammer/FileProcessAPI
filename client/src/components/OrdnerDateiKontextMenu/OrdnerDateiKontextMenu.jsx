@@ -18,7 +18,7 @@ function OrdnerDateiKontextMenu(props) {
     return (
         <div className='KontextMenu' style={{left: context.menu.x, top: context.menu.y}} onClick={(e) => {
             e.stopPropagation();
-            props.closeMenu();
+            props.setMenu(null);
         }}>
             <HerunterladenPunkt/>
             <TeilenPunkt/>

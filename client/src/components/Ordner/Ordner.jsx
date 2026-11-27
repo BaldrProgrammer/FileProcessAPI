@@ -8,6 +8,7 @@ function Ordner(props) {
 
     function ordnerWahlen(e) {
         e.stopPropagation();
+        props.setMenu(null)
         if (e.ctrlKey || e.metaKey) {
             props.setOrdnernAusgewahlt([...context.ordnernAusgewahlt, props.args.id])
         } else {
