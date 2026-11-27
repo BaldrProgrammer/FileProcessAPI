@@ -5,3 +5,5 @@ function WahlenCheckbox(props) {
         <input className={'WahlenCheckbox'} type={'checkbox'} />
     )
 }
+
+export default WahlenCheckbox
