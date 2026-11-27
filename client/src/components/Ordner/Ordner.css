@@ -27,7 +27,7 @@
 }
 
 .ordnerIcon {
-    position: relative;
+    position: absolute;
     top: 15px;
 }
 
