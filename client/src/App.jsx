@@ -17,7 +17,8 @@ function App() {
     const [thema, setThema] = useState('hell')
     const [menu, setMenu] = useState(null);
 
-    const [ausgewahlt, setAusgewahlt] = useState([])
+    const [ordnernAusgewahlt, setOrdnernAusgewahlt] = useState([])
+    const [dateienAusgewahlt, setDateienAusgewahlt] = useState([])
 
     const ordnerRef = useRef(new Map())
     const dateiRef = useRef(new Map())
@@ -47,7 +48,7 @@ function App() {
 
     return (
         <HauptContext.Provider value={{
-            thema, menu, ausgewahlt
+            thema, menu, ordnernAusgewahlt, dateienAusgewahlt
         }}>
             <div className='app' onClick={closeMenu}>
                 {menu && (
@@ -102,7 +103,8 @@ function App() {
                             }}
                             args={ordner}
                             setAktuellPfad={setAktuellPfad}
-                            setAusgewahlt={setAusgewahlt}
+                            setDateienAusgewahlt={setDateienAusgewahlt}
+                            setOrdnernAusgewahlt={setOrdnernAusgewahlt}
                             handleContextMenu={handleContextMenu}/>
                     )}
                     {dateiListe.map(datei =>
@@ -116,7 +118,8 @@ function App() {
                                 }
                             }}
                             args={datei}
-                            setAusgewahlt={setAusgewahlt}
+                            setOrdnernAusgewahlt={setOrdnernAusgewahlt}
+                            setDateienAusgewahlt={setDateienAusgewahlt}
                             handleContextMenu={handleContextMenu}/>
                     )}
                 </main>

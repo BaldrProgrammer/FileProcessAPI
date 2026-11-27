@@ -52,9 +52,10 @@ function Datei(props) {
 
     function dateiWahlen(e) {
         if (e.ctrlKey || e.metaKey) {
-            props.setAusgewahlt([...context.ausgewahlt, props.args.id])
+            props.setDateienAusgewahlt([...context.dateienAusgewahlt, props.args.id])
         } else {
-            props.setAusgewahlt([props.args.id])
+            props.setOrdnernAusgewahlt([])
+            props.setDateienAusgewahlt([props.args.id])
         }
     }
 
@@ -64,7 +65,7 @@ function Datei(props) {
 
 
     return (
-        <div  className={`dateiVerpackung ${context.ausgewahlt.includes(props.args.id) ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={dateiWahlen} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
+        <div  className={`dateiVerpackung ${context.dateienAusgewahlt.includes(props.args.id) ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={dateiWahlen} onDoubleClick={() => dateiOffnen(props.args.dateiPfad)}>
             <div className="datei">
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{props.args.name}</p>
