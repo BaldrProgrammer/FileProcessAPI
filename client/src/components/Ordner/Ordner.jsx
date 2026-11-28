@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {HauptContext} from "../../context/HauptContext.js";
 import WahlenCheckbox from '../WahlenCheckbox/WahlenCheckbox.jsx'
 import './Ordner.css'
@@ -6,6 +6,15 @@ import icon from '../../assets/dateiIcon/ordnerIcon.png'
 
 function Ordner(props) {
     const context = useContext(HauptContext)
+    const [istAktiv, setIstAktiv] = useState(false)
+
+    function ordnerMausEin() {
+        setIstAktiv(true)
+    }
+
+    function ordnerMausAus() {
+        setIstAktiv(false)
+    }
 
     function ordnerWahlen(e) {
         e.stopPropagation();
@@ -23,9 +32,15 @@ function Ordner(props) {
     }
 
     return (
-        <div className={`einOrdnerVerpackung ${context.ordnernAusgewahlt.includes(props.args.id) ? 'ausgewahlt' : ''}`} ref={props.ref} onContextMenu={props.handleContextMenu} onClick={ordnerWahlen} onDoubleClick={() => ordnerOffnen(props.args.ordnerPfad)}>
+        <div className={`einOrdnerVerpackung ${context.ordnernAusgewahlt.includes(props.args.id) ? 'ausgewahlt' : ''}`}
+             ref={props.ref} onContextMenu={props.handleContextMenu}
+             onClick={ordnerWahlen}
+             onDoubleClick={() => ordnerOffnen(props.args.ordnerPfad)}
+             onMouseEnter={ordnerMausEin}
+             onMouseLeave={ordnerMausAus}
+        >
             <div className="einOrdner">
-                <WahlenCheckbox id={props.args.id}/>
+                {(istAktiv || context.ordnernAusgewahlt.includes(props.args.id)) && <WahlenCheckbox id={props.args.id}/>}
                 <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='ordnerName'>{props.args.name}</p>
                 <p className='ordnerAnderung'>{props.args.letztAnderung}</p>
