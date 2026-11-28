@@ -4,9 +4,14 @@ import './WahlenCheckbox.css'
 
 function WahlenCheckbox(props) {
     const context = useContext(HauptContext)
+
+    function wahlen(e) {
+        props.setOrdnernAusgewahlt([...context.ordnernAusgewahlt, props.id])
+    }
+
     return (
-        <div>
-            <input className='WahlenCheckbox' id={`WahlenCheckbox${props.id}`} type={'checkbox'} checked={context.ordnernAusgewahlt.includes(props.id)}/>
+        <div className='WahlenCheckboxVerpackung'  onClick={(e) => e.stopPropagation()}>
+            <input className='WahlenCheckbox' id={`WahlenCheckbox${props.id}`} onChange={wahlen} type={'checkbox'} checked={context.ordnernAusgewahlt.includes(props.id)}/>
             <label htmlFor={`WahlenCheckbox${props.id}`}></label>
         </div>
     )
