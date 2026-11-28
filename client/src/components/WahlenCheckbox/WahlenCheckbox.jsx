@@ -2,7 +2,10 @@ import './WahlenCheckbox.css'
 
 function WahlenCheckbox(props) {
     return (
-        <input className='WahlenCheckbox' type={'checkbox'} />
+        <div>
+            <input className='WahlenCheckbox' id='WahlenCheckbox' type={'checkbox'} />
+            <label id='WahlenCheckbox'></label>
+        </div>
     )
 }
 
