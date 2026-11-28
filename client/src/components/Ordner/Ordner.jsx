@@ -40,7 +40,10 @@ function Ordner(props) {
              onMouseLeave={ordnerMausAus}
         >
             <div className="einOrdner">
-                {(istAktiv || context.ordnernAusgewahlt.includes(props.args.id) || context.ordnernAusgewahlt.length > 0 || context.dateienAusgewahlt.length > 0) && <WahlenCheckbox id={props.args.id} typ='Ordner' setOrdnernAusgewahlt={props.setOrdnernAusgewahlt}/>}
+                {(istAktiv ||
+                    context.ordnernAusgewahlt.includes(props.args.id) ||
+                    context.ordnernAusgewahlt.length > 0 ||
+                    context.dateienAusgewahlt.length > 0) && <WahlenCheckbox id={props.args.id} typ='Ordner' setOrdnernAusgewahlt={props.setOrdnernAusgewahlt}/>}
                 <img className='ordnerIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='ordnerName'>{props.args.name}</p>
                 <p className='ordnerAnderung'>{props.args.letztAnderung}</p>

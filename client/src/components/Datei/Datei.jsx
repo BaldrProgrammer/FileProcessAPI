@@ -85,7 +85,10 @@ function Datei(props) {
               onMouseLeave={ordnerMausAus}
         >
             <div className="datei">
-                {(istAktiv || context.dateienAusgewahlt.includes(props.args.id) || context.ordnernAusgewahlt.length > 0 ||  context.dateienAusgewahlt.length > 0) && <WahlenCheckbox id={props.args.id} typ='Datei' setDateienAusgewahlt={props.setDateienAusgewahlt}/>}
+                {(istAktiv ||
+                    context.dateienAusgewahlt.includes(props.args.id) ||
+                    context.ordnernAusgewahlt.length > 0 ||
+                    context.dateienAusgewahlt.length > 0) && <WahlenCheckbox id={props.args.id} typ='Datei' setDateienAusgewahlt={props.setDateienAusgewahlt}/>}
                 <img className='dateiIcon' src={icon} alt='' width='20px' height='20px'/>
                 <p className='dateiName'>{props.args.name}</p>
                 <p className='dateiAnderung'>{props.args.letztAnderung}</p>

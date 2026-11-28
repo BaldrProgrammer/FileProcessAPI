@@ -14,8 +14,10 @@ function WahlenCheckbox(props) {
     }
 
     return (
-        <div className='WahlenCheckboxVerpackung'  onClick={(e) => e.stopPropagation()}>
-            <input className='WahlenCheckbox' id={`WahlenCheckbox${props.typ}${props.id}`} onChange={wahlen} type={'checkbox'} checked={props.typ === 'Ordner' ? context.ordnernAusgewahlt.includes(props.id) : context.dateienAusgewahlt.includes(props.id)}/>
+        <div className='WahlenCheckboxVerpackung' onClick={(e) => e.stopPropagation()}>
+            <input className='WahlenCheckbox' id={`WahlenCheckbox${props.typ}${props.id}`} onChange={wahlen}
+                   type={'checkbox'}
+                   checked={props.typ === 'Ordner' ? context.ordnernAusgewahlt.includes(props.id) : context.dateienAusgewahlt.includes(props.id)}/>
             <label htmlFor={`WahlenCheckbox${props.typ}${props.id}`}></label>
         </div>
     )
