@@ -4,7 +4,7 @@ function WahlenCheckbox(props) {
     return (
         <div>
             <input className='WahlenCheckbox' id='WahlenCheckbox' type={'checkbox'} />
-            <label id='WahlenCheckbox'></label>
+            <label htmlFor='WahlenCheckbox'></label>
         </div>
     )
 }
